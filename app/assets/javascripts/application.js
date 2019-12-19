@@ -12,5 +12,10 @@
 //
 //= require rails-ujs
 //= require activestorage
+//= require jquery.min
+//= require popper.min
+//= require chartjs.min
+//= require paper-dashboard
+//= require bootstrap-notify
 //= require turbolinks
 //= require_tree .
