@@ -6435,3 +6435,34 @@ License - nucleoapp.com/license/
     padding: 15px;
   }
 }
+
+
+/* Custom CSS */
+
+
+  /* Layout */
+
+body {
+  background-color: #f4f5f8 !important;
+}
+
+.main-container {
+  margin-top: 120px;
+  margin-left: 110px; 
+  margin-right: 110px;
+}
+
+nav.navbar {
+  border-bottom: 0px !important;
+}
+
+ul.navbar-nav {
+  width: 100%;
+  justify-content: center;
+}
+
+li.nav-item > h4 {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
