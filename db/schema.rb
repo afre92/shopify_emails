@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_21_162221) do
+ActiveRecord::Schema.define(version: 2019_12_23_025535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 2019_12_21_162221) do
     t.integer "subscription_type", default: 0
     t.float "tokens", default: 10.0
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "from"
+    t.string "subject"
+    t.string "reply_to"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
