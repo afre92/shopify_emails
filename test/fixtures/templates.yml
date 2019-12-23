@@ -5,9 +5,11 @@ one:
   subject: MyString
   reply_to: MyString
   body: MyText
+  user_id: 1
 
 two:
   from: MyString
   subject: MyString
   reply_to: MyString
   body: MyText
+  user_id: 1
