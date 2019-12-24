@@ -1,38 +1,46 @@
 
-<div >
-<div class="col-md-12 pl-0 pr-0">
-  <div class="form-group">
-    <label>First Name</label>
-    <input type="text" class="form-control" placeholder="Company" value="Chet">
+<div style="">
+  <div class="col-md-12 pl-0 pr-0">
+    <%= form_for @template, url: template_update_path do |f| %>
+    <div class="form-group">
+      <label>From:</label>
+
+      <input type="text" class="form-control" placeholder="my@email.com">
+    </div>
+    <div class="form-group">
+      <label>To:</label>
+      <input type="text" class="form-control" placeholder="customer@email.com" >
+    </div>
+    <div class="form-group">
+      <label>Subject:</label>
+      <input type="text" class="form-control" placeholder="Thank you for your visit">
+    </div>
+    <div class="form-group pb-4">
+      <label>Reply to:</label>
+      <input type="text" class="form-control" placeholder="m@email.com">
+    </div>
+    <div>
+      <%= f.hidden_field :body %>
+    </div>
   </div>
-  <div class="form-group">
-    <label>First Name</label>
-    <input type="text" class="form-control" placeholder="Company" value="Chet">
+  <div id="editor-container" class="pb-4" style="width: 1024px; height: 600px;">
   </div>
-  <div class="form-group">
-    <label>First Name</label>
-    <input type="text" class="form-control" placeholder="Company" value="Chet">
+  <div class="form-group text-center pb-5">
+    <button type="submit" class="btn btn-primary btn-round" id="save-template" >Save Template</button>
   </div>
-  <div class="form-group pb-2">
-    <label>First Name</label>
-    <input type="text" class="form-control" placeholder="Company" value="Chet">
-  </div>
-  <div class="form-group text-right">
-  <button type="submit" class="btn btn-primary btn-round save-template" >Save</button>
-  </div>
+  <% end %>
 </div>
-<div id="editor-container" class="pb-4" style="width: 1024px; height: 600px;"></div>
-</div>
+<script src="//editor.unlayer.com/embed.js"></script>
 <script>
-unlayer.init({
-  id: 'editor-container',
-  projectId: 1234,
-  displayMode: 'email'
-})
-$('.save-template').on('click', function(){
+  unlayer.init({
+    id: 'editor-container',
+    projectId: 1234,
+    displayMode: 'email'
+  })
+$('#save-template').on('click', function(){
   unlayer.saveDesign(function(design) {
-    console.log('design', design);
-    // import form and add desging to body
+    $('#template_body').val(JSON.stringify(design))
+    $('form').submit()
   });
 }   )
 
