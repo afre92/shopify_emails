@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <% application_name = ShopifyApp.configuration.application_name %>
+    <%= javascript_include_tag '//editor.unlayer.com/embed.js' %>
     <title><%= application_name %></title>
     <%= stylesheet_link_tag 'application' %>
     <% if ShopifyApp.use_webpacker? %>
@@ -11,6 +12,8 @@
       <%= javascript_include_tag 'application', "data-turbolinks-track" => true %>
     <% end %>
     <%= csrf_meta_tags %>
+    
+    
   </head>
   
   <body>
