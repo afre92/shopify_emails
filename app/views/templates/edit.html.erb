@@ -32,11 +32,19 @@
 </div>
 
 <script>
-  unlayer.init({
+// document.ready(function() {
+
+// })
+
+    $(document).ready(function() {
+        unlayer.init({
     id: 'editor-container',
     projectId: 3676,
     displayMode: 'email'
   })
+    }); 
+
+
 $('#save-template').on('click', function(){
   unlayer.saveDesign(function(design) {
     $('#template_body').val(JSON.stringify(design))
