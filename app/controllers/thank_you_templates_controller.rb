@@ -1,10 +1,10 @@
-class ThankYouTemplateController < ApplicationController
-  before_action :find_store
+class ThankYouTemplatesController < ApplicationController
+  # before_action :find_store
   def index
   end
 
   def edit
-    @template = @shop.thank_you_template
+    @template = @shop.template
   end
 
   def update

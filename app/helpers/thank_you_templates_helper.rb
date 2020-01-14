@@ -1,0 +1,2 @@
+module ThankYouTemplatesHelper
+end

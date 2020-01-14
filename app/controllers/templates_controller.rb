@@ -1,10 +1,10 @@
 class TemplatesController < AuthenticatedController
-  before_action :find_store
+  before_action :find_store, only: [:edit]
   def index
   end
 
   def edit
-    @template = @shop.template
+    @template = @shop.thank_you_template
   end
 
   def update
