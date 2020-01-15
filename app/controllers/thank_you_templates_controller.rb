@@ -1,5 +1,5 @@
 class ThankYouTemplatesController < ApplicationController
-  # before_action :find_store
+  before_action :find_store
   def index
   end
 
