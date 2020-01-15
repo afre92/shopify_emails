@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 2020_01_15_121309) do
   enable_extension "plpgsql"
 
   create_table "review_templates", force: :cascade do |t|
-    t.string "from"
-    t.string "subject"
-    t.string "reply_to"
+    t.string "from", default: ""
+    t.string "subject", default: ""
+    t.string "reply_to", default: ""
     t.jsonb "body"
     t.integer "shop_id"
-    t.text "html"
+    t.text "html", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
