@@ -1,6 +1,6 @@
 class Shop < ActiveRecord::Base
   include ShopifyApp::SessionStorage
-  has_many :templates
+  has_one :thank_you_template
   after_create :associate_templates
 
   def associate_templates
