@@ -1,0 +1,2 @@
+class ReviewTemplate < ApplicationRecord
+end
