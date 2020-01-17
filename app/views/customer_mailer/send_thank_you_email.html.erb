@@ -1,2 +1,3 @@
-<%= @template.html.html_safe %>
-<%# decode here %>
+<% shop = @shop %>
+<% renderer = ERB.new(@template.html) %>
+<%= renderer.result(binding).html_safe %>
