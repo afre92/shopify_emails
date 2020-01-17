@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'templates', to: 'thank_you_templates#index'
+  get 'templates', to: 'home#templates'
   patch 'thank-you-template/update', to: 'thank_you_templates#update'
   get 'thank-you-template/edit', to: 'thank_you_templates#edit'
   root :to => 'home#show'
