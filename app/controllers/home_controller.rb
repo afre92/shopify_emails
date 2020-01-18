@@ -9,7 +9,6 @@ class HomeController < AuthenticatedController
   end
 
   def templates
-    byebug
     @thank_you_template = @shop.thank_you_template
   end
 
