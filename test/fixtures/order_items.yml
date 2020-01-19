@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  shopify_id: 
+  variant_id: 
+  title: MyString
+  quantity: 
+  order_id: 1
+
+two:
+  shopify_id: 
+  variant_id: 
+  title: MyString
+  quantity: 
+  order_id: 1

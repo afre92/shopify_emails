@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_17_205711) do
+ActiveRecord::Schema.define(version: 2020_01_19_004417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "shopify_id"
+    t.bigint "variant_id"
+    t.string "title"
+    t.integer "quantity"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "shopify_id"
+    t.string "email"
+    t.datetime "shopify_created_at"
+    t.integer "shop_id"
+    t.jsonb "customer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "review_templates", force: :cascade do |t|
     t.string "from", default: ""
