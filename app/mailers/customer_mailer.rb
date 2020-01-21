@@ -5,7 +5,7 @@ class CustomerMailer < ApplicationMailer
     @shop = Shop.last
     @template = @shop.thank_you_template
     mail( :to => 'afre92@gmail.com',
-    :subject => 'Please review the items you recieved' )
+    :subject => 'Thank for your purchase' )
   end
 
   def send_please_review_email#(user)
