@@ -10,7 +10,7 @@ ShopifyApp.configure do |config|
   config.api_version = "2019-10"
   config.session_repository = Shop
   config.webhooks = [
-    {topic: 'order/create', address: 'https://ultimate-mailer-embedded.herokuapp.com/webhooks/order_create', format: 'json'},
+    {topic: 'orders/create', address: 'https://541ba126.ngrok.io/webhooks/order_create', format: 'json'},
   ]
 end
 
