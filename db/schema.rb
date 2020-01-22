@@ -16,17 +16,18 @@ ActiveRecord::Schema.define(version: 2020_01_19_004417) do
   enable_extension "plpgsql"
 
   create_table "order_items", force: :cascade do |t|
-    t.bigint "shopify_id"
-    t.bigint "variant_id"
+    t.string "shopify_id"
+    t.string "variant_id"
     t.string "title"
     t.integer "quantity"
     t.integer "order_id"
+    t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "shopify_id"
+    t.string "shopify_id"
     t.string "email"
     t.datetime "shopify_created_at"
     t.integer "shop_id"

@@ -3,7 +3,7 @@ class OrderCreateJob < ActiveJob::Base
     shop = Shop.find_by(shopify_domain: shop_domain)
 
     new_order = Order.new
-    new_order.shopify_id = webhook['id']
+    new_order.shopify_id = webhook['id'].to_s
     new_order.email = webhook['email']
     new_order.shopify_created_at = webhook['created_at']
     new_order.shop_id = shop.id
@@ -12,8 +12,8 @@ class OrderCreateJob < ActiveJob::Base
 
     webhook['line_items'].each do |item|
       new_order_item = OrderItem.new
-      new_order_item.shopify_id = item['id']
-      new_order_item.variant_id = item['variant_id']
+      new_order_item.shopify_id = item['id'].to_s
+      new_order_item.variant_id = item['variant_id'].to_s
       new_order_item.title = item['title']
       new_order_item.quantity = item['quantity']
       new_order_item.order_id = new_order.id
