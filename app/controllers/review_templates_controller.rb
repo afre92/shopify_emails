@@ -1,2 +1,0 @@
-class ReviewTemplatesController < ApplicationController
-end

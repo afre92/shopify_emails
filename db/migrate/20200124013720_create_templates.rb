@@ -1,10 +1,11 @@
-class CreateReviewTemplates < ActiveRecord::Migration[5.2]
+class CreateTemplates < ActiveRecord::Migration[5.2]
   def change
-    create_table :review_templates do |t|
+    create_table :templates do |t|
       t.string :from, default: ''
+      t.integer :template_type, default: 0
       t.string :subject, default: ''
       t.string :reply_to, default: ''
-      t.jsonb :body
+      t.jsonb :body, default: '{}'
       t.integer :shop_id
       t.text :html, default: ''
 
