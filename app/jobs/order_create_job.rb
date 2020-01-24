@@ -20,6 +20,19 @@ class OrderCreateJob < ActiveJob::Base
       new_order_item.save
     end
 
+    
+    # create and schedule email to be sent
+    #thank you email
+    # shop.templates.find_by(template_type: 0)
+
+    new_email = Email.new 
+    new_email.scheduled_time = new_order.shopify_created_at + 30.minutes
+    new_email.template_id = shop.templates.find_by(template_type: 0).id
+    new_email.shop_id = shop.id
+    new_email.order_id = new_order.id
+    new_email.save
+
+
     shop.with_shopify_session do
     end
   end
