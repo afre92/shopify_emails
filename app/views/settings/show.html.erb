@@ -1,12 +1,12 @@
-<div class="row">
+<div class="row ">
   <div class="col-md-1 col-sm-0"></div>
   <div class="col-md-10">
 
     <div class="card card-user">
       <div class="row">
-        <div class="input-row">
+        <div class="input-row settings">
           <div class="pr-3 pl-3">
-            <span class="form-label" > Pause Emails </span> 
+            <span class="form-label" > <label>Pause Emails</label> </span> 
             <label class="switch float-right">
               <input type="checkbox">
               <span class="slider round"></span>
@@ -19,13 +19,16 @@
     <div class="card card-user">
       <div class="row">
         <div class="pr-3 pl-3" style="width: 100%">
-          <div class="input-row row ml-0 mr-0">
-            <div class="col-md-7 pl-0"><span class="form-label" > Time to Send "Thank You" Email </span>
-
+          <div class="input-row settings row ml-0 mr-0">
+            <div class="col-md-7 pl-0">
+              <span class="form-label" > 
+                <label class="pr-1">Time to Send "Thank You" Email </label>
+                ( <span id="thank-you-range-value" class="pr-1"></span>Minutes )
+              </span>
             </div>
             <div class="col-md-5 pr-0">
               <div class="slidecontainer float-right">
-                  <input type="range" min="1" max="100" value="0" class="bar-slider" id="myRange">
+                  <input type="range" min="1" max="60" value="0" class="bar-slider" id="thank-you-range">
               </div>
             </div>
           </div>
@@ -36,13 +39,17 @@
     <div class="card card-user">
       <div class="row">
         <div class="pr-3 pl-3" style="width: 100%">
-          <div class="input-row row ml-0 mr-0">
-            <div class="col-md-7 pl-0"><span class="form-label" > Time to Send "Review" Email </span>
+          <div class="input-row settings row ml-0 mr-0">
+            <div class="col-md-7 pl-0">
+              <span class="form-label" >
+                <label class="pr-1"> Time to Send "Review" Email </label>
+                ( <span id="review-value" class="pr-1"></span>Days )
+              </span>
 
             </div>
             <div class="col-md-5 pr-0">
               <div class="slidecontainer float-right">
-                  <input type="range" min="1" max="100" value="0" class="bar-slider" id="myRange">
+                  <input type="range" min="1" max="30" value="0" class="bar-slider" id="review-range">
               </div>
             </div>
           </div>
@@ -130,3 +137,20 @@
   <div class="col-md-1 col-sm-0"></div>
 </div>
 
+<script>
+  var thankYouSlider = document.getElementById("thank-you-range");
+  var thankYouSliderOutput = document.getElementById("thank-you-range-value");
+  thankYouSliderOutput.innerHTML = thankYouSlider.value
+
+  thankYouSlider.oninput = function() {
+    thankYouSliderOutput.innerHTML = this.value;
+  }
+
+  var reviewSlider = document.getElementById("review-range");
+  var reviewOutput = document.getElementById("review-value");
+  reviewOutput.innerHTML = reviewSlider.value;
+
+  reviewSlider.oninput = function() {
+    reviewOutput.innerHTML = this.value;
+  }
+</script>

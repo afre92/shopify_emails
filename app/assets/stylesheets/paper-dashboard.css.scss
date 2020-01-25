@@ -6585,3 +6585,7 @@ input:checked + .slider:before {
 ::-ms-input-placeholder { /* Microsoft Edge */
   opacity: .6 !important
 }
+
+.input-row.settings{
+  border-top: 0px;
+}
