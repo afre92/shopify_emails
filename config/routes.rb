@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  # get 'templates', to: 'home#templates'
-  # patch 'thank-you-template/update', to: 'thank_you_templates#update'
-  # get 'thank-you-template/edit', to: 'thank_you_templates#edit'
+  get '/settings', to: 'settings#show'
   resources :templates
   root :to => 'home#show'
   mount ShopifyApp::Engine, at: '/'
