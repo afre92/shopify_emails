@@ -6559,8 +6559,9 @@ input:checked + .slider:before {
 .bar-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid white;
   border-radius: 50%;
   background: #51cbce;
   cursor: pointer;
