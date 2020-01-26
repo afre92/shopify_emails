@@ -1,14 +1,14 @@
 <div class="row ">
   <div class="col-md-1 col-sm-0"></div>
   <div class="col-md-10">
-
+  <%= form_for @shop, url: '/settings' do |f| %>
     <div class="card card-user">
       <div class="row">
         <div class="input-row settings">
           <div class="pr-3 pl-3">
-            <span class="form-label" > <label>Pause Emails</label> </span> 
+            <span class="form-label" > <label>Application Status</label> </span> 
             <label class="switch float-right">
-              <input type="checkbox">
+              <%= f.check_box :status %>
               <span class="slider round"></span>
             </label>
           </div>
@@ -28,7 +28,7 @@
             </div>
             <div class="col-md-5 pr-0">
               <div class="slidecontainer float-right">
-                  <input type="range" min="1" max="60" value="0" class="bar-slider" id="thank-you-range">
+                <%= f.text_field :thank_you_interval, min: '1', max: '60', value: 0, class: 'bar-slider', type: 'range'  %>
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@
             </div>
             <div class="col-md-5 pr-0">
               <div class="slidecontainer float-right">
-                  <input type="range" min="1" max="30" value="0" class="bar-slider" id="review-range">
+                  <%= f.text_field :review_interval, min: '1', max: '30', value: 0, class: 'bar-slider', type: 'range'  %>
               </div>
             </div>
           </div>
@@ -67,13 +67,13 @@
               <div class="col-md-6 pr-1">
                 <div class="form-group">
                   <label>Shop Name</label>
-                  <input type="text" class="form-control" placeholder="Shop Name">
+                  <%= f.text_field :shop_name, class: "form-control", placeholder: 'Shop Name' %>
                 </div>
               </div>
               <div class="col-md-6 pl-1">
                 <div class="form-group">
                   <label>Owner Title</label>
-                  <input type="text" class="form-control" placeholder="Title" >
+                  <%= f.text_field :title, class: "form-control", placeholder: 'Owner Title' %>
                 </div>
               </div>
           </div>
@@ -81,13 +81,13 @@
               <div class="col-md-6 pr-1">
                 <div class="form-group">
                   <label>Owner First Name</label>
-                  <input type="text" class="form-control" placeholder="Owner First Name">
+                  <%= f.text_field :owner_first_name, class: "form-control", placeholder: 'Owner First Name' %>
                 </div>
               </div>
               <div class="col-md-6 pl-1">
                 <div class="form-group">
                   <label>Owner Last Name</label>
-                  <input type="text" class="form-control" placeholder="Owner Last Name" >
+                  <%= f.text_field :owner_last_name, class: "form-control", placeholder: 'Owner Last Name' %>
                 </div>
               </div>
           </div>
@@ -95,13 +95,13 @@
               <div class="col-md-6 pr-1">
                 <div class="form-group">
                   <label>Shop Number</label>
-                  <input type="text" class="form-control" placeholder="Shop Number">
+                  <%= f.text_field :phone, class: "form-control", placeholder: 'Phone Number' %>
                 </div>
               </div>
               <div class="col-md-6 pl-1">
                 <div class="form-group">
                   <label>Address</label>
-                  <input type="text" class="form-control" placeholder="Address" >
+                  <%= f.text_field :address, class: "form-control", placeholder: 'Address' %>
                 </div>
               </div>
           </div>
@@ -109,13 +109,13 @@
               <div class="col-md-6 pr-1">
                 <div class="form-group">
                   <label>Email</label>
-                  <input type="text" class="form-control" placeholder="Email">
+                  <%= f.text_field :email, class: "form-control", placeholder: 'Email' %>
                 </div>
               </div>
               <div class="col-md-6 pl-1">
                 <div class="form-group">
                   <label>Website</label>
-                  <input type="text" class="form-control" placeholder="Website" >
+                  <%= f.text_field :website, class: "form-control", placeholder: 'Website' %>
                 </div>
               </div>
           </div>
@@ -125,20 +125,19 @@
         <div class="card-footer">
           <div class="row">
             <div class="update ml-auto mr-auto">
-              <%= link_to "save", target: "_blank" do %>
                 <button type="submit" class="btn btn-primary btn-round">Save Settings</button>
-              <% end %>
             </div>
           </div>
         </div>
       </div>    
     </div>
   </div>
+  <% end %>
   <div class="col-md-1 col-sm-0"></div>
 </div>
 
 <script>
-  var thankYouSlider = document.getElementById("thank-you-range");
+  var thankYouSlider = document.getElementById("shop_thank_you_interval");
   var thankYouSliderOutput = document.getElementById("thank-you-range-value");
   thankYouSliderOutput.innerHTML = thankYouSlider.value
 
@@ -146,7 +145,7 @@
     thankYouSliderOutput.innerHTML = this.value;
   }
 
-  var reviewSlider = document.getElementById("review-range");
+  var reviewSlider = document.getElementById("shop_review_interval");
   var reviewOutput = document.getElementById("review-value");
   reviewOutput.innerHTML = reviewSlider.value;
 

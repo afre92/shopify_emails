@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_24_024548) do
+ActiveRecord::Schema.define(version: 2020_01_26_001138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,9 @@ ActiveRecord::Schema.define(version: 2020_01_24_024548) do
     t.string "shop_name", default: ""
     t.string "title", default: "Founder"
     t.string "website", default: ""
+    t.integer "review_interval", default: 10
+    t.integer "thank_you_interval", default: 10
+    t.integer "status", default: 0
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
   end
 

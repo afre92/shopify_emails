@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get '/settings', to: 'settings#show'
+  get '/settings', to: 'settings#edit'
+  patch '/settings', to: 'settings#update'
   resources :templates
   root :to => 'home#show'
   mount ShopifyApp::Engine, at: '/'
