@@ -1,9 +1,19 @@
 
   <% shop = @shop %>
   <% renderer = ERB.new(@thank_you_template.html) %>
-  <div class="row">
-    <div class="col-md-1 col-sm-0"></div>
-    <div class="col-md-10">
+  <div class="row pt-20">
+    <div class="col-md-3" style="padding: 15px;">
+      <span style="" >This is how your Thank You Email will look like.</span>
+
+      <p style="margin-top: 45px;">
+        Items in between "{{}}" will be replaced with the corresponding data once the email is sent.
+      </p>
+      <p style="margin-top: 145px;">
+        Your store data (like store name, address, etc ) can be modified at any time. please head over Settings to make changes you need
+      </p>
+    </div>
+
+    <div class="col-md-9">
       <div class="card card-user">
         <div class="card-header">
           <h5 class="card-title text-center"></h5>
@@ -39,17 +49,15 @@
         </div>
         <div class="input-row">
           <div class="card-footer">
-            buttons should go here
+              <div class="row">
+                <div class="update ml-auto mr-auto">
+                  <%= link_to "https://ultimate-mailer-non-embedded.herokuapp.com/thank_you_templates/edit?shop=#{@shop.shopify_domain}&not-redirect=1", target: "_blank" do %>
+                    <button type="submit" class="btn btn-primary btn-round">Edit template</button>
+                  <% end %>
+                </div>
+              </div>
           </div>
         </div>    
       </div>
-    </div>
-    <div class="col-md-1 col-sm-0"></div>
-  </div>
-  <div class="row">
-    <div class="update ml-auto mr-auto">
-      <%= link_to "https://ultimate-mailer-non-embedded.herokuapp.com/thank_you_templates/edit?shop=#{@shop.shopify_domain}&not-redirect=1", target: "_blank" do %>
-        <button type="submit" class="btn btn-primary btn-round">Edit template</button>
-      <% end %>
     </div>
   </div>
