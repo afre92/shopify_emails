@@ -6469,6 +6469,7 @@ li.nav-item > h4 {
 .form-label {
   color: grey;
   padding-right: 10px;
+  font-weight: 500;
 }
 
 a.nav-link {
@@ -6589,4 +6590,13 @@ input:checked + .slider:before {
 
 .input-row.settings{
   border-top: 0px;
+}
+
+.row-bordered {
+  border-bottom: 1px solid lightgray;
+  padding-top: 20px;
+}
+
+.pt-20 {
+  padding-top: 20px;
 }

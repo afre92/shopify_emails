@@ -1,8 +1,13 @@
 <div class="row ">
-  <div class="col-md-1 col-sm-0"></div>
-  <div class="col-md-10">
+  <%# <div class="col-md-1 col-sm-0"></div> %>
+  <div class="col-md-12">
   <%= form_for @shop, url: '/settings' do |f| %>
-    <div class="card card-user">
+  <div class="row row-bordered">
+    <div class="col-md-3" style="padding: 15px">
+      When "off" no emails will be sent and your tokens will remain intact.
+    </div>
+    <div class="col-md-1"></div>
+    <div class="card card-user col-md-8">
       <div class="row">
         <div class="input-row settings">
           <div class="pr-3 pl-3">
@@ -15,8 +20,14 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="card card-user">
+  <div class="row row-bordered">
+    <div class="col-md-3">
+      Time between order placed and sending of "Thank You" email.
+    </div>
+    <div class="col-md-1"></div>
+    <div class="card card-user col-md-8">
       <div class="row">
         <div class="pr-3 pl-3" style="width: 100%">
           <div class="input-row settings row ml-0 mr-0">
@@ -35,21 +46,29 @@
         </div>
       </div>
     </div>
+    </div>
 
-    <div class="card card-user">
-      <div class="row">
-        <div class="pr-3 pl-3" style="width: 100%">
-          <div class="input-row settings row ml-0 mr-0">
-            <div class="col-md-7 pl-0">
-              <span class="form-label" >
-                <label class="pr-1"> Time to Send "Review" Email </label>
-                ( <span id="review-value" class="pr-1"></span>Days )
-              </span>
 
-            </div>
-            <div class="col-md-5 pr-0">
-              <div class="slidecontainer float-right">
-                  <%= f.text_field :review_interval, min: '1', max: '30', value: 0, class: 'bar-slider', type: 'range'  %>
+    <div class="row row-bordered">
+      <div class="col-md-3">
+        Time between order placed and sending of "Review" email.
+      </div>
+      <div class="col-md-1"></div>
+      <div class="card card-user col-md-8">
+        <div class="row">
+          <div class="pr-3 pl-3" style="width: 100%">
+            <div class="input-row settings row ml-0 mr-0">
+              <div class="col-md-7 pl-0">
+                <span class="form-label" >
+                  <label class="pr-1"> Time to Send "Review" Email </label>
+                  ( <span id="review-value" class="pr-1"></span>Days )
+                </span>
+
+              </div>
+              <div class="col-md-5 pr-0">
+                <div class="slidecontainer float-right">
+                    <%= f.text_field :review_interval, min: '1', max: '30', value: 0, class: 'bar-slider', type: 'range'  %>
+                </div>
               </div>
             </div>
           </div>
@@ -57,7 +76,12 @@
       </div>
     </div>
 
-    <div class="card card-user">
+    <div class="row pt-20">
+      <div class="col-md-3">
+        This information will be available from the template, hover over the labels to see how to can access each value on the template editor.
+      </div>
+    <div class="col-md-1"></div>
+    <div class="card card-user col-md-8">
       <div class="card-header">
         <h5 class="card-title text-center"></h5>
       </div>
@@ -131,9 +155,12 @@
         </div>
       </div>    
     </div>
+
+    </div>
+
   </div>
   <% end %>
-  <div class="col-md-1 col-sm-0"></div>
+  <%# <div class="col-md-1 col-sm-0"></div> %>
 </div>
 
 <script>
