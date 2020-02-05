@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-  before_action :find_store, only: [:edit]
+  before_action :find_store
 
   def edit
     
