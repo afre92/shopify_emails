@@ -5,7 +5,7 @@ class CreateTrackingPixels < ActiveRecord::Migration[5.2]
       t.integer :shop_id
       t.integer :email_id
       t.string :token
-      t.integer :views
+      t.integer :views, default: 0
 
       t.timestamps
     end

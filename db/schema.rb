@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2020_02_06_011213) do
     t.integer "shop_id"
     t.integer "email_id"
     t.string "token"
-    t.integer "views"
+    t.integer "views", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

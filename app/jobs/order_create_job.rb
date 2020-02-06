@@ -17,8 +17,10 @@ class OrderCreateJob < ActiveJob::Base
     thank_you_email = Email.new 
     thank_you_email.scheduled_time = new_order.shopify_created_at + shop.thank_you_interval.minutes
     thank_you_email.template_id = shop.templates.find_by(template_type: 0).id
+    thank_you_email.html = shop.templates.find_by(template_type: 0).html
     thank_you_email.shop_id = shop.id
     thank_you_email.order_id = new_order.id
+    # create tracking pixel ?
     thank_you_email.save
 
     # Create Order Items and Review Email if subscription_type == 1
@@ -38,6 +40,7 @@ class OrderCreateJob < ActiveJob::Base
       review_email = Email.new 
       review_email.scheduled_time = new_order.shopify_created_at + shop.review_interval.minutes
       review_email.template_id = shop.templates.find_by(template_type: 1).id
+      review_email.html = shop.templates.find_by(template_type: 1).html
       review_email.shop_id = shop.id
       review_email.order_id = new_order.id
       review_email.save
