@@ -1,0 +1,2 @@
+class TrackingPixel < ApplicationRecord
+end
