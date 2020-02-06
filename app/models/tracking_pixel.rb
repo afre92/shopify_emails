@@ -8,7 +8,7 @@ class TrackingPixel < ApplicationRecord
   end
 
   def conversion_tag
-    url = "#{ENV['APP_URL']}#{Rails.application.routes.url_helpers.views_path(self.token)}"
+    # url = "#{ENV['APP_URL']}#{Rails.application.routes.url_helpers.views_path(self.token)}"
     "<img src='#{url}' width='0' height='0'>"
   end
 
@@ -18,5 +18,5 @@ class TrackingPixel < ApplicationRecord
       return (self.token = random_token) unless TrackingPixel.exists?(token: random_token)
     end
   end
-  
+
 end
