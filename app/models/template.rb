@@ -1,5 +1,6 @@
 class Template < ApplicationRecord
   belongs_to :shop
+  has_many :emails
   before_save :replace_quote_entities_with_escape_characters, :test_insert
 
   def replace_quote_entities_with_escape_characters
