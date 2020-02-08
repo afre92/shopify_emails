@@ -3,8 +3,8 @@ class CustomerMailer < ApplicationMailer
 
   #both email will use this method, maybe change name  
   def send_thank_you_email(email)
-    @shop = Shop.find(email.shop_id)
     @email = email
+    @shop = Shop.find(@email.shop_id)
     @customer = JSON.parse(@shop.orders.find(@email.order_id).customer)
     @template = @shop.templates.find(@email.template_id)
 

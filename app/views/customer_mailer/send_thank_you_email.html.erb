@@ -1,3 +1,4 @@
 <% shop = @shop %>
+<% customer = @customer %>
 <% renderer = ERB.new(@email.html) %>
 <%= renderer.result(binding).html_safe %>
