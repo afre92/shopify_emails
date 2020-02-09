@@ -17,9 +17,7 @@ class TrackingPixel < ApplicationRecord
   def create_unique_token
     loop do
       random_token = SecureRandom.urlsafe_base64(nil, false)
-      unless TrackingPixel.exists?(token: random_token)
-        return (self.token = random_token)
-      end
+      return (self.token = random_token) unless TrackingPixel.exists?(token: random_token)
     end
   end
 end
