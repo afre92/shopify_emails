@@ -9,9 +9,9 @@ class DashboardController < ApplicationController
     @emails_opened = @shop.emails.sent.opened
   end
 
-    private 
-    
-    def find_shop
-      @shop = Shop.find_by(shopify_domain: session[:shopify_domain])
-    end
+  private
+
+  def find_shop
+    @shop = Shop.find_by(shopify_domain: session[:shopify_domain])
+  end
 end
