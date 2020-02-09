@@ -1,12 +1,32 @@
 
       <div class="row">
+      <div class="col-md-12 ">
+        <div class="col-md-4 ml-auto pr-0">
+
+        <%= form_with( url: dashboard_path, method: 'get', data: {remote: false} ) do %>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-8 pt-2">
+                <%= text_field_tag 'daterange', nil,class: "form-control" %>
+              </div>
+              <div class="col-md-4 pl-0">
+                <button type="submit" class="btn btn-primary icon-big ">
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        </div>
+      </div>
         <div class="col-lg-4 col-md-6 col-sm-6">
           <div class="card card-stats">
             <div class="card-body ">
               <div class="row">
                 <div class="col-5 col-md-4">
                   <div class="icon-big text-center icon-warning">
-                    <i class="nc-icon nc-paper text-success"></i>
+                    <i class="nc-icon nc-paper text-primary"></i>
                   </div>
                 </div>
                 <div class="col-7 col-md-8">
@@ -32,7 +52,7 @@
               <div class="row">
                 <div class="col-5 col-md-4">
                   <div class="icon-big text-center icon-warning">
-                    <i class="nc-icon nc-send text-danger"></i>
+                    <i class="nc-icon nc-send text-warning"></i>
                   </div>
                 </div>
                 <div class="col-7 col-md-8">
@@ -58,7 +78,7 @@
               <div class="row">
                 <div class="col-5 col-md-4">
                   <div class="icon-big text-center icon-warning">
-                    <i class="nc-icon nc-email-85 text-primary"></i>
+                    <i class="nc-icon nc-email-85 text-success"></i>
                   </div>
                 </div>
                 <div class="col-7 col-md-8">
@@ -147,15 +167,17 @@
 
   <script>
     $(document).ready(function() {
+      var daterange = "<%= @daterange %>"
+      var [from, to] = daterange.split("...")
       // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
       demo.initChartsPages();
+      $('#daterange').daterangepicker({
+        opens: 'left',
+        startDate: moment(from).utc(),
+        endDate: moment(to).utc()
+      });
     });
   </script>
-
-
-
-
-
 
 
 <% content_for :javascript do %>

@@ -13,10 +13,14 @@ class Email < ApplicationRecord
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
   scope :sent, -> { where(was_sent: 'sent') } do
     def opened
-      each do |email|
-        count = 0
-        count = + 1 if email.tracking_pixel.views > 0
-        return count
+      if count > 0
+        each do |email|
+          count = 0
+          count += 1 if email.tracking_pixel.views > 0
+          return count
+        end
+      else
+        0
       end
     end
   end

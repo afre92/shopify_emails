@@ -18,5 +18,6 @@ class TemplatesController < ApplicationController
 
   def find_store
     @shop = Shop.find_by(shopify_domain: session[:shopify_domain])
+    @controller = params[:controller]
   end
 end

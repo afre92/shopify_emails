@@ -6604,3 +6604,12 @@ input:checked + .slider:before {
 .primary {
   color: #51cbce !important;
 }
+
+.active {
+  // color: #51cbce !important;
+  text-decoration: underline !important;
+}
+
+#daterange {
+  text-align: center;
+}
