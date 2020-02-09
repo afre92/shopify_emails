@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddExtraFieldsToShop < ActiveRecord::Migration[5.2]
   def change
     add_column :shops, :review_interval, :integer, default: 10

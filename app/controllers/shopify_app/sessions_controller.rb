@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module ShopifyApp
   class SessionsController < ActionController::Base # rubocop:disable Metrics/ClassLength
     include ShopifyApp::LoginProtection
 
     layout false, only: :new
-    after_action only: [:new, :create] do |controller|
+    after_action only: %i[new create] do |controller|
       controller.response.headers.except!('X-Frame-Options')
     end
 
@@ -19,13 +21,13 @@ module ShopifyApp
       return unless validate_shop
 
       render(:enable_cookies, layout: false, locals: {
-        does_not_have_storage_access_url: top_level_interaction_path(
-          shop: sanitized_shop_name
-        ),
-        has_storage_access_url: login_url_with_optional_shop(top_level: true),
-        app_home_url: granted_storage_access_path(shop: sanitized_shop_name),
-        current_shopify_domain: current_shopify_domain,
-      })
+               does_not_have_storage_access_url: top_level_interaction_path(
+                 shop: sanitized_shop_name
+               ),
+               has_storage_access_url: login_url_with_optional_shop(top_level: true),
+               app_home_url: granted_storage_access_path(shop: sanitized_shop_name),
+               current_shopify_domain: current_shopify_domain
+             })
     end
 
     def top_level_interaction
@@ -52,6 +54,7 @@ module ShopifyApp
 
     def authenticate
       return render_invalid_shop_error unless sanitized_shop_name.present?
+
       session['shopify.omniauth_params'] = { shop: sanitized_shop_name }
 
       session[:return_to] = params[:return_to] if params[:return_to]
@@ -100,9 +103,9 @@ module ShopifyApp
 
     def enable_cookie_access
       fullpage_redirect_to(enable_cookies_path(
-        shop: sanitized_shop_name,
-        return_to: session[:return_to]
-      ))
+                             shop: sanitized_shop_name,
+                             return_to: session[:return_to]
+                           ))
     end
 
     def authenticate_in_context
@@ -115,6 +118,7 @@ module ShopifyApp
 
     def authenticate_in_context?
       return true unless ShopifyApp.configuration.embedded_app?
+
       params[:top_level]
     end
 
@@ -137,7 +141,7 @@ module ShopifyApp
           ),
           has_storage_access_url: login_url_with_optional_shop(top_level: true),
           app_home_url: granted_storage_access_path(shop: sanitized_shop_name),
-          current_shopify_domain: current_shopify_domain,
+          current_shopify_domain: current_shopify_domain
         }
       )
     end

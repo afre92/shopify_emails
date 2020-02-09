@@ -1,7 +1,13 @@
+# frozen_string_literal: true
+
 require 'dotenv/load'
 
 Rails.application.configure do
-  config.hosts = (config.hosts rescue []) << /\h+.ngrok.io/
+  config.hosts = (begin
+                    config.hosts
+                  rescue StandardError
+                    []
+                  end) << /\h+.ngrok.io/
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TemplatesController < ApplicationController
   before_action :find_store
   def index
@@ -13,7 +15,8 @@ class TemplatesController < ApplicationController
   end
 
   private
-    def find_store
-      @shop = Shop.find_by(shopify_domain: session[:shopify_domain])
-    end
+
+  def find_store
+    @shop = Shop.find_by(shopify_domain: session[:shopify_domain])
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderCreateJob < ActiveJob::Base
   def perform(shop_domain:, webhook:)
     shop = Shop.find_by(shopify_domain: shop_domain)
@@ -14,7 +16,7 @@ class OrderCreateJob < ActiveJob::Base
     new_order.save
 
     # Create Thank You Email
-    thank_you_email = Email.new 
+    thank_you_email = Email.new
     thank_you_email.scheduled_time = new_order.shopify_created_at + shop.thank_you_interval.minutes
     thank_you_email.template_id = shop.templates.find_by(template_type: 0).id
     thank_you_email.html = shop.templates.find_by(template_type: 0).html
@@ -36,7 +38,7 @@ class OrderCreateJob < ActiveJob::Base
       end
 
       # Create Review Email
-      review_email = Email.new 
+      review_email = Email.new
       review_email.scheduled_time = new_order.shopify_created_at + shop.review_interval.days
       review_email.template_id = shop.templates.find_by(template_type: 1).id
       review_email.html = shop.templates.find_by(template_type: 1).html
@@ -45,7 +47,6 @@ class OrderCreateJob < ActiveJob::Base
       review_email.save
 
     end
-
 
     shop.with_shopify_session do
     end
