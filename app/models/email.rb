@@ -6,6 +6,8 @@ class Email < ApplicationRecord
   belongs_to :template
   has_one :tracking_pixel
 
+  validates_presence_of :order_id, :template_id, :shop_id
+
   after_create :add_tracking_pixel
 
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }

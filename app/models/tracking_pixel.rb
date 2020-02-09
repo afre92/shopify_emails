@@ -5,6 +5,8 @@ class TrackingPixel < ApplicationRecord
 
   before_create :create_unique_token
 
+  validates_presence_of :email_id
+
   def increment_views
     update_attribute(:views, views + 1)
   end
