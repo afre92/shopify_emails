@@ -166,7 +166,8 @@
       </div>
 
   <script>
-    $(document).ready(function() {
+    $(document).on('turbolinks:load',function() {
+      console.log('loade')
       var daterange = "<%= @daterange %>"
       var [from, to] = daterange.split("...")
       
