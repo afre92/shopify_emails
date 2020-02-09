@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get '/settings', to: 'settings#edit'
+  get '/settings', to: 'settings#edit', as: 'settings'
   patch '/settings', to: 'settings#update'
   resources :templates
   get '/convert/:token' => 'analytics#convert', as: :views

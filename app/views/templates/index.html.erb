@@ -2,17 +2,17 @@
   <% shop = @shop %>
   <% renderer = ERB.new(@thank_you_template.html) %>
   <div class="row pt-20">
-    <div class="col-md-3" style="padding: 15px;">
-      <span style="" >This is how your Thank You Email will look like.</span>
+    <div class="col-md-4" style="padding: 15px;">
+      <p style="font-size: larger; font-weight: 400" >This is how your Thank You Email will look.</p>
 
-      <p style="margin-top: 45px;">
+      <p style="border-top: solid 1px #c7c7c7 ;margin-top: 66px;;padding-top: 10px;font-size: larger; font-weight: 400">
         Items in between "{{}}" will be replaced with the corresponding data once the email is sent.
       </p>
-      <p style="margin-top: 145px;">
-        Your store data (like store name, address, etc ) can be modified at any time. please head over Settings to make changes you need
+      <p style="border-top: solid 1px #c7c7c7;margin-top: 103px;padding-top: 10px;font-size: larger; font-weight: 400">
+        Your store data (like store name, address, etc ) can be modified at any time. please head over <%= link_to 'Settings', settings_path, class: 'primary' %> to make changes you need.
       </p>
     </div>
-    <div class="col-md-1"></div>
+    <%# <div class="col-md-1"></div> %>
     <div class="col-md-8">
       <div class="card card-user">
         <div class="card-header">
