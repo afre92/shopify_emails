@@ -169,22 +169,26 @@
     $(document).ready(function() {
       var daterange = "<%= @daterange %>"
       var [from, to] = daterange.split("...")
-      // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-      initChartsPages();
+      
       $('#daterange').daterangepicker({
         opens: 'left',
         startDate: moment(from).utc(),
-        endDate: moment(to).utc()
+        endDate: moment(to).utc(),
+        autoApply: true,
       });
+
+      initEmailStatsGraph();
     });
 
 
-    function initChartsPages() {
+  function initEmailStatsGraph() {
+
     chartColor = "#FFFFFF";
     var labels = []
     var emailsSent = []
     var emailsOpened= []
     var graphData = JSON.parse('<%= raw @graph_data.to_json %>')
+
     for(var prop in graphData) {
       labels.push(prop)
       emailsSent.push(graphData[prop][0])
@@ -197,8 +201,10 @@
       type: 'line',
 
       data: {
-        labels: labels, // days to date
+        labels: labels,
         datasets: [{
+            label: 'Emails Sent',
+            // fill: false,
             borderColor: "#fcc468",
             backgroundColor: "#fcc468",
             pointRadius: 0,
@@ -207,6 +213,8 @@
             data: emailsSent
           },
           {
+            label: 'Emails Opened',
+            // fill: false,
             borderColor: "#51cbce",
             backgroundColor: "#51cbce",
             pointRadius: 0,
@@ -217,22 +225,11 @@
         ]
       },
       options: {
-        legend: {
-          display: false
-        },
-
-        tooltips: {
-          enabled: false
-        },
-
         scales: {
           yAxes: [{
-
             ticks: {
               fontColor: "#9f9f9f",
-              beginAtZero: false,
-              maxTicksLimit: 5,
-              //padding: 20
+              beginAtZero: true,
             },
             gridLines: {
               drawBorder: false,
@@ -257,116 +254,6 @@
           }]
         },
       }
-    });
-
-
-    ctx = document.getElementById('chartEmail').getContext("2d");
-
-    myChart = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: [1, 2, 3],
-        datasets: [{
-          label: "Emails",
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          backgroundColor: [
-            '#e3e3e3',
-            '#4acccd',
-            '#fcc468',
-            '#ef8157'
-          ],
-          borderWidth: 0,
-          data: [342, 480, 530, 120]
-        }]
-      },
-
-      options: {
-
-        legend: {
-          display: false
-        },
-
-        pieceLabel: {
-          render: 'percentage',
-          fontColor: ['white'],
-          precision: 2
-        },
-
-        tooltips: {
-          enabled: false
-        },
-
-        scales: {
-          yAxes: [{
-
-            ticks: {
-              display: false
-            },
-            gridLines: {
-              drawBorder: false,
-              zeroLineColor: "transparent",
-              color: 'rgba(255,255,255,0.05)'
-            }
-
-          }],
-
-          xAxes: [{
-            barPercentage: 1.6,
-            gridLines: {
-              drawBorder: false,
-              color: 'rgba(255,255,255,0.1)',
-              zeroLineColor: "transparent"
-            },
-            ticks: {
-              display: false,
-            }
-          }]
-        },
-      }
-    });
-
-    var speedCanvas = document.getElementById("speedChart");
-
-    var dataFirst = {
-      data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
-      fill: false,
-      borderColor: '#fbc658',
-      backgroundColor: 'transparent',
-      pointBorderColor: '#fbc658',
-      pointRadius: 4,
-      pointHoverRadius: 4,
-      pointBorderWidth: 8,
-    };
-
-    var dataSecond = {
-      data: [0, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63],
-      fill: false,
-      borderColor: '#51CACF',
-      backgroundColor: 'transparent',
-      pointBorderColor: '#51CACF',
-      pointRadius: 4,
-      pointHoverRadius: 4,
-      pointBorderWidth: 8
-    };
-
-    var speedData = {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      datasets: [dataFirst, dataSecond]
-    };
-
-    var chartOptions = {
-      legend: {
-        display: false,
-        position: 'top'
-      }
-    };
-
-    var lineChart = new Chart(speedCanvas, {
-      type: 'line',
-      hover: false,
-      data: speedData,
-      options: chartOptions
     });
   }
   </script>
