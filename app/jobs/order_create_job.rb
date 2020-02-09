@@ -37,7 +37,7 @@ class OrderCreateJob < ActiveJob::Base
 
       # Create Review Email
       review_email = Email.new 
-      review_email.scheduled_time = new_order.shopify_created_at + shop.review_interval.minutes
+      review_email.scheduled_time = new_order.shopify_created_at + shop.review_interval.days
       review_email.template_id = shop.templates.find_by(template_type: 1).id
       review_email.html = shop.templates.find_by(template_type: 1).html
       review_email.shop_id = shop.id
