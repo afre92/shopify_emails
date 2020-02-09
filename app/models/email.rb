@@ -11,6 +11,15 @@ class Email < ApplicationRecord
   after_create :add_tracking_pixel
 
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
+  scope :sent, -> { where(was_sent: 'sent') } do
+    def opened
+      self.each do |email|
+        count = 0
+        count =+ 1 if email.tracking_pixel.views > 0
+        return count
+      end
+    end
+  end
 
   def add_tracking_pixel
     tracking_pixel = TrackingPixel.create(template_id: template_id, shop_id: shop_id, email_id: id)

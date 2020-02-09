@@ -1,45 +1,18 @@
 
-    <%# <div class="content"> %>
       <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6">
           <div class="card card-stats">
             <div class="card-body ">
               <div class="row">
                 <div class="col-5 col-md-4">
                   <div class="icon-big text-center icon-warning">
-                    <i class="nc-icon nc-globe text-warning"></i>
+                    <i class="nc-icon nc-paper text-success"></i>
                   </div>
                 </div>
                 <div class="col-7 col-md-8">
                   <div class="numbers">
-                    <p class="card-category">Capacity</p>
-                    <p class="card-title">150GB
-                      <p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer ">
-              <hr>
-              <div class="stats">
-                <i class="fa fa-refresh"></i> Update Now
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-body ">
-              <div class="row">
-                <div class="col-5 col-md-4">
-                  <div class="icon-big text-center icon-warning">
-                    <i class="nc-icon nc-money-coins text-success"></i>
-                  </div>
-                </div>
-                <div class="col-7 col-md-8">
-                  <div class="numbers">
-                    <p class="card-category">Revenue</p>
-                    <p class="card-title">$ 1,345
+                    <p class="card-category">Emails Opened</p>
+                    <p class="card-title"><%= @emails_opened %>
                       <p>
                   </div>
                 </div>
@@ -53,19 +26,19 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6">
           <div class="card card-stats">
             <div class="card-body ">
               <div class="row">
                 <div class="col-5 col-md-4">
                   <div class="icon-big text-center icon-warning">
-                    <i class="nc-icon nc-vector text-danger"></i>
+                    <i class="nc-icon nc-send text-danger"></i>
                   </div>
                 </div>
                 <div class="col-7 col-md-8">
                   <div class="numbers">
-                    <p class="card-category">Errors</p>
-                    <p class="card-title">23
+                    <p class="card-category">Emails Sent</p>
+                    <p class="card-title"><%= @emails_sent %>
                       <p>
                   </div>
                 </div>
@@ -79,19 +52,19 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6">
           <div class="card card-stats">
             <div class="card-body ">
               <div class="row">
                 <div class="col-5 col-md-4">
                   <div class="icon-big text-center icon-warning">
-                    <i class="nc-icon nc-favourite-28 text-primary"></i>
+                    <i class="nc-icon nc-email-85 text-primary"></i>
                   </div>
                 </div>
                 <div class="col-7 col-md-8">
                   <div class="numbers">
-                    <p class="card-category">Followers</p>
-                    <p class="card-title">+45K
+                    <p class="card-category">Emails Used</p>
+                    <p class="card-title"><%= @emails_used %>/6000
                       <p>
                   </div>
                 </div>
@@ -110,7 +83,7 @@
         <div class="col-md-12">
           <div class="card ">
             <div class="card-header ">
-              <h5 class="card-title">Users Behavior</h5>
+              <h5 class="card-title">Email Statistics</h5>
               <p class="card-category">24 Hours performance</p>
             </div>
             <div class="card-body ">
@@ -125,7 +98,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" style="display: none">
         <div class="col-md-4">
           <div class="card ">
             <div class="card-header ">
@@ -171,7 +144,6 @@
           </div>
         </div>
       </div>
-    <%# </div> %>
 
   <script>
     $(document).ready(function() {

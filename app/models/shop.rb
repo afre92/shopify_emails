@@ -4,6 +4,7 @@ class Shop < ActiveRecord::Base
   include ShopifyApp::SessionStorage
   has_many :templates
   has_many :orders
+  has_many :emails
   after_create :get_shop_info, :associate_templates
 
   def associate_templates
