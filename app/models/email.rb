@@ -34,6 +34,6 @@ class Email < ApplicationRecord
   end
 
   def replace_quote_entities_with_escape_characters
-    self.html = html.gsub('&quot;', '"').gsub('&ldquo;', '"').gsub('&rdquo;', '"').gsub('&lsquo;', '"').gsub('&rsquo;', '"').gsub('&lt;', '<').gsub('&gt;', '>').gsub(/&amp;/i, '&').gsub(/&nbsp;/i, '').gsub('{{', '<%=').gsub('}}', '%>')
+    self.html = html.gsub('&quot;', '"').gsub('&ldquo;', '"').gsub('&rdquo;', '"').gsub('&lsquo;', '"').gsub('&rsquo;', '"').gsub('&lt;', '<').gsub('&gt;', '>').gsub('{{', '<%=').gsub('}}', '%>')#.gsub(/&amp;/i, '&').gsub(/&nbsp;/i, '')
   end
 end
