@@ -9,6 +9,7 @@ class Email < ApplicationRecord
   validates_presence_of :order_id, :template_id, :shop_id
 
   after_create :add_tracking_pixel
+  before_save :replace_quote_entities_with_escape_characters
 
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
   scope :sent, -> { where(was_sent: 'sent') } do
@@ -30,5 +31,9 @@ class Email < ApplicationRecord
     body_index = html.index('</body>')
     self.html = html.insert(body_index, tracking_pixel.conversion_tag)
     save
+  end
+
+  def replace_quote_entities_with_escape_characters
+    self.html = html.gsub('&quot;', '"').gsub('&ldquo;', '"').gsub('&rdquo;', '"').gsub('&lsquo;', '"').gsub('&rsquo;', '"').gsub('&lt;', '<').gsub('&gt;', '>').gsub(/&amp;/i, '&').gsub(/&nbsp;/i, '').gsub('{{', '<%=').gsub('}}', '%>')
   end
 end
