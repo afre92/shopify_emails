@@ -15,11 +15,11 @@ class Email < ApplicationRecord
   scope :sent, -> { where(was_sent: 'sent') } do
     def opened
       if count > 0
+        opened = 0
         each do |email|
-          count = 0
-          count += 1 if email.tracking_pixel.views > 0
-          return count
+          opened += 1 if email.tracking_pixel.views > 0
         end
+        return opened
       else
         0
       end

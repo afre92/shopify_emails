@@ -6616,7 +6616,7 @@ input:checked + .slider:before {
 
 .side-info {
   font-size: larger; 
-  font-weight: 400 ;
+  font-weight: 500 ;
   color: '#66615' ;
 }
 
@@ -6625,4 +6625,8 @@ input:checked + .slider:before {
   margin: auto;
   height: 80vh;
   width: 80vw;
+}
+
+.card-stats {
+  padding-bottom: 20px;
 }

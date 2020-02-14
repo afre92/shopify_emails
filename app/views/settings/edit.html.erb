@@ -51,35 +51,35 @@
     </div>
     </div>
 
+    <% if @shop.subscription_type == 1 %>
+      <div class="row row-bordered">
+        <div class="col-md-4">
+          <p style="font-size: larger; font-weight: 500">
+            Time between order placed and sending of "Review" email.
+          </p>
+        </div>
+        <div class="card card-user col-md-8">
+          <div class="row">
+            <div class="pr-3 pl-3" style="width: 100%">
+              <div class="input-row settings row ml-0 mr-0">
+                <div class="col-md-7 pl-0">
+                  <span class="form-label" >
+                    <label class="pr-1"> Time to Send "Review" Email </label>
+                    ( <span id="review-value" class="pr-1"></span>Days )
+                  </span>
 
-    <div class="row row-bordered">
-      <div class="col-md-4">
-        <p style="font-size: larger; font-weight: 500">
-          Time between order placed and sending of "Review" email.
-        </p>
-      </div>
-      <div class="card card-user col-md-8">
-        <div class="row">
-          <div class="pr-3 pl-3" style="width: 100%">
-            <div class="input-row settings row ml-0 mr-0">
-              <div class="col-md-7 pl-0">
-                <span class="form-label" >
-                  <label class="pr-1"> Time to Send "Review" Email </label>
-                  ( <span id="review-value" class="pr-1"></span>Days )
-                </span>
-
-              </div>
-              <div class="col-md-5 pr-0">
-                <div class="slidecontainer float-right">
-                    <%= f.text_field :review_interval, min: '1', max: '30', class: 'bar-slider', type: 'range'  %>
+                </div>
+                <div class="col-md-5 pr-0">
+                  <div class="slidecontainer float-right">
+                      <%= f.text_field :review_interval, min: '1', max: '30', class: 'bar-slider', type: 'range'  %>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
+    <% end %>
     <div class="row pt-20">
       <div class="col-md-4">
         <p style="font-size: larger; font-weight: 500">
@@ -162,12 +162,15 @@
     </div>
 
     </div>
-
+  <div id="chartHours"></div>
   </div>
   <% end %>
 </div>
 
 <script>
+  $(document).on('turbolinks:load', function(){
+    $('label').tooltip();
+  })
   var thankYouSlider = document.getElementById("shop_thank_you_interval");
   var thankYouSliderOutput = document.getElementById("thank-you-range-value");
   thankYouSliderOutput.innerHTML = thankYouSlider.value
@@ -184,7 +187,5 @@
     reviewOutput.innerHTML = this.value;
   }
 
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
+
 </script>

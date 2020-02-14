@@ -38,12 +38,6 @@
             </div>
           </div>
         </div>
-        <div class="card-footer ">
-          <hr>
-          <div class="stats">
-            <i class="fa fa-calendar-o"></i> Last day
-          </div>
-        </div>
       </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-12">
@@ -62,12 +56,6 @@
                   <p>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="card-footer ">
-          <hr>
-          <div class="stats">
-            <i class="fa fa-clock-o"></i> In the last hour
           </div>
         </div>
       </div>
@@ -90,12 +78,6 @@
             </div>
           </div>
         </div>
-        <div class="card-footer ">
-          <hr>
-          <div class="stats">
-            <i class="fa fa-refresh"></i> Update now
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -104,17 +86,10 @@
       <div class="card ">
         <div class="card-header ">
           <h5 class="card-title">Email Statistics</h5>
-          <p class="card-category">24 Hours performance</p>
         </div>
         <div class="card-body ">
           <div >
             <canvas id=chartHours width="400" height="110"></canvas>
-          </div>
-        </div>
-        <div class="card-footer ">
-          <hr>
-          <div class="stats">
-            <i class="fa fa-history"></i> Updated 3 minutes ago
           </div>
         </div>
       </div>
@@ -169,18 +144,21 @@
   </div>
 
   <script>
+  debugger
     $(document).on('turbolinks:load',function() {
-      var daterange = "<%= @daterange %>"
-      var [from, to] = daterange.split("...")
-      
-      $('#daterange').daterangepicker({
-        opens: 'left',
-        startDate: moment(from).utc(),
-        endDate: moment(to).utc(),
-        autoApply: true,
-      });
+      if(window.location.pathname === "/"){
+        var daterange = "<%= @daterange %>"
+        var [from, to] = daterange.split("...")
+        
+        $('#daterange').daterangepicker({
+          opens: 'left',
+          startDate: moment(from).utc(),
+          endDate: moment(to).utc(),
+          autoApply: true,
+        });
 
-      initEmailStatsGraph();
+        initEmailStatsGraph();
+      }
     });
 
 
