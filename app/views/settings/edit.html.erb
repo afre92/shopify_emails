@@ -7,7 +7,6 @@
       When "off" no emails will be sent and your tokens will remain intact.
       </p>
     </div>
-    <%# <div class="col-md-1"></div> %>
     <div class="card card-user col-md-8">
       <div class="row">
         <div class="input-row settings">
@@ -29,7 +28,6 @@
       Time between order placed and sending of "Thank You" email.
       </p>
     </div>
-    <%# <div class="col-md-1"></div> %>
     <div class="card card-user col-md-8">
       <div class="row">
         <div class="pr-3 pl-3" style="width: 100%">
@@ -60,7 +58,6 @@
           Time between order placed and sending of "Review" email.
         </p>
       </div>
-      <%# <div class="col-md-1"></div> %>
       <div class="card card-user col-md-8">
         <div class="row">
           <div class="pr-3 pl-3" style="width: 100%">
@@ -89,7 +86,6 @@
           This information will be available in your templates, hover over the labels to see how to can access each value on the template editor.
         </p>
       </div>
-    <%# <div class="col-md-1"></div> %>
     <div class="card card-user col-md-8">
       <div class="card-header">
         <h5 class="card-title text-center"></h5>
@@ -99,13 +95,13 @@
           <div class="row">
               <div class="col-md-6 pr-1">
                 <div class="form-group">
-                  <label>Shop Name</label>
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.shop_name}}">Shop Name</label>
                   <%= f.text_field :shop_name, class: "form-control", placeholder: 'Shop Name' %>
                 </div>
               </div>
               <div class="col-md-6 pl-1">
                 <div class="form-group">
-                  <label>Owner Title</label>
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.title}}" >Owner Title</label>
                   <%= f.text_field :title, class: "form-control", placeholder: 'Owner Title' %>
                 </div>
               </div>
@@ -113,13 +109,13 @@
           <div class="row">
               <div class="col-md-6 pr-1">
                 <div class="form-group">
-                  <label>Owner First Name</label>
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.owner_first_name}}" >Owner First Name</label>
                   <%= f.text_field :owner_first_name, class: "form-control", placeholder: 'Owner First Name' %>
                 </div>
               </div>
               <div class="col-md-6 pl-1">
                 <div class="form-group">
-                  <label>Owner Last Name</label>
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.owner_last_name}}" >Owner Last Name</label>
                   <%= f.text_field :owner_last_name, class: "form-control", placeholder: 'Owner Last Name' %>
                 </div>
               </div>
@@ -127,13 +123,13 @@
           <div class="row">
               <div class="col-md-6 pr-1">
                 <div class="form-group">
-                  <label>Shop Phone Number</label>
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.phone}}" >Shop Phone Number</label>
                   <%= f.text_field :phone, class: "form-control", placeholder: 'Shop Phone Number' %>
                 </div>
               </div>
               <div class="col-md-6 pl-1">
                 <div class="form-group">
-                  <label>Address</label>
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.address}}">Address</label>
                   <%= f.text_field :address, class: "form-control", placeholder: 'Address' %>
                 </div>
               </div>
@@ -141,13 +137,13 @@
           <div class="row">
               <div class="col-md-6 pr-1">
                 <div class="form-group">
-                  <label>Email</label>
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.email}}">Email</label>
                   <%= f.text_field :email, class: "form-control", placeholder: 'Email' %>
                 </div>
               </div>
               <div class="col-md-6 pl-1">
                 <div class="form-group">
-                  <label>Website</label>
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.website}}">Website</label>
                   <%= f.text_field :website, class: "form-control", placeholder: 'Website' %>
                 </div>
               </div>
@@ -187,4 +183,8 @@
   reviewSlider.oninput = function() {
     reviewOutput.innerHTML = this.value;
   }
+
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 </script>
