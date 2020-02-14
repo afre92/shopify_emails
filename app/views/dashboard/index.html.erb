@@ -107,7 +107,9 @@
           <p class="card-category">24 Hours performance</p>
         </div>
         <div class="card-body ">
-          <canvas id=chartHours width="400" height="100"></canvas>
+          <div >
+            <canvas id=chartHours width="400" height="110"></canvas>
+          </div>
         </div>
         <div class="card-footer ">
           <hr>
@@ -118,7 +120,8 @@
       </div>
     </div>
   </div>
-  <div class="row" style="display: none">
+  <%# hidden %>
+  <div class="row" style="display: none;">
     <div class="col-md-4">
       <div class="card ">
         <div class="card-header ">
@@ -149,7 +152,7 @@
           <p class="card-category">Line Chart with Points</p>
         </div>
         <div class="card-body">
-          <canvas id="speedChart" width="400" height="100"></canvas>
+            <canvas id="speedChart" width="400" height="100"></canvas>
         </div>
         <div class="card-footer">
           <div class="chart-legend">
@@ -194,6 +197,9 @@
       emailsSent.push(graphData[prop][0])
       emailsOpened.push(graphData[prop][1])
     }
+
+    var valuesArray = emailsSent.concat(emailsOpened)
+    var max = Math.max(...valuesArray) + 1
     ctx = document.getElementById('chartHours').getContext("2d");
     
 
@@ -202,52 +208,47 @@
 
       data: {
         labels: labels,
-        datasets: [{
-            label: 'Emails Sent',
-            // fill: false,
-            borderColor: "#fcc468",
-            backgroundColor: "#fcc468",
-            pointRadius: 0,
-            pointHoverRadius: 0,
-            borderWidth: 3,
-            data: emailsSent
-          },
+        datasets: [
           {
             label: 'Emails Opened',
-            // fill: false,
+            fill: false,
             borderColor: "#51cbce",
             backgroundColor: "#51cbce",
             pointRadius: 0,
             pointHoverRadius: 0,
             borderWidth: 3,
             data: emailsOpened
+          },
+          {
+            label: 'Emails Sent',
+            fill: false,
+            borderColor: "#fcc468",
+            backgroundColor: "#fcc468",
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            borderWidth: 3,
+            data: emailsSent
           }
         ]
       },
       options: {
+            tooltips: {
+      mode: 'index',
+      intersect: false,
+    },
         scales: {
           yAxes: [{
             ticks: {
+              max: max,
               fontColor: "#9f9f9f",
               beginAtZero: true,
-            },
-            gridLines: {
-              drawBorder: false,
-              zeroLineColor: "#ccc",
-              color: 'rgba(255,255,255,0.05)'
+              stepSize: 1,
             }
-
           }],
 
           xAxes: [{
             barPercentage: 1.6,
             stacked: true,
-            gridLines: {
-              drawBorder: false,
-              color: 'rgba(255,255,255,0.1)',
-              zeroLineColor: "transparent",
-              display: false,
-            },
             ticks: {
               padding: 20,
               fontColor: "#9f9f9f"

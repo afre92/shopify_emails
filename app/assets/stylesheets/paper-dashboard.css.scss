@@ -6619,3 +6619,10 @@ input:checked + .slider:before {
   font-weight: 400 ;
   color: '#66615' ;
 }
+
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 80vh;
+  width: 80vw;
+}

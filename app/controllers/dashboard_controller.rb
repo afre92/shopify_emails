@@ -19,7 +19,7 @@ class DashboardController < ApplicationController
   def email_graph_data
     @graph_data = {}
     @daterange.each do |date|
-      @graph_data[date.strftime('%m/%d/%Y')] = [@shop.emails.sent.where(created_at: date...date.end_of_day).count, @shop.emails.where(created_at: date...date.end_of_day).sent.opened]
+      @graph_data[date.strftime('%m/%d')] = [@shop.emails.sent.where(created_at: date...date.end_of_day).count, @shop.emails.where(created_at: date...date.end_of_day).sent.opened]
     end
     return @graph_data
   end
