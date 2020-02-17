@@ -5,6 +5,8 @@ class Shop < ActiveRecord::Base
   has_many :templates
   has_many :orders
   has_many :emails
+
+  before_create :create_unique_token
   after_create :get_shop_info, :associate_templates
 
   def associate_templates
@@ -49,4 +51,12 @@ class Shop < ActiveRecord::Base
     self.shop_name = shop_info['name']
     save
   end
+
+  def create_unique_token
+    loop do
+      random_token = SecureRandom.urlsafe_base64(nil, false)
+      return (self.token = random_token) unless TrackingPixel.exists?(token: random_token)
+    end
+  end
+
 end
