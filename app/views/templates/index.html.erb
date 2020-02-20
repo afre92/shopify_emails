@@ -50,9 +50,7 @@
           <div class="card-footer">
               <div class="row">
                 <div class="update ml-auto mr-auto">
-                  <%= link_to "https://ultimate-mailer-non-embedded.herokuapp.com/templates/edit?shop=#{@shop.shopify_domain}&token=#{@token}&type=0", target: "_blank" do %>
-                    <button type="submit" class="btn btn-primary btn-round">Edit template</button>
-                  <% end %>
+                  <%= link_to 'Edit Template', "#{ENV['NON_E']}templates/edit?shop=#{@shop.shopify_domain}&token=#{@token}&type=0", class: "btn btn-primary" ,target: "_blank" %>
                 </div>
               </div>
           </div>
