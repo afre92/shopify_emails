@@ -5,7 +5,7 @@ class TemplatesController < AuthenticatedController
   
 
   def index
-    byebug
+    set_token
     @thank_you_template = @shop.templates.first
   end
 
@@ -18,7 +18,7 @@ class TemplatesController < AuthenticatedController
   end
 
   def set_token
-    shop_token = @shop.web_token+Date.current.month
+    shop_token = @shop.web_token+Date.current.month.to_s
     @token = Digest::SHA2.hexdigest shop_token
   end
 

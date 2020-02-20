@@ -2,11 +2,8 @@
 
 class Template < ApplicationRecord
   belongs_to :shop
-  has_many :emails
+  has_many :emails, dependent: :destroy
 
   validates_presence_of :shop_id
 
-  def test_insert
-    html.insert(5819, '<%= shop.shopify_domain %>')
-  end
 end
