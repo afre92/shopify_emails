@@ -2,6 +2,8 @@
 
 class TemplatesController < ApplicationController
   before_action :find_store
+  
+
   def index
     @thank_you_template = @shop.templates.first
   end
@@ -12,6 +14,11 @@ class TemplatesController < ApplicationController
 
   def update
     byebug
+  end
+
+  def set_token
+    # shop_token = @shop
+    @token = Digest::SHA2.hexdigest 'abc'
   end
 
   private
