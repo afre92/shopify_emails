@@ -55,7 +55,7 @@ class Shop < ActiveRecord::Base
   def create_unique_token
     loop do
       random_token = SecureRandom.urlsafe_base64(nil, false)
-      return (self.web_token = random_token) unless Shop.exists?(token: random_token)
+      return (self.web_token = random_token) unless Shop.exists?(web_token: random_token)
     end
   end
 

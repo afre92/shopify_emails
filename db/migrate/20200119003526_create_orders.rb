@@ -6,7 +6,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.string :shopify_id
       t.string :email
       t.datetime :shopify_created_at
-      t.integer :shop_id
+      t.belongs_to :shop
       t.jsonb :customer
 
       t.timestamps

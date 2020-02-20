@@ -8,7 +8,7 @@ class CreateTemplates < ActiveRecord::Migration[5.2]
       t.string :subject, default: ''
       t.string :reply_to, default: ''
       t.jsonb :body, default: '{}'
-      t.integer :shop_id
+      t.belongs_to :shop
       t.text :html, default: ''
 
       t.timestamps

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   patch '/settings', to: 'settings#update'
   resources :templates
   get '/convert/:token' => 'analytics#convert', as: :views
-  root to: 'dashboard#index', as: 'dashboard'
+  root to: 'home#index', as: 'home'
   mount ShopifyApp::Engine, at: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

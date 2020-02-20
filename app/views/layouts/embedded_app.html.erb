@@ -12,11 +12,44 @@
       <%= javascript_include_tag 'application', "data-turbolinks-track" => true %>
     <% end %>
     <%= csrf_meta_tags %>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   </head>
   
   <body>
-
+      <div class="app-wrapper" style="margin-bottom: 50px;">
+      <div class="app-content" >
+        <main role="main" class="main-container">
+          <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent mt-4 mb-0">
+          <ul class="navbar-nav" style="font-size: larger;">
+              <li class="nav-item">
+                <h4>
+                  <a class="nav-link btn-magnify dashboard" href="/">
+                    Dashboard
+                  </a>
+                </h4>
+              </li>
+              <li class="nav-item btn-rotate dropdown">
+                <h4>
+                  <a class="nav-link templates" href="/templates">
+                    Templates
+                  </a>
+                </h4>
+              </li>
+              <li class="nav-item">
+                <h4>
+                  <a class="nav-link btn-rotate settings" href="/settings" >
+                    Settings
+                  </a>
+                </h4>
+              </li>
+            </ul>
+        </nav>
     <%= yield %>
+            </main>
+      </div>
+    </div>
 
     <%= render 'layouts/flash_messages' %>
 

@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-class TemplatesController < ApplicationController
+class TemplatesController < AuthenticatedController
   before_action :find_store
   
 
   def index
+    byebug
     @thank_you_template = @shop.templates.first
   end
 
@@ -17,8 +18,8 @@ class TemplatesController < ApplicationController
   end
 
   def set_token
-    # shop_token = @shop
-    @token = Digest::SHA2.hexdigest 'abc'
+    shop_token = @shop.web_token+Date.current.month
+    @token = Digest::SHA2.hexdigest shop_token
   end
 
   private

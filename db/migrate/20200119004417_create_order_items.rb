@@ -7,7 +7,7 @@ class CreateOrderItems < ActiveRecord::Migration[5.2]
       t.string :variant_id
       t.string :title
       t.integer :quantity
-      t.integer :order_id
+      t.belongs_to :order
       t.integer :number
 
       t.timestamps

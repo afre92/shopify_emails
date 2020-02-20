@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SettingsController < ApplicationController
+class SettingsController < AuthenticatedController
   before_action :find_store
 
   def edit; end
