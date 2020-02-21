@@ -58,3 +58,63 @@
       </div>
     </div>
   </div>
+
+  <% if @shop.subscription_type == 1%>
+  <div class="row pt-20">
+    <div class="col-md-4" style="padding: 15px;">
+      <p  class="side-info" >This is how your Thank You Email will look.</p>
+
+      <p style="border-top: solid 1px #c7c7c7 ;margin-top: 43px;;padding-top: 10px;" class="side-info">
+        Items in between "{{}}" will be replaced with the corresponding data once the email is sent.
+      </p>
+      <p style="border-top: solid 1px #c7c7c7;margin-top: 103px;padding-top: 10px;" class="side-info">
+        Your store data (like store name, address, etc ) can be modified at any time. please head over <%= link_to 'Settings', settings_path, class: 'primary' %> to make changes you need.
+      </p>
+    </div>
+    <div class="col-md-8">
+      <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title text-center"></h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="input-row">
+                <div><span class="form-label" >From: </span><%= @thank_you_template.from %></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-row">
+                <div><span class="form-label" >To: {{customer.email}}</span></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-row">
+                <div><span class="form-label">Subject: </span> <%= @thank_you_template.subject %></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-row">
+                <div><span class="form-label">Reply to: </span> <%= @thank_you_template.reply_to %></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-row">
+                <%= renderer.result(binding).html_safe %>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="input-row">
+          <div class="card-footer">
+              <div class="row">
+                <div class="update ml-auto mr-auto">
+                  <%= link_to 'Edit Template', "#{ENV['NON_E']}templates/edit?shop=#{@shop.shopify_domain}&token=#{@token}&type=0", class: "btn btn-primary" ,target: "_blank" %>
+                </div>
+              </div>
+          </div>
+        </div>    
+      </div>
+    </div>
+  </div>
+<% end %>
