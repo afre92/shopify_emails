@@ -167,6 +167,9 @@
   <% end %>
 </div>
 
+<%= link_to 'Create Charge', create_charge_url, remote: true ,class: 'btn btn-primary' %>
+
+
 <script>
   $(document).on('turbolinks:load', function(){
     $('label').tooltip();
