@@ -166,11 +166,12 @@
   </div>
   <% end %>
 </div>
-
-<%= link_to 'Create Charge', create_charge_url, remote: true ,class: 'btn btn-primary' %>
+<%= link_to 'Create Charge', create_charge_url, remote: true ,class: 'btn btn-primary create-charge-url' %>
+<%= link_to 'Cancel Charge', cancel_charge_url, remote: true ,class: 'btn btn-danger' %>
 
 
 <script>
+var originUrl = window.top.location
   $(document).on('turbolinks:load', function(){
     $('label').tooltip();
   })

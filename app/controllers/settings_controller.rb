@@ -9,31 +9,49 @@ class SettingsController < AuthenticatedController
     @shop.update(shop_params)
   end
 
+  def remove_plan
+
+  end
+
+  def cancel_charge
+    # check for the presence of current
+    if ShopifyAPI::RecurringApplicationCharge.current.cancel
+      #change subscription_type
+    end
+  end
+
   def create_recurring_application_charge
     unless ShopifyAPI::RecurringApplicationCharge.current
       recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.new(
               name: "Basic plan",
               price: 9.99,
-              return_url: "#{ENV['APP_URL']}activatecharge",
+              return_url: "#{ENV['APP_URL']}/activatecharge",
               test: true,
               trial_days: 7,
               capped_amount: 100,
               terms: "$0.99 for every order created")
    
       if recurring_application_charge.save
-        # @tokens[:confirmation_url] = recurring_application_charge.confirmation_url
-        # byebug
-      @url = recurring_application_charge.confirmation_url
+        @url = recurring_application_charge.confirmation_url
+      else
+        # recurring charge could no be created
       end
     end
    end
   
   def activate_charge
-    byebug
+    # TODO: redirect back original page
+    redirect_link = "https://#{@shop.shopify_domain}/admin/apps"
     recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.find(request.params['charge_id'])
-    recurring_application_charge.status == "accepted" ? recurring_application_charge.activate : redirect_to('https://test-email-thing.myshopify.com/admin/apps')
-
-    redirect_to 'https://test-email-thing.myshopify.com/admin/apps'
+    if recurring_application_charge.status == "accepted" 
+       recurring_application_charge.activate
+       @shop.update(subscription_type: 1)
+    else
+      # soemthing went wrong
+       redirect_to redirect_link
+    end
+    #something right
+    redirect_to redirect_link
   end
 
   private
