@@ -16,11 +16,13 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   </head>
+
   
   <body>
       <div class="app-wrapper" style="margin-bottom: 50px;">
       <div class="app-content" >
         <main role="main" class="main-container">
+        <%= render 'layouts/flash_messages' %>
           <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent mt-4 mb-0">
           <ul class="navbar-nav" style="font-size: larger;">
               <li class="nav-item">
@@ -46,12 +48,13 @@
               </li>
             </ul>
         </nav>
-    <%= yield %>
-            </main>
+          
+          <%= yield %>
+          </main>
       </div>
     </div>
 
-    <%= render 'layouts/flash_messages' %>
+  
 
     <script src="https://cdn.shopify.com/s/assets/external/app.js?<%= Time.now.strftime('%Y%m%d%H') %>"></script>
 

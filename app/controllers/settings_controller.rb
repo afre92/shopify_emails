@@ -8,7 +8,13 @@ class SettingsController < AuthenticatedController
   end
 
   def update
-    @shop.update(shop_params)
+    if @shop.update(shop_params)
+      flash.now[:notice] = "We have exactly "
+      flash[:notice] = "User not found."
+      flash.alert = "User not found."
+      redirect_to settings_path
+    else
+    end
   end
 
   def cancel_charge

@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require paper-dashboard
+ *= require animate
  *= require bootstrap.min
  *= require_self
  */
