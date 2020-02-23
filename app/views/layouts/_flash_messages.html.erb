@@ -14,8 +14,9 @@
 <script>
 if($( ".alert.animated").is(':visible')) {
   setTimeout(function(){
-     $(".alert.animated").removeClass('fadeInDown')
-     $(".alert.animated").addClass('fadeOutUp')
+     $(".alert.animated").parent().fadeOut(400, function(){
+        $(".alert.animated").remove();
+    });
     }, 
   4000);
 }
