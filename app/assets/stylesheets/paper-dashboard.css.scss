@@ -6439,7 +6439,7 @@ body {
 }
 
 .main-container {
-  margin-top: 120px;
+  // padding-top: 120px;
   max-width: 1024px;
   margin-left: auto;
   margin-right: auto;
@@ -6605,11 +6605,6 @@ input:checked + .slider:before {
   color: #51cbce !important;
 }
 
-.active {
-  // color: #51cbce !important;
-  text-decoration: underline !important;
-}
-
 #daterange {
   text-align: center;
 }
@@ -6629,4 +6624,25 @@ input:checked + .slider:before {
 
 .card-stats {
   padding-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  float: left;
+}
+
+li a, a:hover {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+  color: #565656;
 }

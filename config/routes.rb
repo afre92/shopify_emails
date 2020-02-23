@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   get '/settings', to: 'settings#edit', as: 'settings'
   patch '/settings', to: 'settings#update'
+  get '/pricing', to: 'settings#pricing'
   resources :templates
   get '/convert/:token', to: 'analytics#convert', as: :views
   root to: 'home#index'

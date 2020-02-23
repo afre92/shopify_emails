@@ -16,6 +16,9 @@ class SettingsController < AuthenticatedController
     redirect_to settings_path
   end
 
+  def pricing
+  end
+
   def cancel_charge
     ShopifyAPI::RecurringApplicationCharge.current.cancel
     @shop.update(subscription_type: 0)
@@ -30,8 +33,8 @@ class SettingsController < AuthenticatedController
         return_url: "#{ENV['APP_URL']}/activatecharge",
         test: true,
         trial_days: 7,
-        capped_amount: 100,
-        terms: "$0.99 for every order created"
+        capped_amount: 9.99,
+        terms: "7000 email for $9.99"
       )
    
       if recurring_application_charge.save
