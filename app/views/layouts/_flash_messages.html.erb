@@ -12,12 +12,14 @@
   </div>
 <% end %>
 <script>
-if($( ".alert.animated").is(':visible')) {
-  setTimeout(function(){
-     $(".alert.animated").parent().fadeOut(400, function(){
-        $(".alert.animated").remove();
-    });
-    }, 
-  4000);
-}
+
+  if($( ".alert.animated").is(':visible')) {
+    setTimeout(function(){
+      $(".alert.animated").parent().fadeOut(400, function(){
+          $(".alert.animated").remove();
+      });
+      }, 
+    4000);
+  }
+
 </script>

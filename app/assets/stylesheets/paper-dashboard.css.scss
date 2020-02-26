@@ -6646,3 +6646,23 @@ li a, a:hover {
   text-decoration: none;
   color: #565656;
 }
+
+h5.amount {
+  font-size: 7em;
+  font-weight: 400;
+}
+
+.card-price span {
+  font-size: 2em;
+  padding-top: 10%;
+}
+
+.card-price {
+  display: flex;
+  justify-content: center;
+}
+
+.card_description {
+  font-size: larger !important;
+  color: darkgrey !important;
+}
