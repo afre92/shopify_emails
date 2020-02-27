@@ -6639,7 +6639,7 @@ li {
   float: left;
 }
 
-li a, a:hover {
+li a {
   display: block;
   text-align: center;
   padding: 16px;
@@ -6648,13 +6648,14 @@ li a, a:hover {
 }
 
 h5.amount {
-  font-size: 7em;
+  font-size: 6em;
   font-weight: 400;
+  line-height: 1.2em;
 }
 
 .card-price span {
   font-size: 2em;
-  padding-top: 10%;
+  padding-top: 5%;
 }
 
 .card-price {
