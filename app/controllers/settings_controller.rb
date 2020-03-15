@@ -38,7 +38,9 @@ class SettingsController < AuthenticatedController
       )
    
       if recurring_application_charge.save
-        @url = recurring_application_charge.confirmation_url
+        
+        return @url = recurring_application_charge.confirmation_url
+        
       else
         # recurring charge could no be created
       end

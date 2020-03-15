@@ -8,6 +8,8 @@ class Shop < ActiveRecord::Base
 
   before_create :create_unique_token
   after_create :get_shop_info, :associate_templates
+  
+  enum subscription_type: { free: 0, basic: 1, pro: 2 }
 
   def associate_templates
     # Create Thank You Template

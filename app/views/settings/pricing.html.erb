@@ -1,5 +1,5 @@
 <div class="row ">
-  <div class="col-md-3 col-sm-6">
+  <div class="col-md-4 col-sm-6">
     <div class="card card-user text-center">
       <div class="card-header">
         <h2 class="card-title mb-0"> Free</h2>
@@ -30,7 +30,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3 col-sm-6">
+  <div class="col-md-4 col-sm-6">
     <div class="card card-user text-center">
       <div class="card-header">
         <h2 class="card-title mb-0"> Basic</h2>
@@ -61,7 +61,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3 col-sm-6">
+  <div class="col-md-4 col-sm-6">
     <div class="card card-user text-center">
       <div class="card-header">
         <h2 class="card-title mb-0"> Pro</h2>
@@ -86,41 +86,18 @@
       </div>
       <div class="card-footer">
         <hr>
-        <div class="button-container py-2">  
+        <div class="button-container py-2 d-flex">  
           <%= link_to 'Select Plan', create_charge_url, remote: true ,class: 'btn btn-primary create-charge-url' %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3 col-sm-6">
-    <div class="card card-user text-center">
-      <div class="card-header">
-        <h2 class="card-title mb-0"> Premium</h2>
-      </div>
-      <div class="card-body text-center pt-0">
-        <div >
-          <div class="card-price row text-primary">
-            <span>$</span><h5 class="amount mb-0">20</h5>
-          </div>
-          <p class="description">
-            per month
-          </p>
-        </div>
-        <p class="card_description text-center">
-          - "I like the way you work it
-          <br>- "I like the diggity way 
-          <br>- "I like the  work it
-          <br>- "I like No diggit the work it
-          <br>- No diggity
-        </p>
-      </div>
-      <div class="card-footer">
-        <hr>
-        <div class="button-container py-2">  
-          <%= link_to 'Select Plan', create_charge_url, remote: true , id: "wtf",class: 'btn btn-primary create-charge-url' %>
         </div>
       </div>
     </div>
   </div>
 
 </div>
+<script>
+  // disabled other button and add loading animation while it loads
+  $('.btn.btn-primary.create-charge-url').on('click', function(){
+    $('.create-charge-url').addClass('disabled')
+    $(this).parent('div').html('<div class="loader"></div>')
+  })
+</script>

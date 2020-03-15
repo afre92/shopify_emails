@@ -5716,6 +5716,8 @@ License - nucleoapp.com/license/
 .card-user .button-container {
   margin-bottom: 6px;
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .map {
@@ -6667,3 +6669,27 @@ h5.amount {
   font-size: larger !important;
   color: darkgrey !important;
 }
+
+.disabled {
+  opacity: 0.65; 
+  cursor: not-allowed;
+}
+
+.loader {
+  border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 5px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+// .center-h {
+//   displa
+// }
