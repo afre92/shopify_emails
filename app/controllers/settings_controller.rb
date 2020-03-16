@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class SettingsController < AuthenticatedController
+  include UserPlans
   before_action :find_store
 
   def edit 
@@ -26,17 +27,17 @@ class SettingsController < AuthenticatedController
   end
 
   def create_recurring_application_charge
+    #change current plan and move around token if present
     unless ShopifyAPI::RecurringApplicationCharge.current
+      plan_info = get_plan(params[:id])
       recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.new(
-        name: "Basic plan",
-        price: 9.99,
+        name: plan_info[:name],
+        price: plan_info[:price],
         return_url: "#{ENV['APP_URL']}/activatecharge",
-        test: true,
-        trial_days: 7,
-        capped_amount: 9.99,
-        terms: "7000 email for $9.99"
+        test: plan_info[:test],
+        capped_amount: plan_info[:capped_amount],
+        terms: plan_info[:terms]
       )
-   
       if recurring_application_charge.save
         
         return @url = recurring_application_charge.confirmation_url

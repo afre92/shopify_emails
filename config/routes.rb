@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resources :templates
   get '/convert/:token', to: 'analytics#convert', as: :views
   root to: 'home#index'
-  get 'activatecharge', to: 'settings#activate_charge'
-  get 'create-charge', to: 'settings#create_recurring_application_charge', as: 'create_charge'
+  get '/activatecharge', to: 'settings#activate_charge'
+  get 'create-charge/:id', to: 'settings#create_recurring_application_charge', as: 'create_charge'
   get 'cancel-charge', to: 'settings#cancel_charge', as: 'cancel_charge'
   mount ShopifyApp::Engine, at: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

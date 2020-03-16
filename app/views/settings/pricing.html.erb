@@ -24,8 +24,12 @@
       </div>
       <div class="card-footer">
         <hr>
-        <div class="button-container py-2">  
-          <%= link_to 'Select Plan', create_charge_url, remote: true ,class: 'btn btn-primary create-charge-url' %>
+        <div class="button-container py-2">
+          <% if @shop.subscription_type == "free"%>  
+            <a class="btn btn-primary" href="#" disabled>Selected</a>
+          <% else %>
+            <%= link_to 'Select Plan', create_charge_url(0), remote: true ,class: 'btn btn-primary create-charge-url' %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -56,7 +60,11 @@
       <div class="card-footer">
         <hr>
         <div class="button-container py-2">  
-          <%= link_to 'Select Plan', create_charge_url, remote: true ,class: 'btn btn-primary create-charge-url' %>
+          <% if @shop.subscription_type == "pro"%>  
+            <a class="btn btn-primary" href="#" disabled>Selected</a>
+          <% else %>
+            <%= link_to 'Select Plan', create_charge_url(1), remote: true ,class: 'btn btn-primary create-charge-url' %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -86,8 +94,12 @@
       </div>
       <div class="card-footer">
         <hr>
-        <div class="button-container py-2 d-flex">  
-          <%= link_to 'Select Plan', create_charge_url, remote: true ,class: 'btn btn-primary create-charge-url' %>
+        <div class="button-container py-2 d-flex">
+          <% if @shop.subscription_type == "pro"%>  
+            <a class="btn btn-primary" href="#" disabled>Selected</a>
+          <% else %>
+            <%= link_to 'Select Plan', create_charge_url(2), remote: true ,class: 'btn btn-primary create-charge-url' %>
+          <% end %>
         </div>
       </div>
     </div>
