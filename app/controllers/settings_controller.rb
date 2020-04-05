@@ -23,19 +23,17 @@ class SettingsController < AuthenticatedController
   # Move shopify related code to module helper
 
   def cancel_charge
-    ShopifyAPI::RecurringApplicationCharge.current.cancel
-    @shop.update(subscription_type: 'free')
-    redirect_to settings_path
+    ShopifyAPI::RecurringApplicationCharge.current.cancel 
+    @shop.update(subscription_type: 0)
+    flash[:success] = "Successfully changed to the Free plan."
+    fullpage_redirect_to "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/pricing"
   end
 
   def create_recurring_application_charge
-    #change current plan and move around token if present
-      ShopifyAPI::RecurringApplicationCharge.current &&
-        ShopifyAPI::RecurringApplicationCharge.current.cancel
-      
-      # if not accepted then is the current application charge deleted ?
-      @plan_id = params[:id]
-      plan_info = get_plan(@plan_id)
+    # Each shop can have only one recurring charge per app. When a new recurring application charge is activated for a shop 
+    # that already has one, the existing recurring charge is canceled and replaced by the new charge. 
+    # The new recurring charge is then activated.
+      plan_info = get_plan(params[:id])
       recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.new(
         name: plan_info[:name],
         price: plan_info[:price],
@@ -45,9 +43,7 @@ class SettingsController < AuthenticatedController
         terms: plan_info[:terms]
       )
       if recurring_application_charge.save
-        
-        return @url = recurring_application_charge.confirmation_url
-        
+        fullpage_redirect_to recurring_application_charge.confirmation_url
       else
         # recurring charge could no be created
       end
@@ -56,7 +52,6 @@ class SettingsController < AuthenticatedController
   def activate_charge
     redirect_link = "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/pricing"
     recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.find(request.params['charge_id'])
-    # should I check for current plan before? if so should I cancel the current plan?
     if recurring_application_charge.status == "accepted" 
        recurring_application_charge.activate
         #  if subscriptiom upgrade addition of emails sent will go here
@@ -66,10 +61,10 @@ class SettingsController < AuthenticatedController
         @shop.update(subscription_type: 1)
        end
     else
-      # soemthing went wrong
-       redirect_to redirect_link
+      flash[:danger] = "Oopps! somthing is not quite right! plase contact the support team."
+      redirect_to redirect_link
     end
-    #something right
+    flash[:success] = "Successfully changed to the #{recurring_application_charge.name}."
     redirect_to redirect_link
   end
 

@@ -28,7 +28,8 @@
           <% if @shop.subscription_type == "free"%>  
             <a class="btn btn-primary" href="#" disabled>Selected</a>
           <% else %>
-            <%= link_to 'Select Plan', create_charge_url(0), remote: true ,class: 'btn btn-primary create-charge-url' %>
+          <%# link_to 'Cancel Charge', cancel_charge_url, remote: true ,class: 'btn btn-danger' %>
+            <%= link_to 'Select Plan', cancel_charge_url, class: 'btn btn-primary create-charge-url' %>
           <% end %>
         </div>
       </div>
@@ -63,7 +64,7 @@
           <% if @shop.subscription_type == "basic"%>  
             <a class="btn btn-primary" href="#" disabled>Selected</a>
           <% else %>
-            <%= link_to 'Select Plan', create_charge_url(1), remote: true ,class: 'btn btn-primary create-charge-url' %>
+            <%= link_to 'Select Plan', create_charge_url(1) ,class: 'btn btn-primary create-charge-url' %>
           <% end %>
         </div>
       </div>
@@ -98,7 +99,7 @@
           <% if @shop.subscription_type == "pro"%>  
             <a class="btn btn-primary" href="#" disabled>Selected</a>
           <% else %>
-            <%= link_to 'Select Plan', create_charge_url(2), remote: true ,class: 'btn btn-primary create-charge-url' %>
+            <%= link_to 'Select Plan', create_charge_url(2) ,class: 'btn btn-primary create-charge-url' %>
           <% end %>
         </div>
       </div>
