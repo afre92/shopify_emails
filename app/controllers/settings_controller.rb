@@ -20,16 +20,22 @@ class SettingsController < AuthenticatedController
   def pricing
   end
 
+  # Move shopify related code to module helper
+
   def cancel_charge
     ShopifyAPI::RecurringApplicationCharge.current.cancel
-    @shop.update(subscription_type: 0)
+    @shop.update(subscription_type: 'free')
     redirect_to settings_path
   end
 
   def create_recurring_application_charge
     #change current plan and move around token if present
-    unless ShopifyAPI::RecurringApplicationCharge.current
-      plan_info = get_plan(params[:id])
+      ShopifyAPI::RecurringApplicationCharge.current &&
+        ShopifyAPI::RecurringApplicationCharge.current.cancel
+      
+      # if not accepted then is the current application charge deleted ?
+      @plan_id = params[:id]
+      plan_info = get_plan(@plan_id)
       recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.new(
         name: plan_info[:name],
         price: plan_info[:price],
@@ -45,15 +51,20 @@ class SettingsController < AuthenticatedController
       else
         # recurring charge could no be created
       end
-    end
    end
   
   def activate_charge
-    redirect_link = "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/settings"
+    redirect_link = "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/pricing"
     recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.find(request.params['charge_id'])
+    # should I check for current plan before? if so should I cancel the current plan?
     if recurring_application_charge.status == "accepted" 
        recurring_application_charge.activate
-       @shop.update(subscription_type: 1)
+        #  if subscriptiom upgrade addition of emails sent will go here
+       if recurring_application_charge.name == "Pro plan"
+        @shop.update(subscription_type: 2)
+       else
+        @shop.update(subscription_type: 1)
+       end
     else
       # soemthing went wrong
        redirect_to redirect_link

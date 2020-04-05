@@ -60,7 +60,7 @@
       <div class="card-footer">
         <hr>
         <div class="button-container py-2">  
-          <% if @shop.subscription_type == "pro"%>  
+          <% if @shop.subscription_type == "basic"%>  
             <a class="btn btn-primary" href="#" disabled>Selected</a>
           <% else %>
             <%= link_to 'Select Plan', create_charge_url(1), remote: true ,class: 'btn btn-primary create-charge-url' %>
