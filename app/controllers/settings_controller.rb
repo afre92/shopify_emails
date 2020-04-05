@@ -18,6 +18,7 @@ class SettingsController < AuthenticatedController
   end
 
   def pricing
+    @view = 'pricing'
   end
 
   # Move shopify related code to module helper
@@ -72,7 +73,7 @@ class SettingsController < AuthenticatedController
 
     def find_store
       @shop = Shop.find_by(shopify_domain: session[:shopify_domain])
-      @controller = params[:controller]
+      @view = 'settings'
     end
 
     def shop_params

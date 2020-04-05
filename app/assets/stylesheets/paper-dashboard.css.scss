@@ -6595,8 +6595,8 @@ input:checked + .slider:before {
 }
 
 .row-bordered {
-  border-bottom: 1px solid lightgray;
-  padding-top: 20px;
+  // border-bottom: 1px solid lightgray;
+  // padding-top: 20px;
 }
 
 .pt-20 {
@@ -6689,7 +6689,18 @@ h5.amount {
   100% { transform: rotate(360deg); }
 }
 
+.card.nav-bar {
+  background-color: #f4f6f8 !important;
+  border: 2px solid #e0e2ee;
+  box-shadow: none;
+}
 
-// .center-h {
-//   displa
-// }
+.card {
+  border: 2px solid #e0e2ee;
+  box-shadow: none;
+}
+
+a:hover {
+  color: #565656;
+  text-decoration: none;
+}

@@ -28,6 +28,6 @@ class HomeController < AuthenticatedController
 
   def find_shop
     @shop = Shop.find_by(shopify_domain: session[:shopify_domain])
-    @controller = params[:controller]
+    @view = 'dashboard'
   end
 end

@@ -26,6 +26,6 @@ class TemplatesController < AuthenticatedController
 
   def find_store
     @shop = Shop.find_by(shopify_domain: session[:shopify_domain])
-    @controller = params[:controller]
+    @view = 'templates'
   end
 end
