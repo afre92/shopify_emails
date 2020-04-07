@@ -6698,9 +6698,18 @@ h5.amount {
 .card {
   border: 2px solid #e0e2ee;
   box-shadow: none;
+  border-radius: 5px !important;
 }
 
 a:hover {
   color: #565656;
   text-decoration: none;
+}
+
+.nav-bar .card-body {
+  padding: 10px !important;
+}
+
+ul.navbar-list li a {
+  padding: 10px;
 }

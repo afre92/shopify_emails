@@ -13,39 +13,44 @@
       </p>
     </div>
     <div class="col-md-8">
+      <div class="col-md-12 row px-0 mx-0">
+        <div class="col-md-6 pl-0">
+          <div class="card ">
+            <div class="input-row">
+                <span class="form-label" >From: </span><%= @thank_you_template.from %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 pr-0"> 
+          <div class="card">
+            <span class="input-row"> 
+              <span class="form-label">Reply to: </span> <%= @thank_you_template.reply_to %>
+            </span>
+          </div>
+      </div>
+    </div>
+
+    <div class="card card-user">
+      <div class="row">
+        <div class="pr-3 pl-3" style="width: 100%">
+          <div class="input-row settings row ml-0 mr-0">
+              <span class="form-label"> 
+                <div><span class="form-label" >Subject: </span><%= @thank_you_template.subject %></div>
+              </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
       <div class="card card-user">
-        <div class="card-header">
-          <h5 class="card-title text-center"></h5>
+      <div class="row">
+        <div class="input-row" style="border-top: none;">
+          <%= renderer.result(binding).html_safe %>
         </div>
-        <div class="card-body">
-          <form>
-            <div class="row">
-              <div class="input-row">
-                <div><span class="form-label" >From: </span><%= @thank_you_template.from %></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-row">
-                <div><span class="form-label" >To: {{customer.email}}</span></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-row">
-                <div><span class="form-label">Subject: </span> <%= @thank_you_template.subject %></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-row">
-                <div><span class="form-label">Reply to: </span> <%= @thank_you_template.reply_to %></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-row">
-                <%= renderer.result(binding).html_safe %>
-              </div>
-            </div>
-          </form>
-        </div>
+      </div>
         <div class="input-row">
           <div class="card-footer">
               <div class="row">
