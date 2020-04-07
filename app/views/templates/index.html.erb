@@ -1,14 +1,13 @@
 
   <% shop = @shop %>
-  <% renderer = ERB.new(@thank_you_template.html) %>
+  <% thank_you_template = ERB.new(@thank_you_template.html) %>
+  <% review_template = ERB.new(@review_template.html) %>
   <div class="row">
-    <div class="col-md-4" style="padding: 15px;">
-      <p  class="side-info" >This is how your Thank You Email will look.</p>
-
-      <p style="border-top: solid 1px #c7c7c7 ;margin-top: 43px;;padding-top: 10px;" class="side-info">
+    <div class="col-md-4">
+      <p class="side-info">
         Items in between "{{}}" will be replaced with the corresponding data once the email is sent.
       </p>
-      <p style="border-top: solid 1px #c7c7c7;margin-top: 103px;padding-top: 10px;" class="side-info">
+      <p style="margin-top: 20px;padding-top: 10px;" class="side-info">
         Your store data (like store name, address, etc ) can be modified at any time. please head over <%= link_to 'Settings', settings_path, class: 'primary' %> to make changes you need.
       </p>
     </div>
@@ -34,9 +33,7 @@
       <div class="row">
         <div class="pr-3 pl-3" style="width: 100%">
           <div class="input-row settings row ml-0 mr-0">
-              <span class="form-label"> 
-                <div><span class="form-label" >Subject: </span><%= @thank_you_template.subject %></div>
-              </span>
+            <div><span class="form-label" >Subject: </span><%= @thank_you_template.subject %></div>
           </div>
         </div>
       </div>
@@ -48,7 +45,7 @@
       <div class="card card-user">
       <div class="row">
         <div class="input-row" style="border-top: none;">
-          <%= renderer.result(binding).html_safe %>
+          <%= thank_you_template.result(binding).html_safe %>
         </div>
       </div>
         <div class="input-row">
@@ -64,57 +61,58 @@
     </div>
   </div>
 
-  <% if @shop.subscription_type == 1%>
-  <div class="row pt-20">
-    <div class="col-md-4" style="padding: 15px;">
-      <p  class="side-info" >This is how your Thank You Email will look.</p>
-
-      <p style="border-top: solid 1px #c7c7c7 ;margin-top: 43px;;padding-top: 10px;" class="side-info">
+  <% if @shop.subscription_type != 0 %>
+  <div class="row">
+    <div class="col-md-4">
+      <p class="side-info">
         Items in between "{{}}" will be replaced with the corresponding data once the email is sent.
       </p>
-      <p style="border-top: solid 1px #c7c7c7;margin-top: 103px;padding-top: 10px;" class="side-info">
+      <p style="margin-top: 20px;padding-top: 10px;" class="side-info">
         Your store data (like store name, address, etc ) can be modified at any time. please head over <%= link_to 'Settings', settings_path, class: 'primary' %> to make changes you need.
       </p>
     </div>
     <div class="col-md-8">
+      <div class="col-md-12 row px-0 mx-0">
+        <div class="col-md-6 pl-0">
+          <div class="card ">
+            <div class="input-row">
+                <span class="form-label" >From: </span><%= @thank_you_template.from %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 pr-0"> 
+          <div class="card">
+            <span class="input-row"> 
+              <span class="form-label">Reply to: </span> <%= @thank_you_template.reply_to %>
+            </span>
+          </div>
+      </div>
+    </div>
+
+    <div class="card card-user">
+      <div class="row">
+        <div class="pr-3 pl-3" style="width: 100%">
+          <div class="input-row settings row ml-0 mr-0">
+            <div><span class="form-label" >Subject: </span><%= @thank_you_template.subject %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
       <div class="card card-user">
-        <div class="card-header">
-          <h5 class="card-title text-center"></h5>
+      <div class="row">
+        <div class="input-row" style="border-top: none;">
+          <%= review_template.result(binding).html_safe %>
         </div>
-        <div class="card-body">
-          <form>
-            <div class="row">
-              <div class="input-row">
-                <div><span class="form-label" >From: </span><%= @thank_you_template.from %></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-row">
-                <div><span class="form-label" >To: {{customer.email}}</span></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-row">
-                <div><span class="form-label">Subject: </span> <%= @thank_you_template.subject %></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-row">
-                <div><span class="form-label">Reply to: </span> <%= @thank_you_template.reply_to %></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-row">
-                <%= renderer.result(binding).html_safe %>
-              </div>
-            </div>
-          </form>
-        </div>
+      </div>
         <div class="input-row">
           <div class="card-footer">
               <div class="row">
-                <div class="update ml-auto mr-auto">
-                  <%= link_to 'Edit Template', "#{ENV['NON_E']}templates/edit?shop=#{@shop.shopify_domain}&token=#{@token}&type=0", class: "btn btn-primary" ,target: "_blank" %>
+                <div class="update ml-auto mr-auto edit-template">
+                  <%= link_to 'Edit Template', "#{ENV['NON_E']}templates/edit?shop=#{@shop.shopify_domain}&token=#{@token}&type=1", class: "btn btn-primary btn-round" ,target: "_blank" %>
                 </div>
               </div>
           </div>
