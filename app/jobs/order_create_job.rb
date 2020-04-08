@@ -25,7 +25,7 @@ class OrderCreateJob < ActiveJob::Base
     thank_you_email.save
 
     # Create Order Items and Review Email if subscription_type == 1
-    if shop.subscription_type == 1
+    if shop.subscription_type != "free"
 
       webhook['line_items'].each do |item|
         new_order_item = OrderItem.new
