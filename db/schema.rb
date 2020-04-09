@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_202524) do
+ActiveRecord::Schema.define(version: 2020_04_09_204319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_202524) do
     t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uuid"
     t.index ["order_id"], name: "index_emails_on_order_id"
     t.index ["shop_id"], name: "index_emails_on_shop_id"
     t.index ["template_id"], name: "index_emails_on_template_id"
@@ -55,10 +56,10 @@ ActiveRecord::Schema.define(version: 2020_04_09_202524) do
 
   create_table "reviews", force: :cascade do |t|
     t.bigint "email_id"
-    t.integer "rating"
-    t.string "title"
-    t.text "description"
-    t.integer "review_status"
+    t.integer "rating", default: 0
+    t.string "title", default: ""
+    t.text "description", default: ""
+    t.integer "review_status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email_id"], name: "index_reviews_on_email_id"

@@ -5,11 +5,31 @@ class Email < ApplicationRecord
   belongs_to :shop
   belongs_to :template
   has_one :tracking_pixel
+  has_one :review, dependent: :destroy
 
   validates_presence_of :order_id, :template_id, :shop_id
 
   after_create :add_tracking_pixel
-  before_save :replace_quote_entities_with_escape_characters
+  # I dont think I need thid
+  # before_save :replace_quote_entities_with_escape_characters
+  before_create :create_unique_uuid
+  after_create :create_review_obj
+
+  # these two depend on the type of parent
+  
+
+
+  
+
+
+  def create_review_obj
+    return unless Template.find(self.template_id).template_type == 1
+    
+    review = Review.new
+    review.email_id = self.id
+    review.save
+  end
+
 
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
   scope :sent, -> { where(was_sent: 'sent') } do
@@ -23,6 +43,14 @@ class Email < ApplicationRecord
       else
         0
       end
+    end
+  end
+
+  def create_unique_uuid
+    return unless Template.find(self.template_id).template_type == 1
+    loop do
+      random_uuid = SecureRandom.uuid
+      return (self.uuid = random_uuid) unless Email.exists?(uuid: random_uuid)
     end
   end
 
