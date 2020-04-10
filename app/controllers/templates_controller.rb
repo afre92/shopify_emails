@@ -6,8 +6,8 @@ class TemplatesController < AuthenticatedController
 
   def index
     set_token
-    @thank_you_template = @shop.templates.find_by(template_type: 0)
-    @review_template = @shop.templates.find_by(template_type: 1)
+    @thank_you_template = @shop.templates.find_by(template_type: 'thank_you')
+    @review_template = @shop.templates.find_by(template_type: 'review')
   end
 
   def edit

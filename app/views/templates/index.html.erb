@@ -1,7 +1,9 @@
 
   <% shop = @shop %>
   <% thank_you_template = ERB.new(@thank_you_template.html) %>
-  <% review_template = ERB.new(@review_template.html) %>
+  <% body_index = @review_template.html.index('</body>') %>
+  <% some = render 'review_form' %>
+  <% review_template = ERB.new(@review_template.html.insert(body_index, some)) %>
   <div class="row">
     <div class="col-md-4">
       <p class="side-info">
@@ -121,3 +123,8 @@
     </div>
   </div>
 <% end %>
+
+
+<script>
+// .nl-container
+</script>

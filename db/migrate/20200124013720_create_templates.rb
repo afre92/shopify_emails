@@ -4,7 +4,7 @@ class CreateTemplates < ActiveRecord::Migration[5.2]
   def change
     create_table :templates do |t|
       t.string :from, default: ''
-      t.integer :template_type, default: 0
+      t.integer :template_type, default: 'thank_you'
       t.string :subject, default: ''
       t.string :reply_to, default: ''
       t.jsonb :body, default: '{}'

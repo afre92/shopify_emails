@@ -6,4 +6,5 @@ class Template < ApplicationRecord
 
   validates_presence_of :shop_id
 
+  enum template_type: { thank_you: 0, review: 1}
 end

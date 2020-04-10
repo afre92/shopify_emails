@@ -19,13 +19,13 @@ class OrderCreateJob < ActiveJob::Base
     # Create Thank You Email
     thank_you_email = Email.new
     thank_you_email.scheduled_time = new_order.shopify_created_at + shop.thank_you_interval.minutes
-    thank_you_email.template_id = shop.templates.find_by(template_type: 0).id
-    thank_you_email.html = shop.templates.find_by(template_type: 0).html
+    thank_you_email.template_id = shop.templates.find_by(template_type: 'thank_you').id
+    thank_you_email.html = shop.templates.find_by(template_type: 'thank_you').html
     thank_you_email.shop_id = shop.id
     thank_you_email.order_id = new_order.id
     thank_you_email.save
 
-    # Create Order Items and Review Email if subscription_type == 1
+    # Create Order Items and Review Email if subscription_type != 'free'
     if shop.subscription_type != "free"
 
       webhook['line_items'].each do |item|
@@ -41,10 +41,20 @@ class OrderCreateJob < ActiveJob::Base
       # Create Review Email
       review_email = Email.new
       review_email.scheduled_time = new_order.shopify_created_at + shop.review_interval.days
-      review_email.template_id = shop.templates.find_by(template_type: 1).id
-      review_email.html = shop.templates.find_by(template_type: 1).html
       review_email.shop_id = shop.id
       review_email.order_id = new_order.id
+      
+      review_template = shop.templates.find_by(template_type: 'review')
+      template_html = review_template.html
+      body_index = template_html.index('</body>') 
+     
+      #attach review form
+      ac = ActionController::Base.new()
+      review_form = ac.render_to_string :template => 'templates/_review_form.html.erb'
+      review_email.template_id = review_template.id
+      review_email.html = template_html.insert(body_index, review_form)
+
+
       review_email.save
 
     end

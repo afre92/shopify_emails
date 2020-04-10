@@ -10,28 +10,11 @@ class Email < ApplicationRecord
   validates_presence_of :order_id, :template_id, :shop_id
 
   after_create :add_tracking_pixel
-  # I dont think I need thid
-  # before_save :replace_quote_entities_with_escape_characters
-  before_create :create_unique_uuid
   after_create :create_review_obj
-
-  # these two depend on the type of parent
+  before_save :attach_uuid_and_review_form, on: :create
   
-
-
-  
-
-
-  def create_review_obj
-    return unless Template.find(self.template_id).template_type == 1
-    
-    review = Review.new
-    review.email_id = self.id
-    review.save
-  end
-
-
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
+  
   scope :sent, -> { where(was_sent: 'sent') } do
     def opened
       if count > 0
@@ -46,12 +29,31 @@ class Email < ApplicationRecord
     end
   end
 
-  def create_unique_uuid
-    return unless Template.find(self.template_id).template_type == 1
+
+  def create_review_obj
+    return unless Template.find(self.template_id).template_type == 'review'
+    review = Review.new
+    review.email_id = self.id
+    review.save
+  end
+
+  def attach_uuid_and_review_form
+    return unless Template.find(self.template_id).template_type == 'review'
     loop do
       random_uuid = SecureRandom.uuid
       return (self.uuid = random_uuid) unless Email.exists?(uuid: random_uuid)
     end
+    # byebug
+    # shop = Shop.find(shop_id)
+    # template = shop.templates.find_by(template_type: 'review')
+    # template_html = template.html
+    # body_index = template_html.index('</body>') 
+   
+    # #attach review form
+    # ac = ActionController::Base.new()
+    # review_form = ac.render_to_string :template => 'templates/_review_form.html.erb'
+    # self.template_id = template.id
+    # self.html = template_html.insert(body_index, review_form)
   end
 
   def add_tracking_pixel

@@ -51,7 +51,7 @@
     </div>
     </div>
 
-    <% if @shop.subscription_type == 1 %>
+    <% if @shop.subscription_type != 'free' %>
       <div class="row row-bordered">
         <div class="col-md-4">
           <p style="font-size: larger; font-weight: 500">
