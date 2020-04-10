@@ -53,8 +53,6 @@ class OrderCreateJob < ActiveJob::Base
       review_form = ac.render_to_string :template => 'templates/_review_form.html.erb'
       review_email.template_id = review_template.id
       review_email.html = template_html.insert(body_index, review_form)
-
-
       review_email.save
 
     end

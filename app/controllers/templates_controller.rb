@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require 'nokogiri'
+
 
 class TemplatesController < AuthenticatedController
   before_action :find_store
@@ -6,8 +8,14 @@ class TemplatesController < AuthenticatedController
 
   def index
     set_token
+
     @thank_you_template = @shop.templates.find_by(template_type: 'thank_you')
     @review_template = @shop.templates.find_by(template_type: 'review')
+
+    html_doc = Nokogiri::HTML(@review_template.html)
+    review_t = html_doc.css('div.email-row-container div.email-row').first
+    review_form = view_context.render 'templates/review_form.html.erb'
+    @review_template.html = review_t << review_form
   end
 
   def edit
