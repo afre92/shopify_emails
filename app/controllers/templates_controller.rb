@@ -12,10 +12,9 @@ class TemplatesController < AuthenticatedController
     @thank_you_template = @shop.templates.find_by(template_type: 'thank_you')
     @review_template = @shop.templates.find_by(template_type: 'review')
     # todo find better make this and use it also in the job 
-    @email = Email.new(uuid: '')
     review_html = Nokogiri::HTML(@review_template.html)
     div = review_html.at_css('div.email-row-container div.email-row')
-    review_form = view_context.render 'templates/review_form.html.erb'
+    review_form = view_context.render partial: 'templates/review_form.html.erb', locals: { email: Email.new(uuid: '') }
     div.add_child(review_form)
     
     @review_template.html = review_html
