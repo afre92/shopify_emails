@@ -11,7 +11,7 @@ class Email < ApplicationRecord
 
   after_create :add_tracking_pixel
   after_create :create_review_obj
-  before_save :attach_uuid_and_review_form, on: :create
+  before_save :attach_uuid, on: :create
   
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
   
@@ -37,29 +37,18 @@ class Email < ApplicationRecord
     review.save
   end
 
-  def attach_uuid_and_review_form
+  def attach_uuid
     return unless Template.find(self.template_id).template_type == 'review'
     loop do
       random_uuid = SecureRandom.uuid
       return (self.uuid = random_uuid) unless Email.exists?(uuid: random_uuid)
     end
-    # byebug
-    # shop = Shop.find(shop_id)
-    # template = shop.templates.find_by(template_type: 'review')
-    # template_html = template.html
-    # body_index = template_html.index('</body>') 
-   
-    # #attach review form
-    # ac = ActionController::Base.new()
-    # review_form = ac.render_to_string :template => 'templates/_review_form.html.erb'
-    # self.template_id = template.id
-    # self.html = template_html.insert(body_index, review_form)
   end
 
   def add_tracking_pixel
     tracking_pixel = TrackingPixel.create(template_id: template_id, shop_id: shop_id, email_id: id)
-    body_index = html.index('</body>')
-    self.html = html.insert(body_index, tracking_pixel.conversion_tag)
+    body_index = self.html.index('</body>')
+    self.html = self.html.insert(body_index, tracking_pixel.conversion_tag)
     save
   end
 

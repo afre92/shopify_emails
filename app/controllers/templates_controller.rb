@@ -13,17 +13,15 @@ class TemplatesController < AuthenticatedController
     @review_template = @shop.templates.find_by(template_type: 'review')
 
     html_doc = Nokogiri::HTML(@review_template.html)
-    review_t = html_doc.css('div.email-row-container div.email-row').first
+    div = html_doc.at_css('div.email-row-container div.email-row')
     review_form = view_context.render 'templates/review_form.html.erb'
-    @review_template.html = review_t << review_form
+    div.add_child(review_form)
+    
+    @review_template.html = html_doc
   end
 
   def edit
     @template = @shop.templates.first
-  end
-
-  def update
-    byebug
   end
 
   def set_token

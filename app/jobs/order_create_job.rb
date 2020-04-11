@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require "securerandom"
+require 'nokogiri'
 
 class OrderCreateJob < ActiveJob::Base
   def perform(shop_domain:, webhook:)
@@ -39,20 +40,20 @@ class OrderCreateJob < ActiveJob::Base
       end
 
       # Create Review Email
+      ac = ActionController::Base.new()
       review_email = Email.new
       review_email.scheduled_time = new_order.shopify_created_at + shop.review_interval.days
       review_email.shop_id = shop.id
       review_email.order_id = new_order.id
       
       review_template = shop.templates.find_by(template_type: 'review')
-      template_html = review_template.html
-      body_index = template_html.index('</body>') 
-     
-      #attach review form
-      ac = ActionController::Base.new()
-      review_form = ac.render_to_string :template => 'templates/_review_form.html.erb'
+      template_html = Nokogiri::HTML(review_template.html)
+      review_form = ac.view_context.render 'templates/review_form.html.erb'
+      div = template_html.at_css('div.email-row-container div.email-row')
+
+      div.add_child(review_form)
+      review_email.html = template_html.to_html
       review_email.template_id = review_template.id
-      review_email.html = template_html.insert(body_index, review_form)
       review_email.save
 
     end
