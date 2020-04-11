@@ -11,7 +11,6 @@ class Email < ApplicationRecord
 
   after_create :add_tracking_pixel
   after_create :create_review_obj
-  before_save :attach_uuid, on: :create
   
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
   
@@ -35,14 +34,6 @@ class Email < ApplicationRecord
     review = Review.new
     review.email_id = self.id
     review.save
-  end
-
-  def attach_uuid
-    return unless Template.find(self.template_id).template_type == 'review'
-    loop do
-      random_uuid = SecureRandom.uuid
-      return (self.uuid = random_uuid) unless Email.exists?(uuid: random_uuid)
-    end
   end
 
   def add_tracking_pixel

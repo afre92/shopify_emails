@@ -11,13 +11,14 @@ class TemplatesController < AuthenticatedController
 
     @thank_you_template = @shop.templates.find_by(template_type: 'thank_you')
     @review_template = @shop.templates.find_by(template_type: 'review')
-
-    html_doc = Nokogiri::HTML(@review_template.html)
-    div = html_doc.at_css('div.email-row-container div.email-row')
+    # todo find better make this and use it also in the job 
+    @email = Email.new(uuid: '')
+    review_html = Nokogiri::HTML(@review_template.html)
+    div = review_html.at_css('div.email-row-container div.email-row')
     review_form = view_context.render 'templates/review_form.html.erb'
     div.add_child(review_form)
     
-    @review_template.html = html_doc
+    @review_template.html = review_html
   end
 
   def edit

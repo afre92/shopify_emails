@@ -45,10 +45,10 @@ class OrderCreateJob < ActiveJob::Base
       review_email.scheduled_time = new_order.shopify_created_at + shop.review_interval.days
       review_email.shop_id = shop.id
       review_email.order_id = new_order.id
-      
+      review_email.uuid = SecureRandom.uuid
       review_template = shop.templates.find_by(template_type: 'review')
       template_html = Nokogiri::HTML(review_template.html)
-      review_form = ac.view_context.render 'templates/review_form.html.erb'
+      review_form = ac.view_context.render partial: 'templates/review_form.html.erb', locals: {email: review_email}
       div = template_html.at_css('div.email-row-container div.email-row')
 
       div.add_child(review_form)

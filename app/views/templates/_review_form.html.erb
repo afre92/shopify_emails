@@ -1,22 +1,21 @@
 <div style="display: flex; justify-content: center;">
-<form style="max-width: 320px;min-width: 500px;display: table-cell;vertical-align: top;">
-  <div style="text-align: center;">
-  <input type="radio" id="five" name="rating" value="five">
-  <label for="five"><span style="font-size:17px;line-height:23px;color:#4278aa" >★★★★★</span></label>
-  <input type="radio" id="four" name="rating" value="four">
-  <label for="four"><span style="font-size:17px;line-height:23px;color:#4278aa" >★★★★</span></label>
-  <input type="radio" id="three" name="rating" value="three">
-  <label for="three"><span style="font-size:17px;line-height:23px;color:#4278aa">★★★</span></label>
-    <input type="radio" id="two" name="rating" value="two">
-    <label for="tow"><span style="font-size:17px;line-height:23px;color:#4278aa" >★★</span></label>
-  	<input type="radio" id="one" name="rating" value="one">
-   <label for="one"><span style="font-size:17px;line-height:23px;color:#4278aa">★</span></label><br>
-  </div>
-<br/>
-  <label for="title">Title of Review</label><br>
-  <input type="text" id="title" name="title" value="John" style="width: 100%; height: 25px; margin-bottom: 10px"><br>
-  <label for="lname">How was your overall experience using the item?</label><br>
-  <textarea  id="lname" name="lname" value="Doe" style="width: 100%; min-height:100px;"></textarea><br><br>
-  <input type="submit" value="Submit">
-</form>
+  <form action='<%="#{ENV['NON_E']}review-submission/#{email.uuid}"%>' style="max-width: 320px;min-width: 500px;display: table-cell;vertical-align: top;">
+    <div style="text-align: center;">
+      <input type="radio" id="five" name="rating" value="five">
+      <label for="five"><span style="font-size:17px;line-height:23px;color:#ffd700" >★★★★★</span></label>
+      <input type="radio" id="four" name="rating" value="four">
+      <label for="four"><span style="font-size:17px;line-height:23px;color:#ffd700" >★★★★</span></label>
+      <input type="radio" id="three" name="rating" value="three">
+      <label for="three"><span style="font-size:17px;line-height:23px;color:#ffd700">★★★</span></label>
+      <input type="radio" id="two" name="rating" value="two">
+      <label for="tow"><span style="font-size:17px;line-height:23px;color:#ffd700" >★★</span></label>
+      <input type="radio" id="one" name="rating" value="one">
+      <label for="one"><span style="font-size:17px;line-height:23px;color:#ffd700">★</span></label>
+    </div>
+    <label for="title">Title of Review</label><br>
+    <input type="text" id="title" name="title" value="John" style="width: 100%; height: 25px; margin-bottom: 10px"><br>
+    <label for="lname">How was your overall experience using the item?</label><br>
+    <textarea id="lname" name="lname" value="Doe" style="width: 100%; min-height:100px;"></textarea><br><br>
+    <input type="submit" value="Submit">
+  </form>
 </div>
