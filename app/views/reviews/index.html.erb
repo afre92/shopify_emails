@@ -1,0 +1,66 @@
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table" style="table-layout: fixed;  width: 100%;">
+        <thead class=" text-primary">
+          <tr class="text-center">
+            <th colspan="2">
+              Order
+            </th>
+            <th colspan="2">
+              Item
+            </th>
+            <th colspan="2">
+              Rating
+            </th>
+            <th colspan="2" class="text-center">
+              Title
+            </th>
+            <th colspan="4" class="text-center">
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @reviews.present? %>
+            <% @reviews.each do |review| %>
+            <% email = Email.find(review.email_id) %>
+            <% order = Order.find(email.order_id) %>
+              <tr data-id="<%=review.id%>" class="text-center order">
+                <td colspan="2">
+                  <%= order.shopify_id %>
+                </td>
+                <td colspan="2">
+                  <%= order.order_items.first.title %>
+                </td>
+                <td colspan="2" style="color: #ffd700;">
+                  <% total=[] 
+                  review.rating.times do |t|
+                    total << '★' 
+                  end %>
+                  <%= total.join('') %>
+                </td>
+                <td colspan="2">
+                  <%= review.title %>
+                </td>
+                <td colspan="4">
+                  <%= review.description %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="12" class="text-center">
+                No results found. please try again with a different search
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="paginate center-h">
+      <%# <#= will_paginate @orders, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
+  </div>
+  
+</div>
