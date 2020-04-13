@@ -148,6 +148,46 @@
                 </div>
               </div>
           </div>
+          <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.instagram}}">Instagram</label>
+                  <%= f.text_field :instagram, class: "form-control", placeholder: 'Sample' %>
+                </div>
+              </div>
+              <div class="col-md-4 pl-1 pr-1">
+                <div class="form-group">
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.facebook}}">Facebook</label>
+                  <%= f.text_field :facebook, class: "form-control", placeholder: 'Sample' %>
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.twitter}}">Twitter</label>
+                  <%= f.text_field :twitter, class: "form-control", placeholder: 'Sample' %>
+                </div>
+              </div>
+          </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group color">
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.instagram}}">Stars color</label>
+                  <%= f.text_field :star_color, type: 'color', class: "form-control", placeholder: 'Sample' %>
+                </div>
+              </div>
+              <div class="col-md-4 pl-1 pr-1">
+                <div class="form-group color">
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.facebook}}">Form button color</label>
+                  <%= f.text_field :form_button_color, type: 'color', class: "form-control", placeholder: 'Sample' %>
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group color">
+                  <label data-toggle="tooltip" data-placement="top" title="{{shop.twitter}}">Links color</label>
+                  <%= f.text_field :default_link_color, type: 'color', class: "form-control", placeholder: 'Sample' %>
+                </div>
+              </div>
+          </div>
         </form>
       </div>
       <div class="">
