@@ -1,17 +1,21 @@
  <br/>
 <div style="display: flex; justify-content: center;">
   <form action='<%="#{ENV['NON_E']}review-submission/#{email.uuid}"%>' style="max-width: 320px;min-width: 500px;display: table-cell;vertical-align: top;">
-    <div style="text-align: center;">
+    <div style="text-align: center; color: blue;">
       <input type="radio" id="five" name="review[rating]" value="5">
-      <label for="five"><span style="font-size:17px;line-height:23px;color:#ffd700" >★★★★★</span></label>
+      <label for="five"><span style="font-size:17px;line-height:23px; color:<%= @shop.star_color%>" class="pr-1">★★★★★</span></label>
+
       <input type="radio" id="four" name="review[rating]" value="4">
-      <label for="four"><span style="font-size:17px;line-height:23px;color:#ffd700" >★★★★</span></label>
+      <label for="four"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>"  class="pr-1">★★★★</span></label>
+
       <input type="radio" id="three" name="review[rating]" value="3">
-      <label for="three"><span style="font-size:17px;line-height:23px;color:#ffd700">★★★</span></label>
+      <label for="three"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>" class="pr-1">★★★</span></label>
+
       <input type="radio" id="two" name="review[rating]" value="2">
-      <label for="tow"><span style="font-size:17px;line-height:23px;color:#ffd700" >★★</span></label>
+      <label for="tow"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>"  class="pr-1">★★</span></label>
+      
       <input type="radio" id="one" name="review[rating]" value="1">
-      <label for="one"><span style="font-size:17px;line-height:23px;color:#ffd700">★</span></label>
+      <label for="one"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>" class="pr-1">★</span></label>
     </div>
     <br/>
     <label >Title of Review</label><br>
@@ -20,7 +24,8 @@
     <textarea id="description" name="review[description]" style="width: 100%; min-height:100px;"></textarea>
     <input type="hidden" id="review_status" name="review[review_status]" value="completed" style="width: 100%; height: 25px; margin-bottom: 10px"><br>
     <br><br>
-
-    <input type="submit" value="Submit">
+    <div class="text-center">
+      <button type="submit" class="btn" style='background-color: <%= @shop.form_button_color %>'>Submit Review</button>
+    </div>
   </form>
 </div>
