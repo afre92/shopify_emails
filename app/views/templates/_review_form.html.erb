@@ -13,7 +13,7 @@
 
       <input type="radio" id="two" name="review[rating]" value="2">
       <label for="tow"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>"  class="pr-1">★★</span></label>
-      
+
       <input type="radio" id="one" name="review[rating]" value="1">
       <label for="one"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>" class="pr-1">★</span></label>
     </div>
@@ -24,8 +24,52 @@
     <textarea id="description" name="review[description]" style="width: 100%; min-height:100px;"></textarea>
     <input type="hidden" id="review_status" name="review[review_status]" value="completed" style="width: 100%; height: 25px; margin-bottom: 10px"><br>
     <br><br>
-    <div class="text-center">
+    <div style="text-align: center">
       <button type="submit" class="btn" style='background-color: <%= @shop.form_button_color %>'>Submit Review</button>
     </div>
   </form>
+
+
 </div>
+
+  <div class="form-links text-center" style="width: 100%;">
+    <br>
+    <strong style="color:#444444!important">Having trouble with this form?</strong>
+    <br>
+    <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{email.uuid}"%>' target="_blank" style="color: <%= @shop.default_link_color %>" >Submit your review online</a>
+    <br>
+  </div>
+
+  <div class="form-links text-center" style="width: 100%;">
+    <br>
+    <strong style="color:#444444!important">How do I get details about this order?</strong>
+    <br>
+    <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{email.uuid}"%>' target="_blank" style="color: <%= @shop.default_link_color %>" >Get up-to-date information about order</a>
+    <br>
+  </div>
+<br>
+<br>
+    <div class="form-links text-center" style="width: 100%;">
+      <br>
+      <% if @shop.facebook.present? || @shop.instagram.present? || @shop.twitter.present?  %>
+      <strong style="color:#444444!important">Lets keep in touch!</strong>
+      <% end %>
+      <br>
+      <% if @shop.facebook.present? %>
+        <a href="https://www.facebook.com/<%= @shop.facebook %>" style="text-decoration: none;">
+          <img src="https://ci6.googleusercontent.com/proxy/yKrS8mYn3LmKMibnhZLzjIzGYwNdbYtpaoy1OCV2ajjRi6GVVuqvEg_s3LIoeq9YzMYEa-wkP_RlNhWpVseABMTUkDeJX_cf=s0-d-e1-ft" style="width: 40px;">
+        </a>
+      <% end %>
+      <% if @shop.instagram.present? %>
+        <a href="https://www.instagram.com/<%= @shop.instagram %>" style="text-decoration: none;">
+          <img src="https://ci5.googleusercontent.com/proxy/Z3-F3FDmOOsihszuxiPP44syKwWfzuqpwbXewjPSFQHheRdZkc610wOynfbXbr9S4FP76ybONMD7Lmr5NBDK9oKyJ4VRSyu_3g=s0-d-e1-ft" style="width: 40px;">
+        </a>
+      <% end %>
+      <% if @shop.twitter.present? %>
+        <a href="https://www.twitter.com/<%= @shop.twitter %>" style="text-decoration: none;">
+          <img src="https://ci3.googleusercontent.com/proxy/h2Lsa9Cp6aov1E8FPU0mmhC7mwEkKSX8ywelRXeq93ugnCCWwN8NH3vi6kXNMP3OKgzpJ88ZggzQRIA9bI3Svx_yoW8E1BI=s0-d-e1-ft" style="width: 40px;">
+        </a>
+      <% end %>
+      <br>
+    </div>
+  </div>
