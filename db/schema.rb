@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_204319) do
+ActiveRecord::Schema.define(version: 2020_04_13_170519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,12 @@ ActiveRecord::Schema.define(version: 2020_04_09_204319) do
     t.integer "review_interval", default: 10
     t.integer "thank_you_interval", default: 10
     t.integer "status", default: 0
+    t.string "star_color", default: "#ffd700"
+    t.string "form_button_color", default: "#1775EF"
+    t.string "default_link_color", default: "#7db6ff"
+    t.string "instagram", default: ""
+    t.string "facebook", default: ""
+    t.string "twitter", default: ""
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
   end
 
