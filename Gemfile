@@ -13,6 +13,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.12'
 gem 'shopify_app'
 gem 'rb-readline'
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap4'
 # Use SCSS for stylesheets
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'coffee-rails', '~> 4.2'
