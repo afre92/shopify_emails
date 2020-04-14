@@ -1,0 +1,68 @@
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table" style="table-layout: fixed;  width: 100%;">
+        <thead class=" text-primary">
+          <tr class="text-center">
+            <th colspan="2">
+              Order
+            </th>
+            <th colspan="2">
+              Status
+            </th>
+            <th colspan="2">
+              Type
+            </th>
+            <th colspan="5" class="text-center">
+              schedule time
+            </th>
+            <th colspan="1" class="text-center">
+              Views
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @emails.present? %>
+            <% @emails.each do |email| %>
+            <% order = Order.find(email.order_id) %>
+              <tr data-id="<%=email.id%>" class="text-center order">
+                <td colspan="2">
+                  <%= order.shopify_id %>
+                </td>
+                <td colspan="2">
+                  
+                  <% if email.was_sent == 'not_sent' %>
+                    <b class="text-warning">pending</b>
+                  <% elsif email.wast_sent == 'sent' %>
+                    <b class="text-success">sent</b>
+                  <% else %>
+                    <b class="text-danger">error</b>
+                  <% end %>
+                </td>
+                <td colspan="2">
+                  <%= email.template_type.humanize %>
+                </td>
+                <td colspan="5">
+                  <%= email.scheduled_time %>
+                </td>
+                <td colspan="1">
+                  <%= email.tracking_pixel.views %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="12" class="text-center">
+                No results found. please try again with a different search
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="paginate center-h">
+       <%= will_paginate @emails, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
+  </div>
+  
+</div>

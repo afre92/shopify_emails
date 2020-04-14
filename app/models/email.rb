@@ -13,6 +13,11 @@ class Email < ApplicationRecord
   after_create :create_review_obj
   
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
+
+  def template_type
+    template = Template.find(self.template_id)
+    return template.template_type
+  end
   
   scope :sent, -> { where(was_sent: 'sent') } do
     def opened
