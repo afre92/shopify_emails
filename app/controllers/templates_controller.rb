@@ -14,7 +14,7 @@ class TemplatesController < AuthenticatedController
     # todo find better make this and use it also in the job 
     review_html = Nokogiri::HTML(@review_template.html)
     div = review_html.css('div.email-row-container').last
-    review_form = view_context.render partial: 'templates/review_form.html.erb', locals: { email: Email.new(uuid: '') }
+    review_form = view_context.render partial: 'templates/review_form.html.erb', locals: { email: Email.new(uuid: ''), shop: @shop }
     div.add_next_sibling(review_form)
     
     @review_template.html = review_html
