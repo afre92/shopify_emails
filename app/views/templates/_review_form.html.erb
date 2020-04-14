@@ -1,127 +1,120 @@
-
-
-
-
-
-
-
-  <div class="email-row-container" style="padding: 0px;background-color: transparent">
+<div class="email-row-container" style="padding: 0px;background-color: transparent">
   <div style="Margin: 0 auto;min-width: 320px;max-width: 500px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;" class="email-row">
     <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
       <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:500px;"><tr style="background-color: transparent;"><![endif]-->
-      
-<!--[if (mso)|(IE)]><td align="center" width="250" style="width: 250px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
-<div class="email-col email-col-50" style="max-width: 320px;min-width: 250px;display: table-cell;vertical-align: top;">
-  <div style="width: 100% !important;">
-  <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
-<!--<![endif]-->
-  
-<table id="u_content_text_2" class="u_content_text" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tbody>
-    <tr>
-      <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;">
-         <br/>
-<div style="display: flex; justify-content: center;">
-  <form action='<%="#{ENV['NON_E']}review-submission/#{email.uuid}"%>' style="max-width: 320px;min-width: 500px;display: table-cell;vertical-align: top;">
-    <div style="text-align: center; color: blue;">
-      <input type="radio" id="five" name="review[rating]" value="5">
-      <label for="five"><span style="font-size:17px;line-height:23px; color:<%= @shop.star_color%>" class="pr-1">★★★★★</span></label>
 
-      <input type="radio" id="four" name="review[rating]" value="4">
-      <label for="four"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>"  class="pr-1">★★★★</span></label>
+        <!--[if (mso)|(IE)]><td align="center" width="250" style="width: 250px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+          <div class="email-col email-col-50" style="max-width: 320px;min-width: 250px;display: table-cell;vertical-align: top;">
+            <div style="width: 100% !important;">
+              <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+                <!--<![endif]-->
 
-      <input type="radio" id="three" name="review[rating]" value="3">
-      <label for="three"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>" class="pr-1">★★★</span></label>
+                <table id="u_content_text_2" class="u_content_text" style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+                  <tbody>
+                    <tr>
+                      <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;">
+                        <br/>
+                        <div style="display: flex; justify-content: center;">
+                          <form action='<%="#{ENV['NON_E']}review-submission/#{email.uuid}"%>' style="max-width: 320px;min-width: 500px;display: table-cell;vertical-align: top;">
+                            <div style="text-align: center; color: blue;">
+                              <input type="radio" id="five" name="review[rating]" value="5">
+                              <label for="five"><span style="font-size:17px;line-height:23px; color:<%= @shop.star_color%>" class="pr-1">★★★★★</span></label>
 
-      <input type="radio" id="two" name="review[rating]" value="2">
-      <label for="tow"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>"  class="pr-1">★★</span></label>
+                              <input type="radio" id="four" name="review[rating]" value="4">
+                              <label for="four"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>"  class="pr-1">★★★★</span></label>
 
-      <input type="radio" id="one" name="review[rating]" value="1">
-      <label for="one"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>" class="pr-1">★</span></label>
+                              <input type="radio" id="three" name="review[rating]" value="3">
+                              <label for="three"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>" class="pr-1">★★★</span></label>
+
+                              <input type="radio" id="two" name="review[rating]" value="2">
+                              <label for="tow"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>"  class="pr-1">★★</span></label>
+
+                              <input type="radio" id="one" name="review[rating]" value="1">
+                              <label for="one"><span style="font-size:17px;line-height:23px;color:<%= @shop.star_color%>" class="pr-1">★</span></label>
+                            </div>
+                            <br/>
+                            <label >Title of Review</label><br>
+                            <input type="text" id="title" name="review[title]" style="width: 100%; height: 25px; margin-bottom: 10px"><br>
+                            <label >How was your overall experience using the item?</label><br>
+                            <textarea id="description" name="review[description]" style="width: 100%; min-height:100px;"></textarea>
+                            <input type="hidden" id="review_status" name="review[review_status]" value="completed" style="width: 100%; height: 25px; margin-bottom: 10px"><br>
+                            <br><br>
+                            <div style="text-align: center">
+                              <button type="submit" class="btn" style='background-color: <%= @shop.form_button_color %>'>Submit Review</button>
+                            </div>
+                          </form>
+
+
+                        </div>
+
+                        <div class="form-links text-center" style="width: 100%;">
+                          <br>
+                          <strong style="color:#444444!important">Having trouble with this form?</strong>
+                          <br>
+                          <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{email.uuid}"%>' target="_blank" style="color: <%= @shop.default_link_color %>" >Submit your review online</a>
+                          <br>
+                        </div>
+
+                        <div class="form-links text-center" style="width: 100%;">
+                          <br>
+                          <strong style="color:#444444!important">How do I get details about this order?</strong>
+                          <br>
+                          <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{email.uuid}"%>' target="_blank" style="color: <%= @shop.default_link_color %>" >Get up-to-date information about order</a>
+                          <br>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-links text-center" style="width: 100%;">
+                          <br>
+                          <% if @shop.facebook.present? || @shop.instagram.present? || @shop.twitter.present?  %>
+                          <strong style="color:#444444!important">Lets keep in touch!</strong>
+                          <br>
+                          <% end %>
+                          <br>
+                          <% if @shop.facebook.present? %>
+                          <a href="https://www.facebook.com/<%= @shop.facebook %>" style="text-decoration: none;">
+                            <img src="https://ci6.googleusercontent.com/proxy/yKrS8mYn3LmKMibnhZLzjIzGYwNdbYtpaoy1OCV2ajjRi6GVVuqvEg_s3LIoeq9YzMYEa-wkP_RlNhWpVseABMTUkDeJX_cf=s0-d-e1-ft" style="width: 40px;">
+                          </a>
+                          <% end %>
+                          <% if @shop.instagram.present? %>
+                          <a href="https://www.instagram.com/<%= @shop.instagram %>" style="text-decoration: none;">
+                            <img src="https://ci5.googleusercontent.com/proxy/Z3-F3FDmOOsihszuxiPP44syKwWfzuqpwbXewjPSFQHheRdZkc610wOynfbXbr9S4FP76ybONMD7Lmr5NBDK9oKyJ4VRSyu_3g=s0-d-e1-ft" style="width: 40px;">
+                          </a>
+                          <% end %>
+                          <% if @shop.twitter.present? %>
+                          <a href="https://www.twitter.com/<%= @shop.twitter %>" style="text-decoration: none;">
+                            <img src="https://ci3.googleusercontent.com/proxy/h2Lsa9Cp6aov1E8FPU0mmhC7mwEkKSX8ywelRXeq93ugnCCWwN8NH3vi6kXNMP3OKgzpJ88ZggzQRIA9bI3Svx_yoW8E1BI=s0-d-e1-ft" style="width: 40px;">
+                          </a>
+                          <% end %>
+                          <br>
+                        </div>
+                      </div>
+
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!--[if (!mso)&(!IE)]><!-->
+            </div>
+            <!--<![endif]-->
+          </div>
+        </div>
+        <!--[if (mso)|(IE)]></td><![endif]-->
+        <!--[if (mso)|(IE)]><td align="center" width="250" style="width: 250px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
+          <div class="email-col email-col-50" style="max-width: 320px;min-width: 250px;display: table-cell;vertical-align: top;">
+            <div style="width: 100% !important;">
+              <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+                <!--<![endif]-->
+
+                <!--[if (!mso)&(!IE)]><!-->
+              </div>
+              <!--<![endif]-->
+            </div>
+          </div>
+          <!--[if (mso)|(IE)]></td><![endif]-->
+          <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
+        </div>
+      </div>
     </div>
-    <br/>
-    <label >Title of Review</label><br>
-    <input type="text" id="title" name="review[title]" style="width: 100%; height: 25px; margin-bottom: 10px"><br>
-    <label >How was your overall experience using the item?</label><br>
-    <textarea id="description" name="review[description]" style="width: 100%; min-height:100px;"></textarea>
-    <input type="hidden" id="review_status" name="review[review_status]" value="completed" style="width: 100%; height: 25px; margin-bottom: 10px"><br>
-    <br><br>
-    <div style="text-align: center">
-      <button type="submit" class="btn" style='background-color: <%= @shop.form_button_color %>'>Submit Review</button>
-    </div>
-  </form>
-
-
-</div>
-
-  <div class="form-links text-center" style="width: 100%;">
-    <br>
-    <strong style="color:#444444!important">Having trouble with this form?</strong>
-    <br>
-    <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{email.uuid}"%>' target="_blank" style="color: <%= @shop.default_link_color %>" >Submit your review online</a>
-    <br>
-  </div>
-
-  <div class="form-links text-center" style="width: 100%;">
-    <br>
-    <strong style="color:#444444!important">How do I get details about this order?</strong>
-    <br>
-    <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{email.uuid}"%>' target="_blank" style="color: <%= @shop.default_link_color %>" >Get up-to-date information about order</a>
-    <br>
-  </div>
-<br>
-<br>
-    <div class="form-links text-center" style="width: 100%;">
-      <br>
-      <% if @shop.facebook.present? || @shop.instagram.present? || @shop.twitter.present?  %>
-        <strong style="color:#444444!important">Lets keep in touch!</strong>
-        <br>
-      <% end %>
-      <br>
-      <% if @shop.facebook.present? %>
-        <a href="https://www.facebook.com/<%= @shop.facebook %>" style="text-decoration: none;">
-          <img src="https://ci6.googleusercontent.com/proxy/yKrS8mYn3LmKMibnhZLzjIzGYwNdbYtpaoy1OCV2ajjRi6GVVuqvEg_s3LIoeq9YzMYEa-wkP_RlNhWpVseABMTUkDeJX_cf=s0-d-e1-ft" style="width: 40px;">
-        </a>
-      <% end %>
-      <% if @shop.instagram.present? %>
-        <a href="https://www.instagram.com/<%= @shop.instagram %>" style="text-decoration: none;">
-          <img src="https://ci5.googleusercontent.com/proxy/Z3-F3FDmOOsihszuxiPP44syKwWfzuqpwbXewjPSFQHheRdZkc610wOynfbXbr9S4FP76ybONMD7Lmr5NBDK9oKyJ4VRSyu_3g=s0-d-e1-ft" style="width: 40px;">
-        </a>
-      <% end %>
-      <% if @shop.twitter.present? %>
-        <a href="https://www.twitter.com/<%= @shop.twitter %>" style="text-decoration: none;">
-          <img src="https://ci3.googleusercontent.com/proxy/h2Lsa9Cp6aov1E8FPU0mmhC7mwEkKSX8ywelRXeq93ugnCCWwN8NH3vi6kXNMP3OKgzpJ88ZggzQRIA9bI3Svx_yoW8E1BI=s0-d-e1-ft" style="width: 40px;">
-        </a>
-      <% end %>
-      <br>
-    </div>
-  </div>
-
-
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-  <!--[if (!mso)&(!IE)]><!-->
-</div>
-<!--<![endif]-->
-  </div>
-</div>
-<!--[if (mso)|(IE)]></td><![endif]-->
-<!--[if (mso)|(IE)]><td align="center" width="250" style="width: 250px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
-<div class="email-col email-col-50" style="max-width: 320px;min-width: 250px;display: table-cell;vertical-align: top;">
-  <div style="width: 100% !important;">
-  <!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
-<!--<![endif]-->
-  
-  <!--[if (!mso)&(!IE)]><!-->
-</div>
-<!--<![endif]-->
-  </div>
-</div>
-<!--[if (mso)|(IE)]></td><![endif]-->
-      <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
-    </div>
-  </div>
-</div>
