@@ -49,9 +49,8 @@ class OrderCreateJob < ActiveJob::Base
       review_template = shop.templates.find_by(template_type: 'review')
       template_html = Nokogiri::HTML(review_template.html)
       review_form = ac.view_context.render partial: 'templates/review_form.html.erb', locals: {email: review_email}
-      div = template_html.at_css('div.email-row-container div.email-row')
-
-      div.add_child(review_form)
+      div = review_html.css('div.email-row-container').last
+      div.add_next_sibling(review_form)
       review_email.html = template_html.to_html
       review_email.template_id = review_template.id
       review_email.save
