@@ -52,7 +52,7 @@
                           
                             <% order.order_items.each do |item| %>
                               <div>
-                              <br>
+                                <br>
                                 <p><%= item.title %></p>
                                 <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{item.review.uuid}"%>'>WRITE A REVIEW</a>
                               <div>
@@ -83,24 +83,24 @@
                         <div class="form-links" style="width: 100%;text-align: center">
                           <br>
                           <% if shop.facebook.present? || shop.instagram.present? || shop.twitter.present?  %>
-                          <strong style="color:#444444!important">Lets keep in touch!</strong>
-                          <br>
+                            <strong style="color:#444444!important">Lets keep in touch!</strong>
+                            <br>
                           <% end %>
                           <br>
                           <% if shop.facebook.present? %>
-                          <a href="https://www.facebook.com/<%= shop.facebook %>" style="text-decoration: none;">
-                            <img src="https://ci6.googleusercontent.com/proxy/yKrS8mYn3LmKMibnhZLzjIzGYwNdbYtpaoy1OCV2ajjRi6GVVuqvEg_s3LIoeq9YzMYEa-wkP_RlNhWpVseABMTUkDeJX_cf=s0-d-e1-ft" style="width: 40px;">
-                          </a>
+                            <a href="https://www.facebook.com/<%= shop.facebook %>" style="text-decoration: none;">
+                              <img src="https://ci6.googleusercontent.com/proxy/yKrS8mYn3LmKMibnhZLzjIzGYwNdbYtpaoy1OCV2ajjRi6GVVuqvEg_s3LIoeq9YzMYEa-wkP_RlNhWpVseABMTUkDeJX_cf=s0-d-e1-ft" style="width: 40px;">
+                            </a>
                           <% end %>
                           <% if shop.instagram.present? %>
-                          <a href="https://www.instagram.com/<%= shop.instagram %>" style="text-decoration: none;">
-                            <img src="https://ci5.googleusercontent.com/proxy/Z3-F3FDmOOsihszuxiPP44syKwWfzuqpwbXewjPSFQHheRdZkc610wOynfbXbr9S4FP76ybONMD7Lmr5NBDK9oKyJ4VRSyu_3g=s0-d-e1-ft" style="width: 40px;">
-                          </a>
+                            <a href="https://www.instagram.com/<%= shop.instagram %>" style="text-decoration: none;">
+                              <img src="https://ci5.googleusercontent.com/proxy/Z3-F3FDmOOsihszuxiPP44syKwWfzuqpwbXewjPSFQHheRdZkc610wOynfbXbr9S4FP76ybONMD7Lmr5NBDK9oKyJ4VRSyu_3g=s0-d-e1-ft" style="width: 40px;">
+                            </a>
                           <% end %>
                           <% if shop.twitter.present? %>
-                          <a href="https://www.twitter.com/<%= shop.twitter %>" style="text-decoration: none;">
-                            <img src="https://ci3.googleusercontent.com/proxy/h2Lsa9Cp6aov1E8FPU0mmhC7mwEkKSX8ywelRXeq93ugnCCWwN8NH3vi6kXNMP3OKgzpJ88ZggzQRIA9bI3Svx_yoW8E1BI=s0-d-e1-ft" style="width: 40px;">
-                          </a>
+                            <a href="https://www.twitter.com/<%= shop.twitter %>" style="text-decoration: none;">
+                              <img src="https://ci3.googleusercontent.com/proxy/h2Lsa9Cp6aov1E8FPU0mmhC7mwEkKSX8ywelRXeq93ugnCCWwN8NH3vi6kXNMP3OKgzpJ88ZggzQRIA9bI3Svx_yoW8E1BI=s0-d-e1-ft" style="width: 40px;">
+                            </a>
                           <% end %>
                           <br>
                         </div>

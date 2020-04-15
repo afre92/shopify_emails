@@ -30,6 +30,7 @@ class OrderCreateJob < ActiveJob::Base
     if shop.subscription_type != "free"
 
       webhook['line_items'].each do |item|
+        # next if new_order.find_by(shopify_id: item['id'].to_s).present?
         new_order_item = OrderItem.new
         new_order_item.shopify_id = item['id'].to_s
         new_order_item.variant_id = item['variant_id'].to_s
