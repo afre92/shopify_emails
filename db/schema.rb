@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_13_170519) do
+ActiveRecord::Schema.define(version: 2020_04_15_155654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,14 +55,15 @@ ActiveRecord::Schema.define(version: 2020_04_13_170519) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.bigint "email_id"
     t.integer "rating", default: 0
     t.string "title", default: ""
     t.text "description", default: ""
     t.integer "review_status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email_id"], name: "index_reviews_on_email_id"
+    t.bigint "order_items_id"
+    t.string "uuid", default: ""
+    t.index ["order_items_id"], name: "index_reviews_on_order_items_id"
   end
 
   create_table "shops", force: :cascade do |t|
@@ -119,4 +120,5 @@ ActiveRecord::Schema.define(version: 2020_04_13_170519) do
     t.index ["template_id"], name: "index_tracking_pixels_on_template_id"
   end
 
+  add_foreign_key "reviews", "order_items", column: "order_items_id"
 end
