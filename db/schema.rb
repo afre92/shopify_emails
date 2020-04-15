@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(version: 2020_04_15_155654) do
     t.integer "review_status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "order_items_id"
+    t.bigint "order_item_id"
     t.string "uuid", default: ""
-    t.index ["order_items_id"], name: "index_reviews_on_order_items_id"
+    t.index ["order_item_id"], name: "index_reviews_on_order_item_id"
   end
 
   create_table "shops", force: :cascade do |t|
@@ -120,5 +120,5 @@ ActiveRecord::Schema.define(version: 2020_04_15_155654) do
     t.index ["template_id"], name: "index_tracking_pixels_on_template_id"
   end
 
-  add_foreign_key "reviews", "order_items", column: "order_items_id"
+  add_foreign_key "reviews", "order_items"
 end
