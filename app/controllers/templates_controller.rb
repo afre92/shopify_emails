@@ -4,6 +4,7 @@ require 'nokogiri'
 
 class TemplatesController < AuthenticatedController
   before_action :find_store
+  before_action :create_data_for_template, only: [:index]
   
 
   def index
@@ -14,10 +15,22 @@ class TemplatesController < AuthenticatedController
     # todo find better make this and use it also in the job 
     review_html = Nokogiri::HTML(@review_template.html)
     div = review_html.css('div.email-row-container').last
-    review_form = view_context.render partial: 'templates/review_form.html.erb', locals: { email: Email.new(uuid: ''), shop: @shop }
+    # create order and children and grand children to pass to review form
+    new_order = Order.new
+    new_order.order_items.new.build_review
+    review_form = view_context.render partial: 'templates/review_form.html.erb', locals: { order: @order, shop: @shop }
     div.add_next_sibling(review_form)
     
     @review_template.html = review_html
+  end
+
+
+  def create_data_for_template
+    @order = Order.new
+    3.times do |i|
+      @order.order_items.new(title: "#{i} times").build_review
+    end
+
   end
 
   def edit

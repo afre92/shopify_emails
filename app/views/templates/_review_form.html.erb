@@ -16,7 +16,7 @@
                       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;">
                         <br/>
                         <div style="display: flex; justify-content: center;">
-                          <form action='<%="#{ENV['NON_E']}review-submission/#{email.uuid}"%>' style="max-width: 320px;min-width: 500px;display: table-cell;vertical-align: top;">
+                          <form action='<%="#{ENV['NON_E']}review-submission/#{order.order_items.first.review.uuid}"%>' style="max-width: 320px;min-width: 500px;display: table-cell;vertical-align: top;">
                             <div style="text-align: center; color: blue;">
                               <input type="radio" id="five" name="review[rating]" value="5">
                               <label for="five"><span style="font-size:17px;line-height:23px; color:<%= shop.star_color%>" class="pr-1">★★★★★</span></label>
@@ -44,15 +44,30 @@
                               <button type="submit" class="btn" style='background-color: <%= shop.form_button_color %>'>Submit Review</button>
                             </div>
                           </form>
-
-
                         </div>
+
+                        <% if order.order_items.length > 1 %>
+                          <div style="width: 100%; text-align:center; padding-top: 50px;">
+                          <strong style="color:#444444!important">Write a review for other products</strong>
+                          
+                            <% order.order_items.each do |item| %>
+                              <div>
+                              <br>
+                                <p><%= item.title %></p>
+                                <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{item.review.uuid}"%>'>WRITE A REVIEW</a>
+                              <div>
+                              
+                            <% end %>
+                            <br>
+                          </div>
+                        <% end %>
+
 
                         <div class="form-links text-center" style="width: 100%;">
                           <br>
                           <strong style="color:#444444!important">Having trouble with this form?</strong>
                           <br>
-                          <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{email.uuid}"%>' target="_blank" style="color: <%= shop.default_link_color %>" >Submit your review online</a>
+                          <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{order.order_items.first.review.uuid}"%>' target="_blank" style="color: <%= shop.default_link_color %>" >Submit your review online</a>
                           <br>
                         </div>
 
@@ -60,7 +75,7 @@
                           <br>
                           <strong style="color:#444444!important">How do I get details about this order?</strong>
                           <br>
-                          <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{email.uuid}"%>' target="_blank" style="color: <%= shop.default_link_color %>" >Get up-to-date information about order</a>
+                          <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{order.order_items.first.review.uuid}"%>' target="_blank" style="color: <%= shop.default_link_color %>" >Get up-to-date information about order</a>
                           <br>
                         </div>
                         <br>
