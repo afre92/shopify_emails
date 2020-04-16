@@ -9,6 +9,7 @@ class Email < ApplicationRecord
   validates_presence_of :order_id, :template_id, :shop_id
 
   after_create :add_tracking_pixel
+  before_save :replace_quote_entities_with_escape_characters
   
   
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
