@@ -5,7 +5,7 @@ class Shop < ActiveRecord::Base
   has_many :templates, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :emails, dependent: :destroy
-  has_many :reviews, through: :emails
+  has_many :reviews, through: :orders
 
   before_create :create_unique_token
   after_create :get_shop_info, :associate_templates

@@ -24,14 +24,14 @@
         <tbody>
           <% if @reviews.present? %>
             <% @reviews.each do |review| %>
-            <% email = Email.find(review.email_id) %>
-            <% order = Order.find(email.order_id) %>
+            <% order_item = OrderItem.find(review.order_item_id) %>
+            <% order = Order.find(order_item.order_id) %>
               <tr data-id="<%=review.id%>" class="text-center order">
                 <td colspan="2">
                   <%= order.shopify_id %>
                 </td>
                 <td colspan="2">
-                  <%= order.order_items.first.title %>
+                  <%= order_item.title %>
                 </td>
                 <td colspan="2" style="color: #ffd700;">
                   <% total=[] 
