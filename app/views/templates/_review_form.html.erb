@@ -41,7 +41,7 @@
                             <input type="hidden" id="review_status" name="review[review_status]" value="completed" style="width: 100%; height: 25px; margin-bottom: 10px"><br>
                             <br><br>
                             <div style="text-align: center">
-                              <button type="submit" class="btn" style='background-color: <%= shop.form_button_color %>'>Submit Review</button>
+                              <button type="submit" class="btn button" style='padding: 10px !important;border-radius: 5px !important;color: white !important;font-weight: 500 !important;background-color: <%= shop.form_button_color %>'>Submit Review</button>
                             </div>
                           </form>
                         </div>
@@ -50,11 +50,12 @@
                           <div style="width: 100%; text-align:center; padding-top: 50px;">
                           <strong style="color:#444444!important">Write a review for other products</strong>
                           
-                            <% order.order_items.each do |item| %>
+                            <% order.order_items.each_with_index do |item, index| %>
+                            <% next if index == 0 %>
                               <div>
                                 <br>
                                 <p><%= item.title %></p>
-                                <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{item.review.uuid}"%>'>WRITE A REVIEW</a>
+                                <a href='<%="#{ENV['NON_E']}review/#{item.review.uuid}/edit"%>'>WRITE A REVIEW</a>
                               <div>
                               
                             <% end %>
@@ -63,7 +64,7 @@
                         <% end %>
 
 
-                        <div class="form-links text-center" style="width: 100%;">
+                        <div class="form-links" style="width: 100%;text-align:center;">
                           <br>
                           <strong style="color:#444444!important">Having trouble with this form?</strong>
                           <br>
@@ -134,3 +135,11 @@
         </div>
       </div>
     </div>
+    <style>
+    .button {
+      padding: 10px !important;
+      border-radius: 5px !important;
+      color: white !important;
+      font-weight: 500 !important;
+    }
+    </style>

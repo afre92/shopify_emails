@@ -22,6 +22,7 @@ class OrderCreateJob < ActiveJob::Base
     thank_you_email.scheduled_time = new_order.shopify_created_at + shop.thank_you_interval.minutes
     thank_you_email.template_id = shop.templates.find_by(template_type: 'thank_you').id
     thank_you_email.html = shop.templates.find_by(template_type: 'thank_you').html
+    thank_you_email.email_type = 'thank_you'
     thank_you_email.shop_id = shop.id
     thank_you_email.order_id = new_order.id
     thank_you_email.save
@@ -45,6 +46,7 @@ class OrderCreateJob < ActiveJob::Base
       review_email = Email.new
       review_email.scheduled_time = new_order.shopify_created_at + shop.review_interval.days
       review_email.shop_id = shop.id
+      review_email.email_type = 'review'
       review_email.order_id = new_order.id
       # review_email.uuid = SecureRandom.uuid
       review_template = shop.templates.find_by(template_type: 'review')

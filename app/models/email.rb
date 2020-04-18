@@ -13,6 +13,7 @@ class Email < ApplicationRecord
   
   
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
+  enum email_type: { thank_you: 0, review: 1}
 
   def template_type
     template = Template.find(self.template_id)
