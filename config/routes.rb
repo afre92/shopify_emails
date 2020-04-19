@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   patch '/settings', to: 'settings#update'
   get '/pricing', to: 'settings#pricing'
   resources :templates
-  get '/convert/:token', to: 'analytics#convert', as: :views
+  get '/convert/:token', to: 'analytics#convert'
   root to: 'home#index'
   get '/activatecharge', to: 'settings#activate_charge'
   get 'create-charge/:id', to: 'settings#create_recurring_application_charge', as: 'create_charge'

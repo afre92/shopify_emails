@@ -12,7 +12,7 @@ class TrackingPixel < ApplicationRecord
   end
 
   def conversion_tag
-    url = "#{ENV['APP_URL']}#{Rails.application.routes.url_helpers.views_path(token)}"
+    url = "#{ENV['APP_URL']}/convert/#{token}"
     "<img src='#{url}' width='0' height='0'>"
   end
 
