@@ -15,7 +15,7 @@
                     <tr>
                       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;">
                         <br/>
-                        <div>
+                        <div style='padding-bottom: 50px;'>
                           <form action='<%="#{ENV['NON_E']}review-submission/#{order.order_items.first.review.uuid}"%>'>
                             <div style="text-align: center; color: blue;">
                               <input type="radio" id="five" name="review[rating]" value="5">
@@ -47,15 +47,16 @@
                         </div>
 
                         <% if order.order_items.length > 1 %>
-                          <div style="width: 100%; text-align:center; padding-top: 50px;">
+                          <div style="width: 100%; text-align:center;">
                           <strong style="color:#444444!important">Write a review for other products</strong>
                           
                             <% order.order_items.each_with_index do |item, index| %>
                             <% next if index == 0 %>
                               <div>
                                 <br>
-                                <p><%= item.title %></p>
-                                <a href='<%="#{ENV['NON_E']}review/#{item.review.uuid}/edit"%>'>WRITE A REVIEW</a>
+                                <p style="margin-bottom: 1.5em;"><%= item.title %></p>
+
+                                <a href='<%="#{ENV['NON_E']}review/#{item.review.uuid}/edit"%>' style="background-color: <%= shop.form_button_color %>;color: white; padding: 1em 1.5em; text-decoration: none; font-weight: 600; font-size:smaller; border-radius: 5px;">WRITE A REVIEW</a>
                               <div>
                               
                             <% end %>
