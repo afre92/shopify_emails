@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_17_232610) do
+ActiveRecord::Schema.define(version: 2020_04_21_222546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,8 @@ ActiveRecord::Schema.define(version: 2020_04_17_232610) do
     t.string "instagram", default: ""
     t.string "facebook", default: ""
     t.string "twitter", default: ""
+    t.integer "payment_status", default: 0
+    t.string "charge_id", default: ""
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
   end
 

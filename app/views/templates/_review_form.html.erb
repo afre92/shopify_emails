@@ -41,21 +41,19 @@
                             <input type="hidden" id="review_status" name="review[review_status]" value="completed" style="width: 100%; height: 25px; margin-bottom: 10px"><br>
                             <br><br>
                             <div style="text-align: center">
-                              <button type="submit" class="btn button" style='padding: 10px !important;border-radius: 5px !important;color: white !important;font-weight: 500 !important;background-color: <%= shop.form_button_color %>'>Submit Review</button>
+                              <button type="submit" class="btn button" style='border: 0;padding: 10px !important;border-radius: 5px !important;color: white !important;font-weight: 600 !important;background-color: <%= shop.form_button_color %>'>SUBMIT YOUR REVIEW</button>
                             </div>
                           </form>
                         </div>
 
                         <% if order.order_items.length > 1 %>
                           <div style="width: 100%; text-align:center;">
-                          <strong style="color:#444444!important">Write a review for other products</strong>
-                          
+                            <strong style="color:#444444!important">Write a review for other products</strong>
                             <% order.order_items.each_with_index do |item, index| %>
                             <% next if index == 0 %>
                               <div>
                                 <br>
                                 <p style="margin-bottom: 1.5em;"><%= item.title %></p>
-
                                 <a href='<%="#{ENV['NON_E']}review/#{item.review.uuid}/edit"%>' style="background-color: <%= shop.form_button_color %>;color: white; padding: 1em 1.5em; text-decoration: none; font-weight: 600; font-size:smaller; border-radius: 5px;">WRITE A REVIEW</a>
                               <div>
                               

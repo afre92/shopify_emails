@@ -38,7 +38,7 @@ class SettingsController < AuthenticatedController
       recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.new(
         name: plan_info[:name],
         price: plan_info[:price],
-        return_url: "#{ENV['APP_URL']}/activatecharge",
+        return_url: "#{ENV['APP_URL']}activatecharge",
         test: plan_info[:test],
         capped_amount: plan_info[:capped_amount],
         terms: plan_info[:terms]
@@ -51,10 +51,14 @@ class SettingsController < AuthenticatedController
    end
   
   def activate_charge
+    # might need to save the charge id to check on its status
     redirect_link = "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/pricing"
     recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.find(request.params['charge_id'])
-    if recurring_application_charge.status == "accepted" 
+    if recurring_application_charge.status == "accepted"
+      
+
        recurring_application_charge.activate
+       @shop.update(payment_status: 1, charge_id: request.params['charge_id'])
         #  if subscriptiom upgrade addition of emails sent will go here
        if recurring_application_charge.name == "Pro plan"
         @shop.update(subscription_type: 2)
@@ -62,7 +66,7 @@ class SettingsController < AuthenticatedController
         @shop.update(subscription_type: 1)
        end
     else
-      flash[:danger] = "Oopps! somthing is not quite right! plase contact the support team."
+      flash[:danger] = "Oopps! something is not quite right! plase contact the support team."
       redirect_to redirect_link
     end
     flash[:success] = "Successfully changed to the #{recurring_application_charge.name}."
