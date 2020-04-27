@@ -24,6 +24,7 @@ class SettingsController < AuthenticatedController
   # Move shopify related code to module helper
 
   def cancel_charge
+    # make sure this works with the new billing system
     ShopifyAPI::RecurringApplicationCharge.current.cancel 
     @shop.update(subscription_type: 0)
     flash[:success] = "Successfully changed to the Free plan."
@@ -55,16 +56,15 @@ class SettingsController < AuthenticatedController
     redirect_link = "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/pricing"
     recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.find(request.params['charge_id'])
     if recurring_application_charge.status == "accepted"
-      
-
        recurring_application_charge.activate
-       @shop.update(payment_status: 1, charge_id: request.params['charge_id'])
+       plan = 0
         #  if subscriptiom upgrade addition of emails sent will go here
        if recurring_application_charge.name == "Pro plan"
-        @shop.update(subscription_type: 2)
+        plan = 2
        else
-        @shop.update(subscription_type: 1)
+        plan = 1
        end
+       @shop.update(payment_status: 1, charge_id: request.params['charge_id'], billing_on: recurring_application_charge.billing_on, subscription_type: plan)
     else
       flash[:danger] = "Oopps! something is not quite right! plase contact the support team."
       redirect_to redirect_link
