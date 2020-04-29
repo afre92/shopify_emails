@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_222546) do
     t.string "twitter", default: ""
     t.integer "payment_status", default: 0
     t.string "charge_id", default: ""
-    t.datetime "billing_on"
+    t.integer "billing_on"
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
   end
 

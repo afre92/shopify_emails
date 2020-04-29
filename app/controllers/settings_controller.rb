@@ -64,7 +64,7 @@ class SettingsController < AuthenticatedController
        else
         plan = 1
        end
-       @shop.update(payment_status: 1, charge_id: request.params['charge_id'], billing_on: recurring_application_charge.billing_on, subscription_type: plan)
+       @shop.update(payment_status: 1, charge_id: request.params['charge_id'], billing_on: recurring_application_charge.billing_on.to_date.day, subscription_type: plan)
     else
       flash[:danger] = "Oopps! something is not quite right! plase contact the support team."
       redirect_to redirect_link
