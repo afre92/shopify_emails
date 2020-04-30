@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 task send_emails: :environment do
-  
+  # try two days back
+  #group by company to check for 
   emails = Email.where(was_sent: 0, scheduled_time: (DateTime.now.utc - 15.minutes...DateTime.now.utc))
   # byebug
   emails.each do |email|
