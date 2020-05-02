@@ -11,6 +11,7 @@ class OrderCreateJob < ActiveJob::Base
     # Create Order for Thank You Email
     new_order = Order.new
     new_order.shopify_id = webhook['id'].to_s
+    new_order.order_number = webhook['order_number']
     new_order.email = webhook['email']
     new_order.shopify_created_at = webhook['created_at']
     new_order.shop_id = shop.id

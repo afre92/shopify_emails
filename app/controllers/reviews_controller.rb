@@ -4,7 +4,7 @@ class ReviewsController < AuthenticatedController
   def index
     # shop.order.reviews
     #keep an eye on this 
-    @reviews = @shop.reviews.where(review_status: 'completed').paginate(page: params[:page], per_page: 3)
+    @reviews = @shop.reviews.where(review_status: 'completed').paginate(page: params[:page], per_page: 10)
   end
 
   def find_store

@@ -27,7 +27,7 @@
             <% order = Order.find(email.order_id) %>
               <tr data-id="<%=email.id%>" class="text-center order">
                 <td colspan="2">
-                  <%= order.shopify_id %>
+                  #<%= order.order_number %>
                 </td>
                 <td colspan="2">
                   

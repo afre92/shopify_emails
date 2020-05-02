@@ -4,11 +4,11 @@
       <table class="table" style="table-layout: fixed;  width: 100%;">
         <thead class=" text-primary">
           <tr class="text-center">
-            <th colspan="2">
+            <th colspan="1">
               Order
             </th>
             <th colspan="2">
-              Item
+              Item Name
             </th>
             <th colspan="2">
               Rating
@@ -16,7 +16,7 @@
             <th colspan="2" class="text-center">
               Title
             </th>
-            <th colspan="4" class="text-center">
+            <th colspan="5" class="text-center">
               Description
             </th>
           </tr>
@@ -27,8 +27,8 @@
             <% order_item = OrderItem.find(review.order_item_id) %>
             <% order = Order.find(order_item.order_id) %>
               <tr data-id="<%=review.id%>" class="text-center order">
-                <td colspan="2">
-                  <%= order.shopify_id %>
+                <td colspan="1">
+                  #<%= order.order_number %>
                 </td>
                 <td colspan="2">
                   <%= order_item.title %>
@@ -43,7 +43,7 @@
                 <td colspan="2">
                   <%= review.title %>
                 </td>
-                <td colspan="4">
+                <td colspan="5">
                   <%= review.description %>
                 </td>
               </tr>
