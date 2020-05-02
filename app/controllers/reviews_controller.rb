@@ -7,8 +7,8 @@ class ReviewsController < AuthenticatedController
     @reviews = @shop.reviews.where(review_status: 'completed').paginate(page: params[:page], per_page: 10)
   end
 
-  def edit
-  byebug
+  def show
+    @review = @shop.reviews.find(params['id'])
   end
 
   def update

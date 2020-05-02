@@ -19,6 +19,9 @@
             <th colspan="4" class="text-center">
               Description
             </th>
+            <th colspan="1" class="text-center">
+              
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -33,18 +36,17 @@
                 <td colspan="2">
                   <%= order_item.title %>
                 </td>
-                <td colspan="2" style="color: #ffd700;">
-                  <% total=[] 
-                  review.rating.times do |t|
-                    total << '★' 
-                  end %>
-                  <%= total.join('') %>
+                <td colspan="2" >
+                  <%= review.print_stars %>
                 </td>
                 <td colspan="3">
                   <%= review.title %>
                 </td>
                 <td colspan="4">
                   <%= review.description %>
+                </td>
+                <td colspan="1">
+                  <%= link_to 'View', review_path(review.id), remote: true %>
                 </td>
               </tr>
             <% end %>

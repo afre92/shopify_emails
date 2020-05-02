@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'create-charge/:id', to: 'settings#create_recurring_application_charge', as: 'create_charge'
   get 'cancel-charge', to: 'settings#cancel_charge', as: 'cancel_charge'
   get '/reviews', to: 'reviews#index', as: 'reviews'
+  get '/review/:id', to: 'reviews#show', as: 'review'
   get '/emails', to: 'emails#index', as: 'emails'
   mount ShopifyApp::Engine, at: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
