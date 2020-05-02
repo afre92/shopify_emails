@@ -9,6 +9,7 @@ class ReviewsController < AuthenticatedController
 
   def show
     @review = @shop.reviews.find(params['id'])
+    @customer = JSON.parse(@review.order.customer)
   end
 
   def update
