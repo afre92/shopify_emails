@@ -13,10 +13,10 @@
             <th colspan="2">
               Rating
             </th>
-            <th colspan="2" class="text-center">
+            <th colspan="3" class="text-center">
               Title
             </th>
-            <th colspan="5" class="text-center">
+            <th colspan="4" class="text-center">
               Description
             </th>
           </tr>
@@ -40,10 +40,10 @@
                   end %>
                   <%= total.join('') %>
                 </td>
-                <td colspan="2">
+                <td colspan="3">
                   <%= review.title %>
                 </td>
-                <td colspan="5">
+                <td colspan="4">
                   <%= review.description %>
                 </td>
               </tr>
@@ -64,3 +64,5 @@
   </div>
   
 </div>
+
+<%= render 'shared/empty_modal' %>
