@@ -53,6 +53,7 @@ class Shop < ActiveRecord::Base
     end
     self.phone = shop_info['phone']
     self.shop_name = shop_info['name']
+    self.timezone = shop_info['timezone']
     save
   end
 

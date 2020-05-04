@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_003320) do
+ActiveRecord::Schema.define(version: 2020_05_04_200803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_003320) do
     t.integer "payment_status", default: 0
     t.string "charge_id", default: ""
     t.integer "billing_on"
+    t.string "timezone", default: "(GMT-05:00) Eastern Time"
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
   end
 

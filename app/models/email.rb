@@ -34,6 +34,9 @@ class Email < ApplicationRecord
     end
   end
 
+  def formatted_schedule_time
+    
+  end
 
   def add_tracking_pixel
     tracking_pixel = TrackingPixel.create(template_id: template_id, shop_id: shop_id, email_id: id)
