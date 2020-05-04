@@ -13,11 +13,13 @@
             <th colspan="2">
               Type
             </th>
-            <th colspan="5" class="text-center">
+            <th colspan="4" class="text-center">
               schedule time
             </th>
             <th colspan="1" class="text-center">
               Views
+            </th>
+            <th colspan="1" class="text-center">
             </th>
           </tr>
         </thead>
@@ -42,11 +44,14 @@
                 <td colspan="2">
                   <%= email.template_type.humanize %>
                 </td>
-                <td colspan="5">
+                <td colspan="4">
                   <%= email.scheduled_time %>
                 </td>
                 <td colspan="1">
                   <%= email.tracking_pixel.views %>
+                </td>
+                <td colspan="1">
+                  <%= link_to 'View', email_path(email.id), remote: true %>
                 </td>
               </tr>
             <% end %>

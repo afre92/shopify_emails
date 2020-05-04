@@ -7,4 +7,10 @@ class Order < ApplicationRecord
   has_many :emails, dependent: :destroy
 
   validates_presence_of :shop_id
+
+
+  def customer_obj
+    return JSON.parse(customer, object_class: OpenStruct)
+  end
+
 end
