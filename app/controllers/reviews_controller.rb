@@ -2,8 +2,6 @@ class ReviewsController < AuthenticatedController
   before_action :find_store
 
   def index
-    # shop.order.reviews
-    #keep an eye on this 
     @reviews = @shop.reviews.where(review_status: 'completed').paginate(page: params[:page], per_page: 10)
   end
 
@@ -13,7 +11,15 @@ class ReviewsController < AuthenticatedController
   end
 
   def update
+    review = @shop.reviews.find(params['id'])
 
+    if review.update(exported: !review.exported)
+      flash[:success] = "Review updated successfully."
+    else
+      flash[:danger] = "Ooops, something is wrong "
+    end
+
+    redirect_to reviews_path
   end
 
 

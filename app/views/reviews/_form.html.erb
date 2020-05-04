@@ -14,20 +14,26 @@
       <div class="row p-3">
         <div class="col-md-3">
           <div class="form-group">
-              <b>Order</b>
-              <p>#<%= @review.order.order_number %></p>
-            </div>
-          </div>
-        <div class="col-md-3">
-          <div class="form-group">
             <b>Rating</b>
             <p><%= @review.print_stars %></p>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-2">
+          <div class="form-group">
+              <b>Order</b>
+              <p>#<%= @review.order.order_number %></p>
+            </div>
+          </div>
+        <div class="col-md-5">
           <div class="form-group">
             <b>Item Name</b>
             <p><%= @review.order_item.title %></p>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <b>Exported</b>
+            <p><%= @review.exported ? 'Yes' : 'No' %></p>
           </div>
         </div>
       </div>
@@ -67,13 +73,19 @@
           </div>
         </div>
       </div>
-        <div class="row p-3">
-        <div class="col-md-7">
+      <div class="row p-3">
+        <div class="col-md-5">
           <div class="form-group">
-              <b>Adress</b>
-              <p><%= @customer['default_address']['address1'] %> <%= @customer['default_address']['address2'] %>  <%= ','+@customer['default_address']['zip'] %> </p>
-            </div>
+              <b>Address</b>
+              <p><%= @customer['default_address']['address1'] %> <%= @customer['default_address']['address2'] %></p>
           </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+              <b>Zip</b>
+              <p><%= @customer['default_address']['zip'] %> </p>
+          </div>
+        </div>
         <div class="col-md-2">
           <div class="form-group">
             <b>State</b>
@@ -91,8 +103,17 @@
 
 
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <div class="modal_footer" style="border: 1px solid #e9ecef; display: flex; padding: 1rem;">
+        <div class='text-left col-md-6'>
+          <% if @review.exported %>
+            <%= link_to 'Unmark as Exported', review_update_path(@review.id), class: 'btn btn-primary' %>
+          <% else %>
+            <%= link_to 'Mark as Exported', review_update_path(@review.id), class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+        <div class="col-md-6 text-right">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
