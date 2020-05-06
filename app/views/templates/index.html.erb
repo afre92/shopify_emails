@@ -44,7 +44,7 @@
 
       <div class="card card-user">
       <div class="row">
-        <div class="input-row" style="border-top: none;">
+        <div class="input-row" style="border-top: none;" id='thank-you-template-content'>
           <%= thank_you_template.result(binding).html_safe %>
         </div>
       </div>
@@ -104,7 +104,7 @@
 
       <div class="card card-user">
       <div class="row">
-        <div class="input-row" style="border-top: none;">
+        <div class="input-row" style="border-top: none;" id='review-template-content'>
           <%= review_template.result(binding).html_safe %>
         </div>
       </div>
@@ -124,5 +124,7 @@
 
 
 <script>
-// .nl-container
+  $('#review-template-content, #thank-you-template-content').on('click', 'a, button', function(e) {
+    e.preventDefault();
+  })
 </script>
