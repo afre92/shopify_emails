@@ -13,7 +13,7 @@ class TrackingPixel < ApplicationRecord
 
   def conversion_tag
     url = "#{ENV['APP_URL']}convert/#{token}"
-    "<img src='#{url}' width='0' height='0'>"
+    "<img src='#{url}' width='0' height='0' class='tp'>"
   end
 
   def create_unique_token
