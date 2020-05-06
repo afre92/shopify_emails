@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_200803) do
     t.integer "payment_status", default: 0
     t.string "charge_id", default: ""
     t.integer "billing_on"
-    t.string "timezone", default: "(GMT-05:00) Eastern Time"
+    t.string "timezone", default: "America/New_York"
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
   end
 

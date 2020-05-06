@@ -45,7 +45,7 @@
                   <%= email.template_type.humanize %>
                 </td>
                 <td colspan="4">
-                  <%= email.scheduled_time %>
+                  <%= formatted_date(email.scheduled_time.in_time_zone(@shop.timezone)) %>
                 </td>
                 <td colspan="1">
                   <%= email.tracking_pixel.views %>
