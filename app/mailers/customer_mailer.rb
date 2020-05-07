@@ -5,6 +5,10 @@ class CustomerMailer < ApplicationMailer
     @email = email
     @shop = Shop.find(@email.shop_id)
     @customer = JSON.parse(@shop.orders.find(@email.order_id).customer, object_class: OpenStruct)
+    if email.type == 'review'
+      order = @shop.orders.find(@email.order_id)
+      @product_name = order.order_items.first.title
+    end
     @template = @shop.templates.find(@email.template_id)
     
     mail(to: @customer.email,
