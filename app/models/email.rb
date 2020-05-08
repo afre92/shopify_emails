@@ -15,6 +15,30 @@ class Email < ApplicationRecord
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
   enum email_type: { thank_you: 0, review: 1}
 
+
+  def initialize(shop, order, type)
+      byebug
+
+    # thank_you_email = Email.new
+      shop_id = shop.id
+      order_id = order.id
+
+      if type == "thank_you"
+        scheduled_time = new_order.shopify_created_at + shop.thank_you_interval.minutes
+
+      elsif type == "review"
+
+      end
+    # thank_you_email.save
+
+
+
+    # thank_you_email.scheduled_time = new_order.shopify_created_at + shop.thank_you_interval.minutes
+    # thank_you_email.template_id = shop.templates.find_by(template_type: 'thank_you').id
+    # thank_you_email.html = shop.templates.find_by(template_type: 'thank_you').html
+    # thank_you_email.email_type = 'thank_you'
+  end
+
   def template_type
     template = Template.find(self.template_id)
     return template.template_type
@@ -32,10 +56,6 @@ class Email < ApplicationRecord
         0
       end
     end
-  end
-
-  def formatted_schedule_time
-    
   end
 
   def add_tracking_pixel

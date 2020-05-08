@@ -2,7 +2,11 @@
 require "securerandom"
 require 'nokogiri'
 
+
+
 class OrderCreateJob < ActiveJob::Base
+  include CreateEmail
+
   def perform(shop_domain:, webhook:)
     shop = Shop.find_by(shopify_domain: shop_domain)
 
@@ -18,15 +22,17 @@ class OrderCreateJob < ActiveJob::Base
     new_order.customer = webhook['customer'].to_json
     new_order.save
 
-    # Create Thank You Email
-    thank_you_email = Email.new
-    thank_you_email.scheduled_time = new_order.shopify_created_at + shop.thank_you_interval.minutes
-    thank_you_email.template_id = shop.templates.find_by(template_type: 'thank_you').id
-    thank_you_email.html = shop.templates.find_by(template_type: 'thank_you').html
-    thank_you_email.email_type = 'thank_you'
-    thank_you_email.shop_id = shop.id
-    thank_you_email.order_id = new_order.id
+    thank_you_email = Email.new(shop, order, 'thank_you')
     thank_you_email.save
+    # Create Thank You Email
+    # thank_you_email = Email.new
+    # thank_you_email.scheduled_time = new_order.shopify_created_at + shop.thank_you_interval.minutes
+    # thank_you_email.template_id = shop.templates.find_by(template_type: 'thank_you').id
+    # thank_you_email.html = shop.templates.find_by(template_type: 'thank_you').html
+    # thank_you_email.email_type = 'thank_you'
+    # thank_you_email.shop_id = shop.id
+    # thank_you_email.order_id = new_order.id
+    # thank_you_email.save
 
     # Create Order Items and Review Email if subscription_type != 'free'
     if shop.subscription_type != "free"
