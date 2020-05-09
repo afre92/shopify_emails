@@ -6,12 +6,9 @@ class Email < ApplicationRecord
   belongs_to :template
   has_one :tracking_pixel
 
-  validates_presence_of :order_id, :template_id, :shop_id
+  validates_presence_of :order_id, :shop_id
+  after_create :add_tracking_pixel  
 
-  after_create :add_tracking_pixel
-  # before_save :replace_quote_entities_with_escape_characters
-  
-  
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
   enum email_type: { thank_you: 0, review: 1}
 
@@ -23,23 +20,18 @@ class Email < ApplicationRecord
     email.shop_id = shop.id
     email.order_id = order.id
     email.scheduled_time = order.shopify_created_at + shop.thank_you_interval.minutes
+    # template id might not be necessary
     email.template_id = template.id
     email.from = template.from
     email.subject = template.subject
-
-    # replace this
     email.to = order.customer_obj.email
-    email.template_id
-    email.html = parse_html_template(shop, order)
+    email.html = parse_html_template(shop, order, template.html)
     email.save
   end
 
-
-  def self.parse_html_template(shop, order)
+  def self.parse_html_template(shop, order, html)
     customer = order.customer_obj
-    # and this
-    template_html = shop.templates.find_by(template_type: 'thank_you').replace_quote_entities
-    parsed_html = ERB.new(template_html)
+    parsed_html = ERB.new(html)
     return parsed_html.result(binding)
   end
 
