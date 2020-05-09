@@ -9,34 +9,30 @@ class Email < ApplicationRecord
   validates_presence_of :order_id, :template_id, :shop_id
 
   after_create :add_tracking_pixel
-  before_save :replace_quote_entities_with_escape_characters
+  # before_save :replace_quote_entities_with_escape_characters
   
   
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
   enum email_type: { thank_you: 0, review: 1}
 
 
-  def initialize(shop, order, type)
-      byebug
-
-    # thank_you_email = Email.new
-      shop_id = shop.id
-      order_id = order.id
-
-      if type == "thank_you"
-        scheduled_time = new_order.shopify_created_at + shop.thank_you_interval.minutes
-
-      elsif type == "review"
-
-      end
-    # thank_you_email.save
+  def self.create_thank_you_type(shop, order)
+    email = Email.new
+    email.email_type = 'thank_you'
+    email.shop_id = shop.id
+    email.order_id = order.id
+    email.scheduled_time = order.shopify_created_at + shop.thank_you_interval.minutes
+    email.template_id = shop.templates.find_by(template_type: 'thank_you').id
+    email.html = parse_html_template(shop, order)
+    email.save
+  end
 
 
-
-    # thank_you_email.scheduled_time = new_order.shopify_created_at + shop.thank_you_interval.minutes
-    # thank_you_email.template_id = shop.templates.find_by(template_type: 'thank_you').id
-    # thank_you_email.html = shop.templates.find_by(template_type: 'thank_you').html
-    # thank_you_email.email_type = 'thank_you'
+  def self.parse_html_template(shop, order)
+    customer = order.customer_obj
+    template_html = shop.templates.find_by(template_type: 'thank_you').replace_quote_entities
+    parsed_html = ERB.new(template_html)
+    return parsed_html.result(binding)
   end
 
   def template_type
@@ -65,7 +61,4 @@ class Email < ApplicationRecord
     save
   end
 
-  def replace_quote_entities_with_escape_characters
-    self.html = html.gsub('&quot;', '"').gsub('&ldquo;', '"').gsub('&rdquo;', '"').gsub('&lsquo;', '"').gsub('&rsquo;', '"').gsub('&lt;', '<').gsub('&gt;', '>').gsub('{{', '<%=').gsub('}}', '%>')
-  end
 end

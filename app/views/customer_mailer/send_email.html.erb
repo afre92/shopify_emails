@@ -1,7 +1,2 @@
-<% shop = @shop %>
-<% customer = @customer %>
-<% product_name = @product_name %>
-<% email = @email %>
-<% renderer = ERB.new(@email.html) %>
 
-<%= renderer.result(binding).html_safe %>
+<%= @email.html.html_safe  %>

@@ -2,10 +2,7 @@
 require "securerandom"
 require 'nokogiri'
 
-
-
 class OrderCreateJob < ActiveJob::Base
-  include CreateEmail
 
   def perform(shop_domain:, webhook:)
     shop = Shop.find_by(shopify_domain: shop_domain)
@@ -22,8 +19,8 @@ class OrderCreateJob < ActiveJob::Base
     new_order.customer = webhook['customer'].to_json
     new_order.save
 
-    thank_you_email = Email.new(shop, order, 'thank_you')
-    thank_you_email.save
+    # byebug
+    Email.create_thank_you_type(shop, new_order)
     # Create Thank You Email
     # thank_you_email = Email.new
     # thank_you_email.scheduled_time = new_order.shopify_created_at + shop.thank_you_interval.minutes

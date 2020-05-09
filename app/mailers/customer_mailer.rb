@@ -4,8 +4,10 @@ class CustomerMailer < ApplicationMailer
   def send_email(email)
     @email = email
     @shop = Shop.find(@email.shop_id)
+
+    # add to: to email and parse the recipient
     @customer = JSON.parse(@shop.orders.find(@email.order_id).customer, object_class: OpenStruct)
-    if email.type == 'review'
+    if email.email_type == 'review'
       order = @shop.orders.find(@email.order_id)
       @product_name = order.order_items.first.title
     end
