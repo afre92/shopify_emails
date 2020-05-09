@@ -17,12 +17,19 @@ class Email < ApplicationRecord
 
 
   def self.create_thank_you_type(shop, order)
+    template = shop.templates.find_by(template_type: 'thank_you')
     email = Email.new
     email.email_type = 'thank_you'
     email.shop_id = shop.id
     email.order_id = order.id
     email.scheduled_time = order.shopify_created_at + shop.thank_you_interval.minutes
-    email.template_id = shop.templates.find_by(template_type: 'thank_you').id
+    email.template_id = template.id
+    email.from = template.from
+    email.subject = template.subject
+
+    # replace this
+    email.to = order.customer_obj.email
+    email.template_id
     email.html = parse_html_template(shop, order)
     email.save
   end
@@ -30,6 +37,7 @@ class Email < ApplicationRecord
 
   def self.parse_html_template(shop, order)
     customer = order.customer_obj
+    # and this
     template_html = shop.templates.find_by(template_type: 'thank_you').replace_quote_entities
     parsed_html = ERB.new(template_html)
     return parsed_html.result(binding)
