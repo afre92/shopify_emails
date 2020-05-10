@@ -9,7 +9,7 @@ class OrderCreateJob < ActiveJob::Base
 
     return unless shop.status == 1
 
-    # Create Order for Thank You Email
+    # Create Order
     new_order = Order.new
     new_order.shopify_id = webhook['id'].to_s
     new_order.order_number = webhook['order_number']
@@ -19,17 +19,9 @@ class OrderCreateJob < ActiveJob::Base
     new_order.customer = webhook['customer'].to_json
     new_order.save
 
-    # byebug
+    # Create thank you email
     Email.create_thank_you_type(shop, new_order)
-    # Create Thank You Email
-    # thank_you_email = Email.new
-    # thank_you_email.scheduled_time = new_order.shopify_created_at + shop.thank_you_interval.minutes
-    # thank_you_email.template_id = shop.templates.find_by(template_type: 'thank_you').id
-    # thank_you_email.html = shop.templates.find_by(template_type: 'thank_you').html
-    # thank_you_email.email_type = 'thank_you'
-    # thank_you_email.shop_id = shop.id
-    # thank_you_email.order_id = new_order.id
-    # thank_you_email.save
+
 
     # Create Order Items and Review Email if subscription_type != 'free'
     if shop.subscription_type != "free"
