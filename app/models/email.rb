@@ -31,33 +31,30 @@ class Email < ApplicationRecord
 
 
   def self.create_review_type(shop, order)
-    ac = ActionController::Base.new()
+
     review_email = Email.new
     review_email.scheduled_time = order.shopify_created_at + shop.review_interval.days
     review_email.shop_id = shop.id
     review_email.email_type = 'review'
     review_email.order_id = order.id
-    # review_email.uuid = SecureRandom.uuid
     review_template = shop.templates.find_by(template_type: 'review')
 
-    # at tem
-    template_html = Nokogiri::HTML(review_template.html)
-    #grab all the order and all the items for it
-    byebug
-    review_form = File.open('templates/review_form.html.erb') { |f| Nokogiri::XML(f) }
-    # review_form = Nokogiri::XML(File.open('templates/review_form.html.erb'))
-    # not render but just paste,render later
-    # review_form = ac.view_context.render partial: 'templates/review_form.html.erb', locals: {email: review_email, shop: shop, order: new_order}
-    div = template_html.css('div.email-row-container').last
-    div.add_next_sibling(review_form)
-    
-    
-    review_email.html = template_html.to_html
+    # parse erb templates
+    parsed_template = parse_html_template(shop, order, review_template.html)
+    parsed_review_form = parse_html_template(shop, order, File.read(Rails.root + "app/views/templates/_review_form.html.erb"))
+
+    # inject to html with Nokogiri
+    parsed_template = Nokogiri::HTML(parsed_template)
+    div = parsed_template.css('div.email-row-container').last
+    div.add_next_sibling(parsed_review_form)
+        
+    review_email.html = parsed_template.to_html
     review_email.template_id = review_template.id
     review_email.save
   end
 
   def self.parse_html_template(shop, order, html)
+    product_name = order.order_items.first.title
     customer = order.customer_obj
     parsed_html = ERB.new(html)
     return parsed_html.result(binding)
