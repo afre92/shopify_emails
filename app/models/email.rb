@@ -6,6 +6,7 @@ class Email < ApplicationRecord
   belongs_to :template
   has_one :tracking_pixel
 
+  before_create :check_limit_for_order
   validates_presence_of :order_id, :shop_id
   after_create :add_tracking_pixel  
 
@@ -53,6 +54,8 @@ class Email < ApplicationRecord
     review_email.save
   end
 
+
+
   def self.parse_html_template(shop, order, html)
     product_name = order.order_items.first.title
     customer = order.customer_obj
@@ -63,6 +66,11 @@ class Email < ApplicationRecord
   def template_type
     template = Template.find(self.template_id)
     return template.template_type
+  end
+
+
+  def check_limit_for_order
+    raise 'Email limit for order reached' if Order.find(order_id).emails.count >= 2
   end
   
   scope :sent, -> { where(was_sent: 'sent') } do

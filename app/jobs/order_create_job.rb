@@ -38,22 +38,7 @@ class OrderCreateJob < ActiveJob::Base
       end
 
       # Create Review Email
-      ac = ActionController::Base.new()
-      review_email = Email.new
-      review_email.scheduled_time = new_order.shopify_created_at + shop.review_interval.days
-      review_email.shop_id = shop.id
-      review_email.email_type = 'review'
-      review_email.order_id = new_order.id
-      # review_email.uuid = SecureRandom.uuid
-      review_template = shop.templates.find_by(template_type: 'review')
-      template_html = Nokogiri::HTML(review_template.html)
-      #grab all the order and all the items for it
-      review_form = ac.view_context.render partial: 'templates/review_form.html.erb', locals: {email: review_email, shop: shop, order: new_order}
-      div = template_html.css('div.email-row-container').last
-      div.add_next_sibling(review_form)
-      review_email.html = template_html.to_html
-      review_email.template_id = review_template.id
-      review_email.save
+      Email.create_review_type(shop, new_order)
 
     end
 
