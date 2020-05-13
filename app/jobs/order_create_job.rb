@@ -22,6 +22,15 @@ class OrderCreateJob < ActiveJob::Base
     # Create thank you email
     Email.create_thank_you_type(shop, new_order)
 
+    thank_you_email = new_order.emails.build({shop: Shop.last, order: Order.last, email_type: 'review'})
+    thank_you_email.add_metadata
+    thank_you_email.add_delivery_data
+
+
+
+
+    # thank
+
 
     # Create Order Items and Review Email if subscription_type != 'free'
     if shop.subscription_type != "free"

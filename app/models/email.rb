@@ -3,65 +3,68 @@
 class Email < ApplicationRecord
   belongs_to :order
   belongs_to :shop
-  belongs_to :template
   has_one :tracking_pixel
 
-  before_create :check_limit_for_order
-  validates_presence_of :order_id, :shop_id
+  # before_create :check_limit_for_order
   after_create :add_tracking_pixel  
 
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
   enum email_type: { thank_you: 0, review: 1}
 
+  attr_reader :shop, :order, :email_type, :template
 
-  def self.create_thank_you_type(shop, order)
-    template = shop.templates.find_by(template_type: 'thank_you')
-    email = Email.new
-    email.email_type = 'thank_you'
-    email.shop_id = shop.id
-    email.order_id = order.id
-    email.scheduled_time = order.shopify_created_at + shop.thank_you_interval.minutes
-    # template id might not be necessary
-    email.template_id = template.id
-    email.from = template.from
-    email.subject = template.subject
-    email.to = order.customer_obj.email
-    email.html = parse_html_template(shop, order, template.html)
-    email.save
+  def initialize(params = {})
+    super
+    @shop = params.fetch(:shop)
+    @order = params.fetch(:order)
+    @email_type = params.fetch(:email_type)
+    @template = @shop.templates.find_by(template_type: @email_type)
   end
 
 
-  def self.create_review_type(shop, order)
+  # change this name to better describe process
+  def add_delivery_data
 
-    review_email = Email.new
-    review_email.scheduled_time = order.shopify_created_at + shop.review_interval.days
-    review_email.shop_id = shop.id
-    review_email.email_type = 'review'
-    review_email.order_id = order.id
-    review_template = shop.templates.find_by(template_type: 'review')
-
-    # parse erb templates
-    parsed_template = parse_html_template(shop, order, review_template.html)
-    parsed_review_form = parse_html_template(shop, order, File.read(Rails.root + "app/views/templates/_review_form.html.erb"))
-
-    # inject to html with Nokogiri
-    parsed_template = Nokogiri::HTML(parsed_template)
-    div = parsed_template.css('div.email-row-container').last
-    div.add_next_sibling(parsed_review_form)
-        
-    review_email.html = parsed_template.to_html
-    review_email.template_id = review_template.id
-    review_email.save
+    self.from = template.from
+    self.subject = template.subject
+    self.to = order.customer_obj.email
+    self.scheduled_time = order.shopify_created_at + (email_type == 'review' ? shop.review_interval.days : shop.thank_you_interval.minutes)
+    self.html = populate_html
   end
 
-
-
-  def self.parse_html_template(shop, order, html)
+  def parse_html(html = template.html)
     product_name = order.order_items.first.title
     customer = order.customer_obj
     parsed_html = ERB.new(html)
     return parsed_html.result(binding)
   end
+
+  def populate_html
+    parsed_html = ''
+    
+    if email_type == 'thank_you'
+      parsed_html = parse_html
+    else
+
+      parsed_template = parse_html
+      parsed_review_form = parse_html(File.read(Rails.root + "app/views/templates/_review_form.html.erb"))
+  
+      # inject to html with Nokogiri
+      parsed_template = Nokogiri::HTML(parsed_template)
+      div = parsed_template.css('div.email-row-container').last
+      div.add_next_sibling(parsed_review_form)
+
+      parsed_html = parsed_template.to_html
+    end
+
+    return parsed_html
+  end
+
+
+
+
+
+
 
   def template_type
     template = Template.find(self.template_id)
@@ -95,3 +98,6 @@ class Email < ApplicationRecord
   end
 
 end
+
+
+
