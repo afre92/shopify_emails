@@ -19,18 +19,13 @@ class OrderCreateJob < ActiveJob::Base
     new_order.customer = webhook['customer'].to_json
     new_order.save
 
-    # Create thank you email
-    Email.create_thank_you_type(shop, new_order)
-
-    thank_you_email = new_order.emails.build({shop: Shop.last, order: Order.last, email_type: 'review'})
-    thank_you_email.add_metadata
+    thank_you_email = new_order.emails.build({shop: Shop.last, order: Order.last, email_type: 'thank_you'})
     thank_you_email.add_delivery_data
-
-
-
-
-    # thank
-
+    if thank_you_email.save
+      puts "Thank you email for Order:#{new_order.id} SUCCESSFULLY created"
+    else
+      puts "Thank you email for Order:#{new_order.id} COULD NOT BE created"
+    end
 
     # Create Order Items and Review Email if subscription_type != 'free'
     if shop.subscription_type != "free"
@@ -47,7 +42,13 @@ class OrderCreateJob < ActiveJob::Base
       end
 
       # Create Review Email
-      Email.create_review_type(shop, new_order)
+      review_email = new_order.emails.build({shop: Shop.last, order: Order.last, email_type: 'review'})
+      review_email.add_delivery_data
+      if review_email.save
+        puts "Review email for Order:#{new_order.id} SUCCESSFULLY created."
+      else
+        puts "Review email for Order:#{new_order.id} COULD NOT BE created."
+      end
 
     end
 
