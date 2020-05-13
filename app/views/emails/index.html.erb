@@ -42,7 +42,7 @@
                   <% end %>
                 </td>
                 <td colspan="2">
-                  <%= email.template_type.humanize %>
+                  <%= email.email_type.humanize %>
                 </td>
                 <td colspan="4">
                   <%= formatted_date(email.scheduled_time.in_time_zone(@shop.timezone)) %>

@@ -11,7 +11,7 @@ class Email < ApplicationRecord
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
   enum email_type: { thank_you: 0, review: 1}
 
-  attr_reader :shop, :order, :email_type, :template
+  attr_reader :shop, :order, :template
 
   scope :sent, -> { where(was_sent: 'sent') } do
     def opened
@@ -39,14 +39,14 @@ class Email < ApplicationRecord
     self.from = template.from
     self.subject = template.subject
     self.to = order.customer_obj.email
-    self.scheduled_time = order.shopify_created_at + (email_type == 'review' ?
+    self.scheduled_time = order.shopify_created_at + (@email_type == 'review' ?
        shop.review_interval.days :
         shop.thank_you_interval.minutes)
     self.html = populate_html
   end
 
   def parse_html(html = template.html)
-    product_name = order.order_items.first.title if email_type == 'review'
+    product_name = order.order_items.first.title if @email_type == 'review'
     customer = order.customer_obj
     parsed_html = ERB.new(html)
     return parsed_html.result(binding)
@@ -54,7 +54,7 @@ class Email < ApplicationRecord
 
   def populate_html
     parsed_html = ''
-    if email_type == 'thank_you'
+    if @email_type == 'thank_you'
       parsed_html = parse_html
     else
       parsed_template = parse_html
