@@ -6,9 +6,7 @@ class OrderCreateJob < ActiveJob::Base
 
   def perform(shop_domain:, webhook:)
     shop = Shop.find_by(shopify_domain: shop_domain)
-
     return unless shop.status == 1
-    
 
     # Create Order
     order = shop.orders.build
@@ -19,7 +17,7 @@ class OrderCreateJob < ActiveJob::Base
     order.customer = webhook['customer'].to_json
     order.save
 
-
+    # Create Thank You Email
     thank_you_email = order.emails.build({shop: shop, order: order, email_type: 'thank_you'})
     thank_you_email.add_delivery_data
     if thank_you_email.save
@@ -33,12 +31,11 @@ class OrderCreateJob < ActiveJob::Base
 
       webhook['line_items'].each do |item|
         # next if order.find_by(shopify_id: item['id'].to_s).present?
-        order_item = OrderItem.new
+        order_item = order.order_items.build
         order_item.shopify_id = item['id'].to_s
         order_item.variant_id = item['variant_id'].to_s
         order_item.title = item['title']
         order_item.quantity = item['quantity']
-        order_item.order_id = order.id
         order_item.save
       end
 

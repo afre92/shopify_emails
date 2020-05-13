@@ -76,7 +76,6 @@ class Email < ApplicationRecord
     return template.template_type
   end
 
-
   def check_limit_for_order
     raise 'Email limit for order reached' if Order.find(order_id).emails.count >= 2
   end

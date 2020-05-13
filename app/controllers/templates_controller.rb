@@ -10,6 +10,9 @@ class TemplatesController < AuthenticatedController
   def index
     set_token
 
+    # find fake shop and fake order to use builder
+    thank_you_email = order.emails.build({shop: @shop, order: @order, email_type: 'thank_you'})
+
     @thank_you_template = @shop.templates.find_by(template_type: 'thank_you')
     @review_template = @shop.templates.find_by(template_type: 'review')
     # todo find better make this and use it also in the job 
