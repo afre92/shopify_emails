@@ -8,7 +8,6 @@ class Order < ApplicationRecord
 
   validates_presence_of :shop_id
 
-
   def customer_obj
     return JSON.parse(customer, object_class: OpenStruct)
   end

@@ -46,7 +46,7 @@ class Email < ApplicationRecord
   end
 
   def parse_html(html = template.html)
-    product_name = order.order_items.first.title
+    product_name = order.order_items.first.title if email_type == 'review'
     customer = order.customer_obj
     parsed_html = ERB.new(html)
     return parsed_html.result(binding)
