@@ -37,6 +37,11 @@ class Shop < ActiveRecord::Base
     )
   end
 
+  def create_sample_dataset
+    order = self.orders.new
+    # create fake order with fake info and also create order items and customer(information needed to render templates on index)
+  end
+
   def api_version
     ShopifyApp.configuration.api_version
   end
