@@ -2,14 +2,14 @@
 
 class Shop < ActiveRecord::Base
   include ShopifyApp::SessionStorage
-  include TemplatesDefault
+  include ShopDefaults
   has_many :templates, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :emails, dependent: :destroy
   has_many :reviews, through: :orders
 
   before_create :create_unique_token
-  after_create :get_shop_info, :create_templates
+  after_create :get_shop_info, :create_templates, :create_sample_dataset
 
   enum subscription_type: { free: 0, basic: 1, pro: 2 }
 
@@ -39,7 +39,17 @@ class Shop < ActiveRecord::Base
 
   def create_sample_dataset
     order = self.orders.new
-    # create fake order with fake info and also create order items and customer(information needed to render templates on index)
+    order.shopify_id = '000'
+    order.email = 'info@example.com'
+    order.shopify_created_at = DateTime.now
+    order.customer = customer_json
+    order.order_number = '000'
+    order.save
+
+    2.times do |t|
+     order_item = order.order_items.new(shopify_id: '000', title: "Test Product ##{t+2}")
+     order_item.save
+    end
   end
 
   def api_version

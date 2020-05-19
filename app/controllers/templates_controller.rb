@@ -1,39 +1,15 @@
 # frozen_string_literal: true
-require 'nokogiri'
-
 
 class TemplatesController < AuthenticatedController
-  before_action :find_store
-  before_action :create_data_for_template, only: [:index]
-  
+  before_action :find_store  
 
   def index
     set_token
-
-    # find fake shop and fake order to use builder
-    thank_you_email = order.emails.build({shop: @shop, order: @order, email_type: 'thank_you'})
-
-    @thank_you_template = @shop.templates.find_by(template_type: 'thank_you')
-    @review_template = @shop.templates.find_by(template_type: 'review')
-    # todo find better make this and use it also in the job 
-    review_html = Nokogiri::HTML(@review_template.html)
-    div = review_html.css('div.email-row-container').last
-    # create order and children and grand children to pass to review form
-    new_order = Order.new
-    new_order.order_items.new.build_review
-    review_form = view_context.render partial: 'templates/review_form.html.erb', locals: { order: @order, shop: @shop }
-    div.add_next_sibling(review_form)
-    
-    @review_template.html = review_html
-  end
-
-
-  def create_data_for_template
-    @order = Order.new
-    3.times do |i|
-      @order.order_items.new(title: "#{i} times").build_review
-    end
-
+    order = @shop.orders.find_by(shopify_id: '000', order_number: '000')
+    @thank_you_email = order.emails.build({shop: @shop, order: order, email_type: 'thank_you'})
+    @review_email = order.emails.build({shop: @shop, order: order, email_type: 'review'})
+    @thank_you_email.add_delivery_data
+    @review_email.add_delivery_data
   end
 
   def edit
