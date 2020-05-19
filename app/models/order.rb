@@ -12,4 +12,8 @@ class Order < ApplicationRecord
     return JSON.parse(customer, object_class: OpenStruct)
   end
 
+  def first_item
+    return order_items.order('id ASC').first
+  end
+
 end

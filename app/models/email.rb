@@ -29,10 +29,11 @@ class Email < ApplicationRecord
 
   def initialize(params = {})
     super
-    @shop = params.fetch(:shop)
     @order = params.fetch(:order)
+    @shop = Shop.find(@order.shop_id)
     @email_type = params.fetch(:email_type)
     @template = @shop.templates.find_by(template_type: @email_type)
+    add_delivery_data
   end
 
   def add_delivery_data
@@ -46,7 +47,7 @@ class Email < ApplicationRecord
   end
 
   def parse_html(html = template.html)
-    product_name = order.order_items.first.title if @email_type == 'review'
+    product_name = order.order_items.order('id ASC').first.title if @email_type == 'review'
     customer = order.customer_obj
     parsed_html = ERB.new(html)
     return parsed_html.result(binding)
@@ -58,7 +59,7 @@ class Email < ApplicationRecord
       parsed_html = parse_html
     else
       parsed_template = parse_html
-      parsed_review_form = parse_html(File.read(Rails.root + "app/views/templates/_review_form.html.erb"))
+      parsed_review_form = parse_html(File.read(Rails.root + "app/views/reviews/_review_form.html.erb"))
   
       # inject review partial into template with nokogiri
       parsed_template = Nokogiri::HTML(parsed_template)

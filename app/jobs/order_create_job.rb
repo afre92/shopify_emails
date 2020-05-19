@@ -18,8 +18,7 @@ class OrderCreateJob < ActiveJob::Base
     order.save
 
     # Create Thank You Email
-    thank_you_email = order.emails.build({shop: shop, order: order, email_type: 'thank_you'})
-    thank_you_email.add_delivery_data
+    thank_you_email = order.emails.build({order: order, email_type: 'thank_you'})
     if thank_you_email.save
       puts "Thank you email for Order:#{order.id} SUCCESSFULLY created"
     else
@@ -40,8 +39,7 @@ class OrderCreateJob < ActiveJob::Base
       end
 
       # Create Review Email
-      review_email = order.emails.build({shop: shop, order: order, email_type: 'review'})
-      review_email.add_delivery_data
+      review_email = order.emails.build({order: order, email_type: 'review'})
       if review_email.save
         puts "Review email for Order:#{order.id} SUCCESSFULLY created."
       else

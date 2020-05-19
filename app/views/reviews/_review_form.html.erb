@@ -16,8 +16,8 @@
                       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;">
                         <br/>
                         <div style='padding-bottom: 50px;'>
-                          <form action='<%="#{ENV['NON_E']}review-submission/#{order.order_items.first.review.uuid}"%>'>
-                            <div style="text-align: center; color: blue;">
+                          <form action='<%="#{ENV['NON_E']}review-submission/#{order.order_items.order('id ASC').first.review.uuid}"%>'>
+                            <div style="text-align: center;">
                               <input type="radio" id="five" name="review[rating]" value="5">
                               <label for="five"><span style="font-size:17px;line-height:23px; color:<%= shop.star_color%>" class="pr-1">★★★★★</span></label>
 
@@ -49,8 +49,8 @@
                         <% if order.order_items.length > 1 %>
                           <div style="width: 100%; text-align:center;">
                             <strong style="color:#444444!important">Write a review for other products</strong>
-                            <% order.order_items.each_with_index do |item, index| %>
-                            <% next if index == 0 %>
+                            <% order.order_items.order('id ASC').each_with_index do |item, index| %>
+                            <% next if item.id == order.order_items.order('id ASC').first.id %>
                               <div>
                                 <br>
                                 <p style="margin-bottom: 1.5em;"><%= item.title %></p>
@@ -67,7 +67,7 @@
                           <br>
                           <strong style="color:#444444!important">Having trouble with this form?</strong>
                           <br>
-                          <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{order.order_items.first.review.uuid}"%>' target="_blank" style="color: <%= shop.default_link_color %>" >Submit your review online</a>
+                          <a href='<%="#{ENV['NON_E']}review/#{order.order_items.first.review.uuid}/edit"%>' target="_blank" style="color: <%= shop.default_link_color %>" >Submit your review online</a>
                           <br>
                         </div>
 

@@ -2,7 +2,6 @@
 
 class OrderItem < ApplicationRecord
   belongs_to :order
-  validates_presence_of :order_id
   has_one :review, dependent: :destroy
 
   after_create :create_review_obj

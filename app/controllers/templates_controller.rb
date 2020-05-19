@@ -1,15 +1,14 @@
 # frozen_string_literal: true
 
+
 class TemplatesController < AuthenticatedController
   before_action :find_store  
 
   def index
     set_token
     order = @shop.orders.find_by(shopify_id: '000', order_number: '000')
-    @thank_you_email = order.emails.build({shop: @shop, order: order, email_type: 'thank_you'})
-    @review_email = order.emails.build({shop: @shop, order: order, email_type: 'review'})
-    @thank_you_email.add_delivery_data
-    @review_email.add_delivery_data
+    @thank_you_email = order.emails.build({order: order, email_type: 'thank_you'})
+    @review_email = order.emails.build({order: order, email_type: 'review'})
   end
 
   def edit
