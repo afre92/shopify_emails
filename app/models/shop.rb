@@ -56,6 +56,10 @@ class Shop < ActiveRecord::Base
     ShopifyApp.configuration.api_version
   end
 
+  def sample_order
+    return self.orders.find_by(shopify_id: '000', order_number: '000')
+  end
+
   def get_shop_info
     shop_info = ShopifyAPI::Session.temp(domain: shopify_domain, token: shopify_token, api_version: ShopifyApp.configuration.api_version) do
       ShopifyAPI::Shop.current

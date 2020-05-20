@@ -6,7 +6,7 @@ class TemplatesController < AuthenticatedController
 
   def index
     set_token
-    order = @shop.orders.find_by(shopify_id: '000', order_number: '000')
+    order = @shop.sample_order
     @thank_you_email = order.emails.build({order: order, email_type: 'thank_you'})
     @review_email = order.emails.build({order: order, email_type: 'review'})
   end
