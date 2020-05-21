@@ -127,17 +127,7 @@
 
   <script>
     $(document).on('turbolinks:load',function() {
-      if(window.location.pathname === "/"){
-        var daterange = "<%= @daterange %>"
-        var [from, to] = daterange.split("...")
-        
-        $('#daterange').daterangepicker({
-          opens: 'left',
-          startDate: moment(from).utc(),
-          endDate: moment(to).utc(),
-          autoApply: true,
-        });
-
+      if(window.location.pathname === "/" || window.location.pathname === "/dashboard"){
         initEmailStatsGraph();
       }
     });
