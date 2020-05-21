@@ -2,18 +2,13 @@
 
 class HomeController < AuthenticatedController
   before_action :find_shop
+  before_action :set_daterange, only: :index
 
   def index
-    @daterange = params[:daterange] ? params[:daterange] : (DateTime.now.beginning_of_month...DateTime.now)
     @emails_sent = @shop.emails.sent.where(created_at: @daterange).count
     @emails_used = @shop.emails.count
     @emails_opened = @shop.emails.where(created_at: @daterange).sent.opened
     email_graph_data
-  end
-
-  def format_daterange(daterange)
-    from, to = daterange.split('-')
-    (DateTime.strptime(from.remove(' '), '%m/%d/%Y')...DateTime.strptime(to.remove(' '), '%m/%d/%Y'))
   end
 
   def email_graph_data

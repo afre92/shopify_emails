@@ -1,8 +1,9 @@
 class ReviewsController < AuthenticatedController
   before_action :find_store
+  before_action :set_daterange, only: :index
 
   def index
-    @reviews = @shop.reviews.where(review_status: 'completed').paginate(page: params[:page], per_page: 10)
+    @reviews = @shop.reviews.where(review_status: 'completed', updated_at: @daterange).paginate(page: params[:page], per_page: 1)
   end
 
   def show
@@ -12,13 +13,11 @@ class ReviewsController < AuthenticatedController
 
   def update
     review = @shop.reviews.find(params['id'])
-
     if review.update(exported: !review.exported)
       flash[:success] = "Review updated successfully."
     else
       flash[:danger] = "Ooops, something is wrong "
     end
-
     redirect_to reviews_path
   end
 
