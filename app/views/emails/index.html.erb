@@ -1,3 +1,18 @@
+    <%= form_with( url: '/emails', method: 'get', data: {remote: false} ) do %>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-8 pt-2">
+            <%= text_field_tag 'daterange', nil,class: "form-control" %>
+          </div>
+          <div class="col-md-4 pl-0">
+            <button type="submit" class="btn btn-primary icon-big btn-round">
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
 <div class="card">
   <div class="card-body">
     <div class="table-responsive">
@@ -66,7 +81,7 @@
       </table>
     </div>
     <div class="paginate center-h">
-       <%= will_paginate @emails, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+       <%= will_paginate @emails, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, params: {daterange: @daterange} %>
     </div>
   </div>
   
@@ -76,4 +91,20 @@
   $('body').on('click','.submit-review-btn', function(e) {
     e.preventDefault();
   })
+
+    $(document).on('turbolinks:load',function() {
+      // if(window.location.pathname === "/"){
+        var daterange = "<%= @daterange %>"
+        // format here
+        debugger
+        var [from, to] = daterange.split("...")        
+        $('#daterange').daterangepicker({
+          opens: 'left',
+          startDate: moment(from).format('MM/DD/YYYY'),
+          endDate: moment(to).format('MM/DD/YYYY'),
+          autoApply: true,
+        });
+
+      // }
+    });
 </script>

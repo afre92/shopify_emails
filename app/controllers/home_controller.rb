@@ -4,7 +4,7 @@ class HomeController < AuthenticatedController
   before_action :find_shop
 
   def index
-    @daterange = params[:daterange] ? format_daterange(params[:daterange]) : (DateTime.now.beginning_of_month...DateTime.now)
+    @daterange = params[:daterange] ? params[:daterange] : (DateTime.now.beginning_of_month...DateTime.now)
     @emails_sent = @shop.emails.sent.where(created_at: @daterange).count
     @emails_used = @shop.emails.count
     @emails_opened = @shop.emails.where(created_at: @daterange).sent.opened
