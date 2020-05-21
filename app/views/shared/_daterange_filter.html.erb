@@ -1,0 +1,34 @@
+  <div class="col-md-12 pr-1">
+    <div class="col-md-4 ml-auto pr-0">
+        <%= form_with( url: "/#{@view}", method: 'get', data: {remote: false} ) do %>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-8 pt-2">
+            <%= text_field_tag 'daterange', nil,class: "form-control" %>
+          </div>
+          <div class="col-md-4 pl-0">
+            <button type="submit" class="btn btn-primary icon-big btn-round">
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+
+  <script>
+    $(document).on('turbolinks:load',function() {
+      // if(window.location.pathname === "/"){
+        var daterange = "<%= @daterange %>"
+        var [from, to] = daterange.split("...")   
+        $('#daterange').daterangepicker({
+          opens: 'left',
+          startDate: moment(from).utc().format('MM/DD/YYYY'),
+          endDate: moment(to).utc().format('MM/DD/YYYY'),
+          autoApply: true,
+        });
+
+      // }
+    });
+</script>

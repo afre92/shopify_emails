@@ -1,3 +1,5 @@
+<%= render '/shared/daterange_filter' %>
+
 <div class="card">
   <div class="card-body">
     <div class="table-responsive">
@@ -61,9 +63,10 @@
       </table>
     </div>
     <div class="paginate center-h">
-       <%= will_paginate @reviews, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+       <%= will_paginate @reviews, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, params: { daterange: @daterange } %>
     </div>
   </div>
   
 </div>
+
 
