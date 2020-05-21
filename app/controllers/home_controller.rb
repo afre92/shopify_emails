@@ -5,9 +5,9 @@ class HomeController < AuthenticatedController
   before_action :set_daterange, only: :index
 
   def index
-    @emails_sent = @shop.emails.sent.where(created_at: @daterange).count
+    @emails_sent = @shop.emails_sent(@daterange)
+    @emails_opened = @shop.emails_opened(@daterange)
     @emails_used = @shop.emails.count
-    @emails_opened = @shop.emails.where(created_at: @daterange).sent.opened
     email_graph_data
   end
 

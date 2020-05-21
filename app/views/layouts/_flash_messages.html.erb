@@ -1,6 +1,6 @@
 
 <% flash.keys.each do |key|%> 
-  <div class="col-md-12 " style="max-width: 1024px">
+  <div class="col-md-12 " style="max-width: 1024px; top: -10px;">
     <div style="position: absolute; z-index:9; width: 50%; marin-right: 23%; margin-left: 23%" >
       <div class="alert alert-<%= key %> alert-dismissible animated fadeInDown">
         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
@@ -11,8 +11,8 @@
     </div>
   </div>
 <% end %>
-<script>
 
+<script>
   if($( ".alert.animated").is(':visible')) {
     setTimeout(function(){
       $(".alert.animated").parent().fadeOut(400, function(){
@@ -21,5 +21,4 @@
       }, 
     4000);
   }
-
 </script>
