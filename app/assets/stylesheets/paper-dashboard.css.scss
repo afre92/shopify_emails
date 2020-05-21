@@ -638,7 +638,7 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
 .show>.btn-primary.dropdown-toggle,
 .show>.btn-primary.dropdown-toggle:focus,
 .show>.btn-primary.dropdown-toggle:hover {
-  background-color: #34b5b8 !important;
+  background-color: #1775ef !important;
   color: #FFFFFF !important;
   box-shadow: none !important;
 }
@@ -1572,13 +1572,13 @@ fieldset[disabled] .btn-neutral.active {
 .show>.btn-neutral.dropdown-toggle:focus,
 .show>.btn-neutral.dropdown-toggle:hover {
   background-color: #FFFFFF !important;
-  color: #34b5b8 !important;
+  color: #1775ef !important;
   box-shadow: none !important;
 }
 
 .btn-neutral:hover,
 .btn-neutral:focus {
-  color: #34b5b8 !important;
+  color: #1775ef !important;
 }
 
 .btn-neutral:hover:not(.nav-link),
@@ -6724,4 +6724,17 @@ div.edit-template a {
 
 .form-group.color input{
   min-height: 40px !important;
+}
+
+.notification-container {
+  max-width: 1024px;
+  top: -10px;
+}
+
+.notification-container > div{
+  position: absolute;
+  z-index:9;
+  width: 50%;
+  margin-right: 23%;
+  margin-left: 23%;
 }
