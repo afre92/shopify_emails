@@ -33,7 +33,7 @@
     font-family: 'montserrat', "Helvetica Neue", Arial, sans-serif;
   }
 </style>
-
+<% first_item = order.order_items.order('id ASC').first %>
 <div class="email-row-container" style="padding: 0px;background-color: transparent;margin:0 auto;min-width:320px;max-width:500px;word-wrap:break-word;word-break:break-word;background-color:transparent">
   <div style="margin: 0 auto;min-width: 320px;max-width: 500px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;" class="email-row">
     <div style="border-collapse: collapse;width: 100%;background-color: transparent;">
@@ -51,7 +51,7 @@
                       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;">
                         <br/>
                         <div style='padding-bottom: 50px;'>
-                          <form action='<%="#{ENV['NON_E']}review-submission/#{order.order_items.order('id ASC').first.review.uuid}"%>'>
+                          <form action='<%="#{ENV['NON_E']}review-submission/#{first_item.review.uuid}"%>'>
                             <div style="text-align: center;" class="rating-stars-container">
                               <input type="radio" id="five" name="review[rating]" value="5">
                               <label for="five"><span>★★★★★</span></label>
@@ -85,7 +85,7 @@
                           <div style="width: 100%; text-align:center;">
                             <strong style="color:#444444!important">Write a review for other products</strong>
                             <% order.order_items.order('id ASC').each_with_index do |item, index| %>
-                            <% next if item.id == order.order_items.order('id ASC').first.id %>
+                            <% next if item.id == first_item.id %>
                               <div>
                                 <br>
                                 <p style="margin-bottom: 1.5em;"><%= item.title %></p>
@@ -102,7 +102,7 @@
                           <br>
                           <strong style="color:#444444!important">Having trouble with this form?</strong>
                           <br>
-                          <a href='<%="#{ENV['NON_E']}review/#{order.order_items.first.review.uuid}/edit"%>' class="link-color" target="_blank"  >Submit your review online</a>
+                          <a href='<%="#{ENV['NON_E']}review/#{first_item.review.uuid}/edit"%>' class="link-color" target="_blank"  >Submit your review online</a>
                           <br>
                         </div>
 
@@ -110,7 +110,7 @@
                           <br>
                           <strong style="color:#444444!important">How do I get details about this order?</strong>
                           <br>
-                          <a href='<%="#{ENV['NON_E']}review-submission-on-site/#{order.order_items.first.review.uuid}"%>' target="_blank" class="link-color" >Get up-to-date information about order</a>
+                          <a href='<%= order.order_status_url %>' target="_blank" class="link-color" >Get up-to-date information about order <%= order.order_number %></a>
                           <br>
                         </div>
                         <br>

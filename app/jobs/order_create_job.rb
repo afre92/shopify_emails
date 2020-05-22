@@ -11,6 +11,7 @@ class OrderCreateJob < ActiveJob::Base
     # Create Order
     order = shop.orders.build
     order.shopify_id = webhook['id'].to_s
+    order.order_status_url = webhook['order_status_url']
     order.order_number = webhook['order_number']
     order.email = webhook['email']
     order.shopify_created_at = webhook['created_at']
