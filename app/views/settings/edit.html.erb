@@ -8,7 +8,7 @@
       </p>
     </div>
     <div class="row col-md-8 p-0 m-0">
-      <div class="card card-user col-md-6">
+      <div class="card card-user mr-3" style="width: 48%;">
         <div class="row p">
           <div class="input-row settings">
             <div class="pr-3 pl-3">
@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-      <div class="card card-user col-md-6">
+      <div class="card card-user ml-2" style="width: 48%;">
         <div class="row">
           <div class="input-row settings">
             <div class="pr-3 pl-3">
@@ -81,35 +81,33 @@
     </div>
     </div>
 
-    <% if @shop.subscription_type != 'free' %>
-      <div class="row row-bordered">
-        <div class="col-md-4">
-          <p style="font-size: larger; font-weight: 500">
-            Time between order placed and sending of "Review" email.
-          </p>
-        </div>
-        <div class="card card-user col-md-8">
-          <div class="row">
-            <div class="pr-3 pl-3" style="width: 100%">
-              <div class="input-row settings row ml-0 mr-0">
-                <div class="col-md-7 pl-0">
-                  <span class="form-label" >
-                    <label class="pr-1"> Time to Send "Review" Email </label>
-                    ( <span id="review-value" class="pr-1"></span>Days )
-                  </span>
+    <div class="row row-bordered">
+      <div class="col-md-4">
+        <p style="font-size: larger; font-weight: 500">
+          Time between order placed and sending of "Review" email.
+        </p>
+      </div>
+      <div class="card card-user col-md-8">
+        <div class="row">
+          <div class="pr-3 pl-3" style="width: 100%">
+            <div class="input-row settings row ml-0 mr-0">
+              <div class="col-md-7 pl-0">
+                <span class="form-label" >
+                  <label class="pr-1"> Time to Send "Review" Email </label>
+                  ( <span id="review-value" class="pr-1"></span>Days )
+                </span>
 
-                </div>
-                <div class="col-md-5 pr-0">
-                  <div class="slidecontainer float-right">
-                      <%= f.text_field :review_interval, min: '1', max: '30', class: 'bar-slider', type: 'range'  %>
-                  </div>
+              </div>
+              <div class="col-md-5 pr-0">
+                <div class="slidecontainer float-right">
+                    <%= f.text_field :review_interval, min: '1', max: '30', class: 'bar-slider', type: 'range'  %>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    <% end %>
+    </div>
     <div class="row">
       <div class="col-md-4">
         <p style="font-size: larger; font-weight: 500">
@@ -178,25 +176,25 @@
                 </div>
               </div>
           </div>
-          <div class="row">
-              <div class="col-md-4 pr-1">
-                <div class="form-group">
-                  <label data-toggle="tooltip" data-placement="top" title="{{shop.instagram}}">Instagram</label>
-                  <%= f.text_field :instagram, class: "form-control", placeholder: 'Sample' %>
-                </div>
+          <div>
+            <div class="col-md-12 p-0">
+              <div class="form-group">
+                <label data-toggle="tooltip" data-placement="top" title="{{shop.instagram}}">Instagram</label>
+                <%= f.text_field :instagram, class: "form-control", placeholder: 'Sample' %>
               </div>
-              <div class="col-md-4 pl-1 pr-1">
-                <div class="form-group">
-                  <label data-toggle="tooltip" data-placement="top" title="{{shop.facebook}}">Facebook</label>
-                  <%= f.text_field :facebook, class: "form-control", placeholder: 'Sample' %>
-                </div>
+            </div>
+            <div class="col-md-12 p-0">
+              <div class="form-group">
+                <label data-toggle="tooltip" data-placement="top" title="{{shop.facebook}}">Facebook</label>
+                <%= f.text_field :facebook, class: "form-control", placeholder: 'Sample' %>
               </div>
-              <div class="col-md-4 pl-1">
-                <div class="form-group">
-                  <label data-toggle="tooltip" data-placement="top" title="{{shop.twitter}}">Twitter</label>
-                  <%= f.text_field :twitter, class: "form-control", placeholder: 'Sample' %>
-                </div>
+            </div>
+            <div class="col-md-12 p-0">
+              <div class="form-group">
+                <label data-toggle="tooltip" data-placement="top" title="{{shop.twitter}}">Twitter</label>
+                <%= f.text_field :twitter, class: "form-control", placeholder: 'Sample' %>
               </div>
+            </div>
           </div>
             <div class="row">
               <div class="col-md-4 pr-1">
@@ -265,130 +263,3 @@ var originUrl = window.top.location
 
 </script>
 
-
-<style>
-/* ON/OFF Switch */
-.onoffswitch {
-  position: relative;
-  width: 55px;
-  display: inline-block;
-  font-size: 80%;
-}
-.onoffswitch .onoffswitch-label {
-  display: block;
-  overflow: hidden;
-  cursor: pointer;
-  border: 1px solid hsl(0, 0%, 90%);
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-  border-radius: 20px;
-  margin: 0;
-}
-.onoffswitch .onoffswitch-inner {
-  width: 200%;
-  margin-left: -100%;
-  -webkit-transition: margin 0.15s ease-in-out;
-  -o-transition: margin 0.15s ease-in-out;
-  -moz-transition: margin 0.15s ease-in-out;
-  transition: margin 0.15s ease-in-out;
-}
-.onoffswitch .onoffswitch-inner:before,
-.onoffswitch .onoffswitch-inner:after {
-  float: left;
-  width: 50%;
-  height: 24px;
-  padding: 0;
-  line-height: 24px;
-  font-size: 80%;
-  color: hsl(0, 0%, 100%);
-  font-weight: normal;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.onoffswitch .onoffswitch-inner:before {
-  content: "ON";
-  padding-left: 10px;
-  background-color: hsl(203, 100%, 39.1569%);
-  color: hsl(0, 0%, 100%);
-}
-.onoffswitch .onoffswitch-inner:after {
-  content: "OFF";
-  padding-right: 10px;
-  background-color: hsl(0, 0%, 98%);
-  color: hsl(0, 0%, 24%);
-  text-align: right;
-}
-.onoffswitch .onoffswitch-switch {
-  width: 22px;
-  height: 22px;
-  margin: 0;
-  background: hsl(0, 0%, 100%);
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  position: absolute;
-  top: 2px;
-  bottom: 0;
-  right: 35px;
-  -webkit-transition: right 0.15s ease-in-out;
-  -o-transition: right 0.15s ease-in-out;
-  -moz-transition: right 0.15s ease-in-out;
-  transition: right 0.15s ease-in-out;
-}
-.toggle-group {
-  display: contents;
-  position: relative;
-  height: 27px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  top: 50%;
-  left: 20px;
-  margin-top: -13.5px;
-}
-.toggle-group input[type=checkbox] {
-  position: absolute;
-  left: 10px;
-}
-.toggle-group input[type=checkbox]:checked ~ .onoffswitch .onoffswitch-label .onoffswitch-inner {
-  margin-left: 0;
-}
-.toggle-group input[type=checkbox]:checked ~ .onoffswitch .onoffswitch-label .onoffswitch-switch {
-  right: 1px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-}
-.toggle-group input[type=checkbox]:focus ~ .onoffswitch {
-  outline: thin dotted #333;
-  outline: 0;
-}
-.toggle-group label {
-  position: absolute;
-  cursor: pointer;
-  padding-left: 65px;
-  display: inline-block;
-  text-align: left;
-  line-height: 24px;
-  width: 100%;
-  z-index: 1;
-  height: 24px;
-  font-weight: 200;
-}
-/* ==== Accessibility ===== */
-.aural {
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  width: 1px;
-}
-.aural:focus {
-  clip: rect(0, 0, 0, 0);
-  font-size: 1em;
-  height: auto;
-  outline: thin dotted;
-  position: static !important;
-  width: auto;
-  overflow: visible;
-}
-
-</style>
