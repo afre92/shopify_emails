@@ -6612,8 +6612,8 @@ input:checked + .slider:before {
 
 .side-info {
   font-size: larger; 
-  font-weight: 500 ;
-  color: '#66615' ;
+  font-weight: 500;
+  color: gray;
 }
 
 .chart-container {
@@ -6743,4 +6743,14 @@ div.edit-template a {
   color: #66615B !important;
   background-color: #ffffff;
   border: 2px solid #e4e4e4;
+}
+
+.inner-div-overlay {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  color: blue; 
+  z-index: 9999;
 }

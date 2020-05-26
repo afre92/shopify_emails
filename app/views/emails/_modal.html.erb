@@ -8,10 +8,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body text-center">
-
-       <%= @email.html.html_safe %>
-
+      <div class="modal-body text-center" style="position: relative;">
+        <%= @email.html.html_safe %>
+        <div class="inner-div-overlay">
+        </div>
       </div>
       <div class="modal-footer" >
         <div class="text-right">

@@ -1,11 +1,12 @@
 
+  <h3>Thank You Template</h3>
   <div class="row">
     <div class="col-md-4">
       <p class="side-info">
-        Items in between "{{}}" will be replaced with the corresponding data once the email is sent.
+        This is how your Thank You email will look like.
       </p>
       <p style="margin-top: 20px;padding-top: 10px;" class="side-info">
-        Your store data (like store name, address, etc ) can be modified at any time. please head over <%= link_to 'Settings', settings_path, class: 'primary' %> to make changes you need.
+        Your store info (like store name, address, phone number, etc ) can be modified at any time. Please click on <%= link_to 'Settings', settings_path, class: 'primary' %> to change them.
       </p>
     </div>
     <div class="col-md-8">
@@ -36,13 +37,12 @@
       </div>
     </div>
 
-
-
-
-      <div class="card card-user">
+    <div class="card card-user">
       <div class="row">
-        <div class="input-row" style="border-top: none;" id='thank-you-template-content'>
+        <div class="input-row" style="border-top: none; position: relative;" id='thank-you-template-content'>
           <%= @thank_you_email.html.html_safe %>
+          <div class="inner-div-overlay">
+          </div>
         </div>
       </div>
         <div class="input-row" style="border-top: 1px solid #e4e4e4; padding: 10px 20px;">
@@ -66,14 +66,14 @@
     </div>
   </div>
 
-  <% if @shop.subscription_type != 0 %>
+  <h3 class='pt-4'>Review Template</h3>
   <div class="row">
     <div class="col-md-4">
       <p class="side-info">
-        Items in between "{{}}" will be replaced with the corresponding data once the email is sent.
+        This is how your Review email will look like.
       </p>
       <p style="margin-top: 20px;padding-top: 10px;" class="side-info">
-        Your store data (like store name, address, etc ) can be modified at any time. please head over <%= link_to 'Settings', settings_path, class: 'primary' %> to make changes you need.
+        Your store info (like store name, address, phone number, etc ) can be modified at any time. Please click on <%= link_to 'Settings', settings_path, class: 'primary' %> to change them.
       </p>
     </div>
     <div class="col-md-8">
@@ -104,10 +104,12 @@
       </div>
     </div>
     <div class="card card-user">
-      <div class="row">
+      <div class="">
         <div class="input-row" style="border-top: none;" id='review-template-content'>
-          <div>
-            <%= @review_email.html.html_safe %>
+          <div style="position: relative;">
+              <%= @review_email.html.html_safe %>
+              <div class="inner-div-overlay">
+              </div>
           </div>
         </div>
       </div>
@@ -130,8 +132,7 @@
         </div>  
       </div>
     </div>
-  </div>
-<% end %>
+</div>
 
 
 <script>
