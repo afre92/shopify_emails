@@ -1,19 +1,16 @@
-<% shop = @shop %>
-<% customer = @customer %>
-<% email_html = ERB.new(@email_html.to_html) %>
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-bledby="exampleModalb" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalb">Email sent to blah blah</h5>
+        <h5 class="modal-title" id="exampleModalb">Email sent to <%= @email.to %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-b="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body text-center">
 
-       <%= email_html.result(binding).html_safe %>
+       <%= @email.html.html_safe %>
 
       </div>
       <div class="modal-footer" >

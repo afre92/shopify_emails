@@ -7,11 +7,10 @@ class EmailsController < AuthenticatedController
   end
 
   def show
-    email = @shop.emails.find(params['id'])
-    @email_html = Nokogiri::HTML(email.html)
-    @email_html.search('img.tp').each(&:remove)
-    order = @shop.orders.find(email.order_id)
-    @customer = order.customer_obj
+    @email = @shop.emails.find(params['id'])
+    email_html = Nokogiri::HTML(@email.html)
+    email_html.search('img.tp').each(&:remove)
+    @email.html = email_html.to_html
   end
 
   def find_store
