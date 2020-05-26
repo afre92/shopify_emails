@@ -7,15 +7,45 @@
       When "off" no emails will be sent and your tokens will remain intact.
       </p>
     </div>
-    <div class="card card-user col-md-8">
-      <div class="row">
-        <div class="input-row settings">
-          <div class="pr-3 pl-3">
-            <span class="form-label" > <label>Application Status</label> </span> 
-            <label class="switch float-right">
-              <%= f.check_box :status %>
-              <span class="slider round"></span>
-            </label>
+    <div class="row col-md-8 p-0 m-0">
+      <div class="card card-user col-md-6">
+        <div class="row p">
+          <div class="input-row settings">
+            <div class="pr-3 pl-3">
+              <span class="form-label" > <label>Thank you email Status</label> </span> 
+              
+              <div class="toggle-group">
+                  <%= f.check_box :thank_you_status, class: 'd-none',id: "thank_you_status" %>
+                  <label for="thank_you_status">
+                  </label>
+                  <div class="onoffswitch pull-right" aria-hidden="true">
+                      <div class="onoffswitch-label">
+                          <div class="onoffswitch-inner"></div>
+                          <div class="onoffswitch-switch"></div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-user col-md-6">
+        <div class="row">
+          <div class="input-row settings">
+            <div class="pr-3 pl-3">
+              <span class="form-label" > <label>Review email Status</label> </span> 
+              <div class="toggle-group">
+                  <%= f.check_box :review_status, class: 'd-none',id: "review_status" %>
+                  <label for="review_status">
+                  </label>
+                  <div class="onoffswitch pull-right" aria-hidden="true">
+                      <div class="onoffswitch-label">
+                          <div class="onoffswitch-inner"></div>
+                          <div class="onoffswitch-switch"></div>
+                      </div>
+                  </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -214,6 +244,8 @@ var originUrl = window.top.location
   $(document).on('turbolinks:load', function(){
     $('label').tooltip();
   })
+
+
   var thankYouSlider = document.getElementById("shop_thank_you_interval");
   var thankYouSliderOutput = document.getElementById("thank-you-range-value");
   thankYouSliderOutput.innerHTML = thankYouSlider.value
@@ -232,3 +264,131 @@ var originUrl = window.top.location
 
 
 </script>
+
+
+<style>
+/* ON/OFF Switch */
+.onoffswitch {
+  position: relative;
+  width: 55px;
+  display: inline-block;
+  font-size: 80%;
+}
+.onoffswitch .onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid hsl(0, 0%, 90%);
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  margin: 0;
+}
+.onoffswitch .onoffswitch-inner {
+  width: 200%;
+  margin-left: -100%;
+  -webkit-transition: margin 0.15s ease-in-out;
+  -o-transition: margin 0.15s ease-in-out;
+  -moz-transition: margin 0.15s ease-in-out;
+  transition: margin 0.15s ease-in-out;
+}
+.onoffswitch .onoffswitch-inner:before,
+.onoffswitch .onoffswitch-inner:after {
+  float: left;
+  width: 50%;
+  height: 24px;
+  padding: 0;
+  line-height: 24px;
+  font-size: 80%;
+  color: hsl(0, 0%, 100%);
+  font-weight: normal;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.onoffswitch .onoffswitch-inner:before {
+  content: "ON";
+  padding-left: 10px;
+  background-color: hsl(203, 100%, 39.1569%);
+  color: hsl(0, 0%, 100%);
+}
+.onoffswitch .onoffswitch-inner:after {
+  content: "OFF";
+  padding-right: 10px;
+  background-color: hsl(0, 0%, 98%);
+  color: hsl(0, 0%, 24%);
+  text-align: right;
+}
+.onoffswitch .onoffswitch-switch {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  background: hsl(0, 0%, 100%);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  bottom: 0;
+  right: 35px;
+  -webkit-transition: right 0.15s ease-in-out;
+  -o-transition: right 0.15s ease-in-out;
+  -moz-transition: right 0.15s ease-in-out;
+  transition: right 0.15s ease-in-out;
+}
+.toggle-group {
+  display: contents;
+  position: relative;
+  height: 27px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  top: 50%;
+  left: 20px;
+  margin-top: -13.5px;
+}
+.toggle-group input[type=checkbox] {
+  position: absolute;
+  left: 10px;
+}
+.toggle-group input[type=checkbox]:checked ~ .onoffswitch .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+.toggle-group input[type=checkbox]:checked ~ .onoffswitch .onoffswitch-label .onoffswitch-switch {
+  right: 1px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+.toggle-group input[type=checkbox]:focus ~ .onoffswitch {
+  outline: thin dotted #333;
+  outline: 0;
+}
+.toggle-group label {
+  position: absolute;
+  cursor: pointer;
+  padding-left: 65px;
+  display: inline-block;
+  text-align: left;
+  line-height: 24px;
+  width: 100%;
+  z-index: 1;
+  height: 24px;
+  font-weight: 200;
+}
+/* ==== Accessibility ===== */
+.aural {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+.aural:focus {
+  clip: rect(0, 0, 0, 0);
+  font-size: 1em;
+  height: auto;
+  outline: thin dotted;
+  position: static !important;
+  width: auto;
+  overflow: visible;
+}
+
+</style>

@@ -81,6 +81,6 @@ class SettingsController < AuthenticatedController
     end
 
     def shop_params
-      params.require(:shop).permit(:status, :thank_you_interval, :review_interval, :shop_name, :title, :owner_first_name, :owner_last_name, :phone, :address, :email, :website, :star_color, :form_button_color, :default_link_color, :instagram, :facebook, :twitter)
+      params.require(:shop).permit(:status, :thank_you_interval, :review_interval, :shop_name, :title, :owner_first_name, :owner_last_name, :phone, :address, :email, :website, :star_color, :form_button_color, :default_link_color, :instagram, :facebook, :twitter, :thank_you_status, :review_status)
     end
 end

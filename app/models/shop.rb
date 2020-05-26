@@ -12,6 +12,8 @@ class Shop < ActiveRecord::Base
   after_create :get_shop_info, :create_templates, :create_sample_dataset
 
   enum subscription_type: { free: 0, basic: 1, pro: 2 }
+  # enum review_status: { off: 0, on: 1 }
+  # enum thank_you_status: { off: 0, on: 1 }
 
   def create_templates
     # Create Thank You Template
