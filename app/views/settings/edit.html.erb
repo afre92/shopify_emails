@@ -3,7 +3,7 @@
   <%= form_for @shop, url: '/settings', data: {remote: false} do |f| %>
   <div class="row row-bordered pt-0">
     <div class="col-md-4" style="padding: 15px">
-    <p style="font-size: larger; font-weight: 500">
+    <p style="font-size: larger; font-weight: 500;color: gray;">
       When "off" no emails will be sent and your tokens will remain intact.
       </p>
     </div>
@@ -54,8 +54,8 @@
 
   <div class="row row-bordered">
     <div class="col-md-4">
-      <p style="font-size: larger; font-weight: 500">
-      Time between order placed and sending of "Thank You" email.
+      <p style="font-size: larger; font-weight: 500; color: gray;">
+        Time between order placed and sending of "Thank You" email.
       </p>
     </div>
     <div class="card card-user col-md-8">
@@ -65,7 +65,7 @@
             <div class="col-md-7 pl-0">
               <span class="form-label" > 
                 <label class="pr-1">
-                Time to Send "Thank You" Email 
+                Time to send "Thank You" Email 
                 </label>
                 ( <span id="thank-you-range-value" class="pr-1"></span>Minutes )
               </span>
@@ -83,7 +83,7 @@
 
     <div class="row row-bordered">
       <div class="col-md-4">
-        <p style="font-size: larger; font-weight: 500">
+        <p style="font-size: larger; font-weight: 500; color: gray;">
           Time between order placed and sending of "Review" email.
         </p>
       </div>
@@ -93,7 +93,7 @@
             <div class="input-row settings row ml-0 mr-0">
               <div class="col-md-7 pl-0">
                 <span class="form-label" >
-                  <label class="pr-1"> Time to Send "Review" Email </label>
+                  <label class="pr-1"> Time to send "Review" Email </label>
                   ( <span id="review-value" class="pr-1"></span>Days )
                 </span>
 
@@ -110,7 +110,7 @@
     </div>
     <div class="row">
       <div class="col-md-4">
-        <p style="font-size: larger; font-weight: 500">
+        <p style="font-size: larger; font-weight: 500; color: gray;">
           This information will be available in your templates, hover over the labels to see how to can access each value on the template editor.
         </p>
       </div>
