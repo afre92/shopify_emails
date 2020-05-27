@@ -3,7 +3,7 @@
 class Email < ApplicationRecord
   belongs_to :order
   belongs_to :shop
-  has_one :tracking_pixel
+  has_one :tracking_pixel, dependent: :destroy
 
   before_create :check_limit_for_order
   after_create :add_tracking_pixel  
