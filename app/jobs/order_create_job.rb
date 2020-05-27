@@ -6,8 +6,9 @@ class OrderCreateJob < ActiveJob::Base
 
   def perform(shop_domain:, webhook:)
     shop = Shop.find_by(shopify_domain: shop_domain)
-    # byebug
+
     return unless shop.thank_you_status == 1 || shop.review_status == 1
+
     # Create Order
     order = shop.orders.build
     order.shopify_id = webhook['id'].to_s
@@ -29,7 +30,6 @@ class OrderCreateJob < ActiveJob::Base
       order_item.save
     end
 
-
     # Create Thank You Email
     if shop.thank_you_status == 1
       thank_you_email = order.emails.build({order: order, email_type: 'thank_you'})
@@ -39,7 +39,6 @@ class OrderCreateJob < ActiveJob::Base
         puts "Thank you email for Order:#{order.id} COULD NOT BE created"
       end
     end
-
 
     # Create Review Email
     if shop.review_status == 1

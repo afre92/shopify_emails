@@ -6573,6 +6573,7 @@ input:checked + .slider:before {
 
 .input-row.settings{
   border-top: 0px;
+  position: relative;
 }
 
 
@@ -6833,7 +6834,7 @@ div.edit-template a {
   display: inline-block;
   text-align: left;
   line-height: 24px;
-  width: 40%;
+  width: 41%;
   z-index: 1;
   height: 24px;
   font-weight: 200;
