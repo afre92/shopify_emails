@@ -19,7 +19,6 @@
 
   <script>
     $(document).on('turbolinks:load',function() {
-      // if(window.location.pathname === "/"){
         var daterange = "<%= @daterange %>"
         var [from, to] = daterange.split("...")   
         $('#daterange').daterangepicker({
@@ -28,7 +27,5 @@
           endDate: moment(to).utc().format('MM/DD/YYYY'),
           autoApply: true,
         });
-
-      // }
     });
 </script>

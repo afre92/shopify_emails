@@ -1,4 +1,37 @@
-<%= render '/shared/daterange_filter' %>
+<div class="col-md-12 pr-1">
+  <div class="col-6 ml-auto p-0">
+      <%= form_with( url: "/#{@view}", method: 'get', data: {remote: false} ) do %>
+    <div class="form-group">
+      <div class="" style="display: flex;">
+        <div class="col-md-3">
+          <span style="color: gray"> Exported</span>
+          <%= select_tag 'exported', options_for_select([['Yes', 'true'],['No', 'false']], @exported), class: "form-control" %>
+          <div class="toggle-group d-none">
+            
+              <label for="exported">
+              </label>
+              <div class="onoffswitch" aria-hidden="true">
+                  <div class="onoffswitch-label">
+                      <div class="onoffswitch-inner"></div>
+                      <div class="onoffswitch-switch"></div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <span style="color: gray"> Submitted on</span>
+          <%= text_field_tag 'daterange', nil,class: "form-control" %>
+        </div>
+        <div class="col-md-3 pl-0 mt-2">
+          <button type="submit" class="btn btn-primary icon-big btn-round">
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
+</div>
 
 <div class="card">
   <div class="card-body">
@@ -61,10 +94,22 @@
       </table>
     </div>
     <div class="paginate center-h">
-       <%= will_paginate @reviews, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, params: { daterange: @daterange } %>
+       <%= will_paginate @reviews, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, params: { daterange: @daterange, exported: @exported } %>
     </div>
   </div>
   
 </div>
 
 
+  <script>
+    $(document).on('turbolinks:load',function() {
+        var daterange = "<%= @daterange %>"
+        var [from, to] = daterange.split("...")   
+        $('#daterange').daterangepicker({
+          opens: 'left',
+          startDate: moment(from).utc().format('MM/DD/YYYY'),
+          endDate: moment(to).utc().format('MM/DD/YYYY'),
+          autoApply: true,
+        });
+    });
+</script>

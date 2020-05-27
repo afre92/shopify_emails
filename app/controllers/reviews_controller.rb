@@ -3,7 +3,8 @@ class ReviewsController < AuthenticatedController
   before_action :set_daterange, only: :index
 
   def index
-    @reviews = @shop.reviews.where(review_status: 'completed', submitted_on: @daterange).paginate(page: params[:page], per_page: 10)
+    @exported = params[:exported] ? params[:exported] : false
+    @reviews = @shop.reviews.where(review_status: 'completed', submitted_on: @daterange, exported: @exported).paginate(page: params[:page], per_page: 10)
   end
 
   def show
