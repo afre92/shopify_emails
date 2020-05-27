@@ -6,20 +6,20 @@
       <table class="table" style="table-layout: fixed;  width: 100%;">
         <thead class=" text-primary">
           <tr class="text-center">
-            <th colspan="1">
-              Order
-            </th>
-            <th colspan="2">
-              Item Name
-            </th>
             <th colspan="2">
               Rating
             </th>
             <th colspan="3" class="text-center">
               Title
             </th>
-            <th colspan="4" class="text-center">
-              Description
+            <th colspan="3">
+              Item Name
+            </th>
+            <th colspan="1">
+              Order
+            </th>
+            <th colspan="3" class="text-center">
+              Submitted On
             </th>
             <th colspan="1" class="text-center">
               
@@ -29,23 +29,21 @@
         <tbody>
           <% if @reviews.present? %>
             <% @reviews.each do |review| %>
-            <% order_item = OrderItem.find(review.order_item_id) %>
-            <% order = Order.find(order_item.order_id) %>
               <tr data-id="<%=review.id%>" class="text-center order">
-                <td colspan="1">
-                  #<%= order.order_number %>
-                </td>
-                <td colspan="2">
-                  <%= order_item.title %>
-                </td>
                 <td colspan="2" >
-                  <%= review.print_stars %>
+                  <%= review.rating_stars %>
                 </td>
                 <td colspan="3">
                   <%= review.title %>
                 </td>
-                <td colspan="4">
-                  <%= review.description %>
+                <td colspan="3">
+                  <%= review.order_item.title %>
+                </td>
+                <td colspan="1">
+                  #<%= review.order.order_number %>
+                </td>
+                <td colspan="3">
+                  <%= formatted_date(review.submitted_on.in_time_zone(@shop.timezone)) %>
                 </td>
                 <td colspan="1">
                   <%= link_to 'View', review_path(review.id), remote: true %>
@@ -54,7 +52,7 @@
             <% end %>
           <% else %>
             <tr>
-              <td colspan="12" class="text-center">
+              <td colspan="13" class="text-center">
                 No results found. please try again with a different search
               </td>
             </tr>

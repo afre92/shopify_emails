@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       return (from.to_datetime.beginning_of_day...to.to_datetime.end_of_day)
     else
       from, to = daterange.split('-')
-      return (DateTime.strptime(from.remove(' '), '%m/%d/%Y')...DateTime.strptime(to.remove(' '), '%m/%d/%Y'))
+      return (DateTime.strptime(from.remove(' '), '%m/%d/%Y')...DateTime.strptime(to.remove(' '), '%m/%d/%Y').end_of_day)
     end
   end
 

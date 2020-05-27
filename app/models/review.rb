@@ -3,7 +3,7 @@ class Review < ApplicationRecord
   enum review_status: { pending: 0, completed: 1}
   has_one :order, through: :order_item
 
-  def print_stars
+  def rating_stars
     total=[] 
     rating.times do |t|
       total << '★' 
