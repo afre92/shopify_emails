@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   after_action :allow_shopify_iframe
 
   def set_daterange
-    @daterange = params[:daterange] ? format_daterange(params[:daterange]) : (DateTime.now.beginning_of_month...DateTime.now)
+    @daterange = params[:daterange] ? format_daterange(params[:daterange]) : (DateTime.now.beginning_of_month...DateTime.now.utc.end_of_day)
   end
 
   def format_daterange(daterange)

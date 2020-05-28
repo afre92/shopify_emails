@@ -40,6 +40,7 @@ class Email < ApplicationRecord
     self.from = template.from
     self.subject = template.subject
     self.to = order.customer_obj.email
+    self.shop_id = order.shop_id
     self.scheduled_time = order.shopify_created_at + (@email_type == 'review' ?
        shop.review_interval.days :
         shop.thank_you_interval.minutes)

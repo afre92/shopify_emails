@@ -1,38 +1,9 @@
-<style>
-  .rating-stars-container > label > span {
-    font-size:17px;
-    line-height:23px; 
-    color:<%= shop.star_color %>;
-    padding-right: .25rem;
-  }
 
-  .submit-review-btn {
-    border: 0;
-    padding: 10px !important;
-    border-radius: 5px !important;
-    color: white !important;
-    font-weight: 600 !important;
-    background-color: <%= shop.form_button_color %>;
-  }
+<% styles = {} 
+ styles['button'] = "line-height: 1.35em;font-size: 0.8571em;font-family: 'montserrat', 'Helvetica Neue', Arial, sans-serif;border:0;padding: 10px!important;border-radius: 5px !important;color: white !important;font-weight: 600 !important; text-decoration: none;background-color: #{shop.form_button_color};"
+ styles['stars'] = "font-size:17px;line-height:23px; color:#{shop.star_color};padding-right: .25rem;"
+ styles['links'] = "color: #{shop.default_link_color}" %>
 
-  .button {
-    padding: 10px !important;
-    border-radius: 5px !important;
-    color: white !important;
-    font-weight: 500 !important;
-    text-decoration: none;
-  }
-
-  a.link-color {
-    color: <%= shop.default_link_color %>;
-  }
-
-  a.button {
-    line-height: 1.35em;
-    font-size: 0.8571em;
-    font-family: 'montserrat', "Helvetica Neue", Arial, sans-serif;
-  }
-</style>
 <% first_item = order.order_items.order('id ASC').first %>
 <div class="email-row-container" style="padding: 0px;background-color: transparent;margin:0 auto;min-width:320px;max-width:500px;word-wrap:break-word;word-break:break-word;background-color:transparent">
   <div style="margin: 0 auto;min-width: 320px;max-width: 500px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;" class="email-row">
@@ -54,19 +25,19 @@
                           <form action='<%="#{ENV['NON_E']}review-submission/#{first_item.review.uuid}"%>'>
                             <div style="text-align: center;" class="rating-stars-container">
                               <input type="radio" id="five" name="review[rating]" value="5">
-                              <label for="five"><span>★★★★★</span></label>
+                              <label for="five"><span style="<%=styles['stars']%>">★★★★★</span></label>
 
                               <input type="radio" id="four" name="review[rating]" value="4">
-                              <label for="four"><span>★★★★</span></label>
+                              <label for="four"><span style="<%=styles['stars']%>">★★★★</span></label>
 
                               <input type="radio" id="three" name="review[rating]" value="3">
-                              <label for="three"><span>★★★</span></label>
+                              <label for="three"><span style="<%=styles['stars']%>">★★★</span></label>
 
                               <input type="radio" id="two" name="review[rating]" value="2">
-                              <label for="tow"><span>★★</span></label>
+                              <label for="tow"><span style="<%=styles['stars']%>">★★</span></label>
 
                               <input type="radio" id="one" name="review[rating]" value="1">
-                              <label for="one"><span>★</span></label>
+                              <label for="one"><span style="<%=styles['stars']%>">★</span></label>
                             </div>
                             <br/>
                             <label >Title of Review</label><br>
@@ -76,7 +47,7 @@
                             <input type="hidden" id="review_status" name="review[review_status]" value="completed" style="width: 100%; height: 25px; margin-bottom: 10px"><br>
                             <br><br>
                             <div style="text-align: center">
-                              <button type="submit" class="btn button submit-review-btn" >SUBMIT YOUR REVIEW</button>
+                              <button type="submit" class="btn button submit-review-btn" style="<%=styles['button']%>" >SUBMIT YOUR REVIEW</button>
                             </div>
                           </form>
                         </div>
@@ -89,7 +60,7 @@
                               <div>
                                 <br>
                                 <p style="margin-bottom: 1.5em;"><%= item.title %></p>
-                                <a href='<%="#{ENV['NON_E']}review/#{item.review.uuid}/edit"%>' class="submit-review-btn button">WRITE A REVIEW</a>
+                                <a href='<%="#{ENV['NON_E']}review/#{item.review.uuid}/edit"%>' class="submit-review-btn button" style="<%=styles['button']%>">WRITE A REVIEW</a>
                               <div>
                               
                             <% end %>
@@ -102,7 +73,7 @@
                           <br>
                           <strong style="color:#444444!important">Having trouble with this form?</strong>
                           <br>
-                          <a href='<%="#{ENV['NON_E']}review/#{first_item.review.uuid}/edit"%>' class="link-color" target="_blank"  >Submit your review online</a>
+                          <a href='<%="#{ENV['NON_E']}review/#{first_item.review.uuid}/edit"%>' class="link-color" target="_blank" style="<%= styles['links'] %>" >Submit your review online</a>
                           <br>
                         </div>
 
@@ -110,7 +81,7 @@
                           <br>
                           <strong style="color:#444444!important">How do I get details about this order?</strong>
                           <br>
-                          <a href='<%= order.order_status_url %>' target="_blank" class="link-color" >Get up-to-date information about order <%= order.order_number %></a>
+                          <a href='<%= order.order_status_url %>' target="_blank" class="link-color" style="<%= styles['links'] %>" >Get up-to-date information about order <%= order.order_number %></a>
                           <br>
                         </div>
                         <br>
