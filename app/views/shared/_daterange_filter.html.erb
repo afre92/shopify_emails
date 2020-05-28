@@ -3,10 +3,11 @@
         <%= form_with( url: "/#{@view}", method: 'get', data: {remote: false} ) do %>
       <div class="form-group">
         <div class="row">
-          <div class="col-md-8 pt-2">
+          <div class="col-md-8">
+          <span style="color: gray;"><%= label %></span>
             <%= text_field_tag 'daterange', nil,class: "form-control" %>
           </div>
-          <div class="col-md-4 pl-0">
+          <div class="col-md-4 pl-0 mt-2">
             <button type="submit" class="btn btn-primary icon-big btn-round">
               Search
             </button>

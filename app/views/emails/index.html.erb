@@ -1,4 +1,4 @@
-<%= render '/shared/daterange_filter' %>
+<%= render partial: '/shared/daterange_filter', locals: { label: 'Scheduled time'} %>
 
 <div class="card">
   <div class="card-body">
@@ -16,7 +16,7 @@
               Type
             </th>
             <th colspan="4" class="text-center">
-              schedule time
+              scheduled time
             </th>
             <th colspan="1" class="text-center">
               Views

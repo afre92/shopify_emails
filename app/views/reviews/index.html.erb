@@ -4,22 +4,11 @@
     <div class="form-group">
       <div class="" style="display: flex;">
         <div class="col-md-3">
-          <span style="color: gray"> Exported</span>
+          <span style="color: gray"> Exported:</span>
           <%= select_tag 'exported', options_for_select([['Yes', 'true'],['No', 'false']], @exported), class: "form-control" %>
-          <div class="toggle-group d-none">
-            
-              <label for="exported">
-              </label>
-              <div class="onoffswitch" aria-hidden="true">
-                  <div class="onoffswitch-label">
-                      <div class="onoffswitch-inner"></div>
-                      <div class="onoffswitch-switch"></div>
-                  </div>
-              </div>
-          </div>
         </div>
         <div class="col-md-6">
-          <span style="color: gray"> Submitted on</span>
+          <span style="color: gray"> Submitted On:</span>
           <%= text_field_tag 'daterange', nil,class: "form-control" %>
         </div>
         <div class="col-md-3 pl-0 mt-2">
