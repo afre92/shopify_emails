@@ -31,7 +31,7 @@
             <% order = Order.find(email.order_id) %>
               <tr data-id="<%=email.id%>" class="text-center order">
                 <td colspan="2">
-                  #<%= order.order_number %>
+                  <%= link_to '#'+order.order_number, "https://#{@shop.shopify_domain}/admin/orders/#{order.shopify_id}", target: :_blank %>
                 </td>
                 <td colspan="2">
                   

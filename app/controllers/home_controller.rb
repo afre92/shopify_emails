@@ -8,9 +8,8 @@ class HomeController < AuthenticatedController
   def index
     @emails_sent = @shop.emails_sent(@daterange)
     @emails_opened = @shop.emails_opened(@daterange)
-
     @emails_used = @shop.emails_sent(DateTime.now.beginning_of_month...DateTime.now.end_of_month)
-    @email_limit = get_plan(@shop.subscription_type)[:number_of_emails]
+    @email_limit = (@emails_used + @shop.tokens).round
     email_graph_data
   end
 
