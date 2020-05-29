@@ -9,7 +9,9 @@ class Order < ApplicationRecord
   validates_presence_of :shop_id
 
   def customer_obj
-    return JSON.parse(customer, object_class: OpenStruct)
+    c = JSON.parse(customer, object_class: OpenStruct)
+    c['full_name'] = c['default_address']['name']
+    return c
   end
 
   def first_item

@@ -83,6 +83,7 @@ class Shop < ActiveRecord::Base
     else
       self.owner_first_name = shop_info['shop_owner']
     end
+    self.website = self.shopify_domain
     self.phone = shop_info['phone']
     self.shop_name = shop_info['name']
     self.timezone = shop_info['iana_timezone']
