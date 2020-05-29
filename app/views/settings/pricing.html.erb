@@ -63,7 +63,7 @@
           <% if @shop.subscription_type == "basic"%>  
             <a class="btn btn-primary btn-round" href="#" disabled>Selected</a>
           <% else %>
-            <%= link_to 'Select Plan', create_charge_url(1) ,class: 'btn btn-primary create-charge-url btn-round' %>
+            <%= link_to 'Select Plan', create_charge_url('basic') ,class: 'btn btn-primary create-charge-url btn-round' %>
           <% end %>
         </div>
       </div>
@@ -99,7 +99,7 @@
             <% if @shop.subscription_type == "pro"%>  
               <a class="btn btn-primary btn-round" href="#" disabled>Selected</a>
             <% else %>
-              <%= link_to 'Select Plan', create_charge_url(2) ,class: 'btn btn-primary btn-round create-charge-url' %>
+              <%= link_to 'Select Plan', create_charge_url('pro') ,class: 'btn btn-primary btn-round create-charge-url' %>
             <% end %>
           </div>
         </div>

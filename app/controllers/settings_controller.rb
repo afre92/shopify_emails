@@ -56,15 +56,14 @@ class SettingsController < AuthenticatedController
     redirect_link = "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/pricing"
     recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.find(request.params['charge_id'])
     if recurring_application_charge.status == "accepted"
+      plan_info = get_plan(recurring_application_charge.name.downcase)
        recurring_application_charge.activate
-       plan = 0
-        #  if subscriptiom upgrade addition of emails sent will go here
-       if recurring_application_charge.name == "Pro plan"
-        plan = 2
-       else
-        plan = 1
-       end
-       @shop.update(payment_status: 1, charge_id: request.params['charge_id'], billing_on: recurring_application_charge.billing_on.to_date.day, subscription_type: plan)
+       @shop.update(payment_status: 1, 
+        charge_id: request.params['charge_id'], 
+        billing_on: recurring_application_charge.billing_on.to_date.day, 
+        subscription_type: recurring_application_charge.name.downcase,
+        tokens: plan_info[:number_of_emails])
+        
     else
       flash[:danger] = "Oopps! something is not quite right! plase contact the support team."
       redirect_to redirect_link
