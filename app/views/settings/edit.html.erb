@@ -176,23 +176,25 @@
                 </div>
               </div>
           </div>
+          <div class="my-3" style="color: gray;">* add social media link to show icons on review template</div>
           <div>
+           
             <div class="col-md-12 p-0">
               <div class="form-group">
                 <label data-toggle="tooltip" data-placement="top" title="{{shop.instagram}}">Instagram</label>
-                <%= f.text_field :instagram, class: "form-control", placeholder: 'Sample' %>
+                <%= f.text_field :instagram, class: "form-control", placeholder: 'https://www.instagram.com' %>
               </div>
             </div>
             <div class="col-md-12 p-0">
               <div class="form-group">
                 <label data-toggle="tooltip" data-placement="top" title="{{shop.facebook}}">Facebook</label>
-                <%= f.text_field :facebook, class: "form-control", placeholder: 'Sample' %>
+                <%= f.text_field :facebook, class: "form-control", placeholder: 'https://www.facebook.com' %>
               </div>
             </div>
             <div class="col-md-12 p-0">
               <div class="form-group">
                 <label data-toggle="tooltip" data-placement="top" title="{{shop.twitter}}">Twitter</label>
-                <%= f.text_field :twitter, class: "form-control", placeholder: 'Sample' %>
+                <%= f.text_field :twitter, class: "form-control", placeholder: 'https://www.twitter.com' %>
               </div>
             </div>
           </div>
@@ -200,19 +202,19 @@
               <div class="col-md-4 pr-1">
                 <div class="form-group color">
                   <label data-toggle="tooltip" data-placement="top" title="{{shop.instagram}}">Stars color</label>
-                  <%= f.text_field :star_color, type: 'color', class: "form-control", placeholder: 'Sample' %>
+                  <%= f.text_field :star_color, type: 'color', class: "form-control" %>
                 </div>
               </div>
               <div class="col-md-4 pl-1 pr-1">
                 <div class="form-group color">
                   <label data-toggle="tooltip" data-placement="top" title="{{shop.facebook}}">Form button color</label>
-                  <%= f.text_field :form_button_color, type: 'color', class: "form-control", placeholder: 'Sample' %>
+                  <%= f.text_field :form_button_color, type: 'color', class: "form-control" %>
                 </div>
               </div>
               <div class="col-md-4 pl-1">
                 <div class="form-group color">
                   <label data-toggle="tooltip" data-placement="top" title="{{shop.twitter}}">Links color</label>
-                  <%= f.text_field :default_link_color, type: 'color', class: "form-control", placeholder: 'Sample' %>
+                  <%= f.text_field :default_link_color, type: 'color', class: "form-control"%>
                 </div>
               </div>
           </div>
@@ -222,7 +224,7 @@
         <div class="card-footer">
           <div class="row">
             <div class="update ml-auto mr-auto">
-                <button type="submit" class="btn btn-primary btn-round">Save Settings</button>
+                <button type="submit" class="btn btn-primary btn-round mb-4">Save Settings</button>
             </div>
           </div>
         </div>
