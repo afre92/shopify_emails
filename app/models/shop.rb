@@ -47,7 +47,7 @@ class Shop < ActiveRecord::Base
     order.save
 
     2.times do |t|
-     order_item = order.order_items.new(shopify_id: '000', title: "Test Product ##{t+2}")
+     order_item = order.order_items.new(shopify_id: '000', title: "Test Product ##{t+1}")
      order_item.save
     end
   end
