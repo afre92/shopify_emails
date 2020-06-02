@@ -115,3 +115,11 @@
     $(this).parent('div').html('<div class="loader"></div>')
   })
 </script>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    ShopifyApp.ready(function(){
+      ShopifyApp.Bar.initialize({ title: "Pricing" });
+    });
+  </script>
+<% end %>
