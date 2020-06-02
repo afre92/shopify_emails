@@ -10,7 +10,7 @@ class SettingsController < AuthenticatedController
 
   def update
     if @shop.update(shop_params)
-      flash[:success] = "Settings updated successfully."
+      flash[:success] = "Settings updated."
     else
       flash[:danger] = "Ooops, something is wrong "
     end
@@ -27,7 +27,7 @@ class SettingsController < AuthenticatedController
     # make sure this works with the new billing system
     ShopifyAPI::RecurringApplicationCharge.current.cancel 
     @shop.update(subscription_type: 0)
-    flash[:success] = "Successfully changed to the Free plan."
+    flash[:success] = "Your plan has been changed to Free."
     fullpage_redirect_to "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/pricing"
   end
 
@@ -65,10 +65,10 @@ class SettingsController < AuthenticatedController
         tokens: plan_info[:number_of_emails])
         
     else
-      flash[:danger] = "Oopps! something is not quite right! plase contact the support team."
+      flash[:danger] = "Something is not quite right! plase contact the support team."
       redirect_to redirect_link
     end
-    flash[:success] = "Successfully changed to the #{recurring_application_charge.name}."
+    flash[:success] = "Your plan has been changed to #{recurring_application_charge.name}."
     redirect_to redirect_link
   end
 

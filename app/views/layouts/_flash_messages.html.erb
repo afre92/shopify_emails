@@ -1,12 +1,20 @@
 
-<% flash.keys.each do |key|%> 
+<% flash.keys.each do |key|%>
+<%
+result = ""
+if key == "success"
+  result = "Success!   "
+else
+  retuls = "Ooops!   "
+end
+%>
   <div class="col-md-12 notification-container">
     <div>
       <div class="alert alert-<%= key %> alert-dismissible animated fadeInDown">
         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
           <i class="nc-icon nc-simple-remove"></i>
         </button>
-        <span><%= flash[key] %> </span>
+        <span><b><%= result %></b><%= flash[key] %> </span>
       </div>
     </div>
   </div>

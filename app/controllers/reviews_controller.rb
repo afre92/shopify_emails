@@ -15,9 +15,9 @@ class ReviewsController < AuthenticatedController
   def update
     review = @shop.reviews.find(params['id'])
     if review.update(exported: !review.exported)
-      flash[:success] = "Review updated successfully."
+      flash[:success] = "Review updated"
     else
-      flash[:danger] = "Ooops, something is wrong "
+      flash[:danger] = "Something is wrong"
     end
     redirect_to reviews_path
   end
