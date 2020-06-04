@@ -1,9 +1,7 @@
-<div style="position: relative;">
 
+  <%= render partial: '/shared/daterange_filter', locals: { label: 'Emails:'} %>
 
-<%= render partial: '/shared/daterange_filter', locals: { label: 'Emails:'} %>
-
-<div class="row">
+  <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-12">
       <div class="card card-stats">
         <div class="card-body ">
@@ -78,27 +76,15 @@
         </div>
       </div>
     </div>
-</div>
-
-<div  class="inner-div-overlay" style="background-color: rgba(255,255,255, 1);">
-  <%= render partial: '/shared/onboarding'%>
-</div>
-
-</div>
+  </div>
 
 
-
-
-  <script>
-    $(document).on('turbolinks:load',function() {
-      if(window.location.pathname === "/" || window.location.pathname === "/dashboard"){
-        initEmailStatsGraph();
-      }
-    });
-
-
-
-
+<script>
+  $(document).on('turbolinks:load',function() {
+    if(window.location.pathname === "/" || window.location.pathname === "/dashboard"){
+      initEmailStatsGraph();
+    }
+  });
 
   function initEmailStatsGraph() {
 
@@ -174,12 +160,6 @@
       }
     });
   }
-
-
-
-
-
-
 </script>
 
 

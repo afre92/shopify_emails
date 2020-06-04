@@ -21,6 +21,11 @@ class SettingsController < AuthenticatedController
     @view = 'pricing'
   end
 
+  def complete_onboarding
+    @shop.update_attribute(:onboarding_completed, true)
+    redirect_to root_path
+  end
+
   # Move shopify related code to module helper
 
   def cancel_charge
