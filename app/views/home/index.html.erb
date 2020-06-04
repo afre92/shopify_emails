@@ -1,3 +1,5 @@
+<div style="position: relative;">
+
 
 <%= render partial: '/shared/daterange_filter', locals: { label: 'Emails:'} %>
 
@@ -76,7 +78,16 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
+<%# dont render if the client has finished %>
+<div  class="inner-div-overlay" style="background-color: rgba(255,255,255, 1);">
+  <%= render partial: '/shared/onboarding'%>
+</div>
+
+</div>
+
+
+
 
   <script>
     $(document).on('turbolinks:load',function() {
@@ -84,6 +95,17 @@
         initEmailStatsGraph();
       }
     });
+
+    $(document).ready(function(){
+  $('.your-class').slick();
+});
+
+$('.modal').on('shown.bs.modal', function (e) {
+  $('.your-class').slick('setPosition');
+  $('.wrap-modal-slider').addClass('open');
+})
+
+
 
 
   function initEmailStatsGraph() {
@@ -160,7 +182,13 @@
       }
     });
   }
-  </script>
+
+
+
+
+
+
+</script>
 
 
 <% content_for :javascript do %>
