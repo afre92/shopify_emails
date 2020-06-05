@@ -7,7 +7,7 @@
 
       <div class="slide">
         <div class="visual-content-container">
-          <img src="https://tscweb-uxtest.azurewebsites.net/HostedAssets/scrolling-capture-16-9.gif" alt="" />              
+          <%= image_tag 'edit_template' %>              
         </div>
         <div class="helper-content-container">
           <div class="helper-content">
@@ -20,7 +20,7 @@
 
       <div class="slide">
         <div class="visual-content-container">
-          <img src="https://tscweb-uxtest.azurewebsites.net/HostedAssets/scrolling-capture-16-9.gif" alt="" />              
+          <%= image_tag 'save_template' %>                   
         </div>
         <div class="helper-content-container">
           <div class="helper-content">
@@ -28,11 +28,23 @@
             Helper text content.<br>
           </div>
         </div>
-      </div>   
+      </div> 
+
+    <div class="slide">
+        <div class="visual-content-container">
+          <%= image_tag 'edit_shop_info' %>                   
+        </div>
+        <div class="helper-content-container">
+          <div class="helper-content">
+            <h2 class="slide-title">Slide Two Title</h2>
+            Helper text content.<br>
+          </div>
+        </div>
+      </div>    
 
       <div class="slide">
         <div class="visual-content-container">
-          <img src="https://tscweb-uxtest.azurewebsites.net/HostedAssets/scrolling-capture-16-9.gif" alt="" />              
+          <%= image_tag 'turn_on_emails' %>                       
         </div>
         <div class="helper-content-container">
           <div class="helper-content">
@@ -49,8 +61,8 @@
       <button class="button button-nav previous" title="Previous Slide">Back</button>
       <div class="dynamic-toggles"></div>
       <button class="button button-nav button-primary next" title="Next Slide">Next</button>
-      <%# <button class="button button-primary complete onboarding-completed" title="Got It!">Got it!</button> %>
-      <%= link_to 'Got it!', complete_onboarding_path, class: 'button button-primary complete onboarding-completed"' %>
+      
+      <%= link_to 'Got it!', complete_onboarding_path, class: 'button button-primary complete onboarding-completed' %>
 
     </div>
   </div>
@@ -203,13 +215,14 @@
 	 pointer-events: none;
 }
  .carousel {
-	 width: 640px;
+	 width: 800px;
 	 margin: auto;
 }
  .controls {
 	 text-align: center;
 	 padding: 20px;
-	 white-space: nowrap;
+   white-space: nowrap;
+   margin-top: 100px;
 }
  .controls.on-last-slide .button-nav.next {
 	 display: none;
@@ -254,15 +267,15 @@
 	 background: #fff;
 	 opacity: 0;
 	 transition: opacity 0.3s ease;
-	 height: 360px;
+	 height: 460px;
 }
  .slide.active {
 	 opacity: 1;
 	 z-index: 1;
 }
  .visual-content-container {
-	 height: 360px;
-	 width: 640px;
+	 height: 460px;
+	 width: 800px;
 }
  .visual-content-container img, .visual-content-container video {
 	 max-width: 100%;
@@ -273,7 +286,7 @@
 	 width: 100%;
 	 position: absolute;
 	 right: 0;
-	 top: 360px;
+	 top: 460px;
 	 left: 0;
 	 height: 100px;
 	 box-sizing: border-box;

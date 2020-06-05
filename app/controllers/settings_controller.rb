@@ -23,7 +23,7 @@ class SettingsController < AuthenticatedController
 
   def complete_onboarding
     @shop.update_attribute(:onboarding_completed, true)
-    redirect_to root_path
+    redirect_to templates_path
   end
 
   # Move shopify related code to module helper

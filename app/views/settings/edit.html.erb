@@ -1,113 +1,13 @@
+<%= form_for @shop, url: '/settings', data: {remote: false} do |f| %>
 <div class="row ">
   <div class="col-md-12">
-  <%= form_for @shop, url: '/settings', data: {remote: false} do |f| %>
-  <div class="row row-bordered pt-0">
-    <div class="col-md-4" style="padding: 15px">
-    <p style="font-size: larger; font-weight: 500;color: gray;">
-      When "off" no emails of that type will be sent and your tokens will remain intact.
-      </p>
-    </div>
-    <div class="row col-md-8 p-0 m-0">
-      <div class="card card-user mr-3" style="width: 48%;">
-        <div class="row p">
-          <div class="input-row settings">
-            <div class="pr-3 pl-3">
-              <span class="form-label" > <label>Thank you email Status</label> </span> 
-              
-              <div class="toggle-group">
-                  <%= f.check_box :thank_you_status, class: 'd-none',id: "thank_you_status" %>
-                  <label for="thank_you_status">
-                  </label>
-                  <div class="onoffswitch pull-right" aria-hidden="true">
-                      <div class="onoffswitch-label">
-                          <div class="onoffswitch-inner"></div>
-                          <div class="onoffswitch-switch"></div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card card-user ml-2" style="width: 48%;">
-        <div class="row">
-          <div class="input-row settings">
-            <div class="pr-3 pl-3">
-              <span class="form-label" > <label>Review email Status</label> </span> 
-              <div class="toggle-group">
-                  <%= f.check_box :review_status, class: 'd-none',id: "review_status" %>
-                  <label for="review_status">
-                  </label>
-                  <div class="onoffswitch pull-right" aria-hidden="true">
-                      <div class="onoffswitch-label">
-                          <div class="onoffswitch-inner"></div>
-                          <div class="onoffswitch-switch"></div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 
-  <div class="row row-bordered">
-    <div class="col-md-4">
-      <p style="font-size: larger; font-weight: 500; color: gray;">
-        Time between order placed and sending of "Thank You" email.
-      </p>
-    </div>
-    <div class="card card-user col-md-8">
-      <div class="row">
-        <div class="pr-3 pl-3" style="width: 100%">
-          <div class="input-row settings row ml-0 mr-0">
-            <div class="col-md-7 pl-0">
-              <span class="form-label" > 
-                <label class="pr-1">
-                Time to send "Thank You" Email 
-                </label>
-                ( <span id="thank-you-range-value" class="pr-1"></span>Minutes )
-              </span>
-            </div>
-            <div class="col-md-5 pr-0">
-              <div class="slidecontainer float-right">
-                <%= f.text_field :thank_you_interval, min: '1', max: '60', class: 'bar-slider', type: 'range'  %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
 
-    <div class="row row-bordered">
-      <div class="col-md-4">
-        <p style="font-size: larger; font-weight: 500; color: gray;">
-          Time between order placed and sending of "Review" email.
-        </p>
-      </div>
-      <div class="card card-user col-md-8">
-        <div class="row">
-          <div class="pr-3 pl-3" style="width: 100%">
-            <div class="input-row settings row ml-0 mr-0">
-              <div class="col-md-7 pl-0">
-                <span class="form-label" >
-                  <label class="pr-1"> Time to send "Review" Email </label>
-                  ( <span id="review-value" class="pr-1"></span>Days )
-                </span>
 
-              </div>
-              <div class="col-md-5 pr-0">
-                <div class="slidecontainer float-right">
-                    <%= f.text_field :review_interval, min: '1', max: '30', class: 'bar-slider', type: 'range'  %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+
+    
     <div class="row">
       <div class="col-md-4">
         <p style="font-size: larger; font-weight: 500; color: gray;">
@@ -223,20 +123,138 @@
       <div class="">
         <div class="card-footer">
           <div class="row">
-            <div class="update ml-auto mr-auto">
-                <button type="submit" class="btn btn-primary btn-round mb-4">Save Settings</button>
-            </div>
+
           </div>
         </div>
       </div>    
     </div>
 
     </div>
-  <div id="chartHours"></div>
-  </div>
-  <% end %>
-</div>
 
+        <div class="row row-bordered">
+      <div class="col-md-4">
+        <p style="font-size: larger; font-weight: 500; color: gray;">
+          Time between order placed and sending of "Review" email.
+        </p>
+      </div>
+      <div class="card card-user col-md-8">
+        <div class="row">
+          <div class="pr-3 pl-3" style="width: 100%">
+            <div class="input-row settings row ml-0 mr-0">
+              <div class="col-md-7 pl-0">
+                <span class="form-label" >
+                  <label class="pr-1"> Time to send "Review" Email </label>
+                  ( <span id="review-value" class="pr-1"></span>Days )
+                </span>
+
+              </div>
+              <div class="col-md-5 pr-0">
+                <div class="slidecontainer float-right">
+                    <%= f.text_field :review_interval, min: '1', max: '30', class: 'bar-slider', type: 'range'  %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="row row-bordered">
+    <div class="col-md-4">
+      <p style="font-size: larger; font-weight: 500; color: gray;">
+        Time between order placed and sending of "Thank You" email.
+      </p>
+    </div>
+    <div class="card card-user col-md-8">
+      <div class="row">
+        <div class="pr-3 pl-3" style="width: 100%">
+          <div class="input-row settings row ml-0 mr-0">
+            <div class="col-md-7 pl-0">
+              <span class="form-label" > 
+                <label class="pr-1">
+                Time to send "Thank You" Email 
+                </label>
+                ( <span id="thank-you-range-value" class="pr-1"></span>Minutes )
+              </span>
+            </div>
+            <div class="col-md-5 pr-0">
+              <div class="slidecontainer float-right">
+                <%= f.text_field :thank_you_interval, min: '1', max: '60', class: 'bar-slider', type: 'range'  %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="row row-bordered pt-0">
+    <div class="col-md-4" style="padding: 15px">
+    <p style="font-size: larger; font-weight: 500;color: gray;">
+      When "off" no emails of that type will be sent and your tokens will remain intact.
+      </p>
+    </div>
+    <div class="row col-md-8 p-0 m-0">
+      <div class="card card-user mr-3" style="width: 48%;">
+        <div class="row p">
+          <div class="input-row settings">
+            <div class="pr-3 pl-3">
+              <span class="form-label" > <label>Thank you email Status</label> </span> 
+              
+              <div class="toggle-group">
+                  <%= f.check_box :thank_you_status, class: 'd-none',id: "thank_you_status" %>
+                  <label for="thank_you_status">
+                  </label>
+                  <div class="onoffswitch pull-right" aria-hidden="true">
+                      <div class="onoffswitch-label">
+                          <div class="onoffswitch-inner"></div>
+                          <div class="onoffswitch-switch"></div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-user ml-2" style="width: 48%;">
+        <div class="row">
+          <div class="input-row settings">
+            <div class="pr-3 pl-3">
+              <span class="form-label" > <label>Review email Status</label> </span> 
+              <div class="toggle-group">
+                  <%= f.check_box :review_status, class: 'd-none',id: "review_status" %>
+                  <label for="review_status">
+                  </label>
+                  <div class="onoffswitch pull-right" aria-hidden="true">
+                      <div class="onoffswitch-label">
+                          <div class="onoffswitch-inner"></div>
+                          <div class="onoffswitch-switch"></div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div> <%# end of main row %>
+
+
+
+
+  <div class="row col-md-12">
+    <div class="col-md-4"></div>
+  <div class=" col-md-8 text-center">
+    <div class="update ml-auto mr-auto">
+      <button type="submit" class="btn btn-primary btn-round mb-4">Save Settings</button>
+    </div>
+  </div>
+
+
+
+<% end %>
 
 
 
