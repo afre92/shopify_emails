@@ -18,7 +18,6 @@
     
   </head>
   <body >
-   <div style="position: relative;">
     <div class="app-wrapper" style="margin-bottom: 50px; min-height: 100vh;">
       <div class="app-content" >
         <main role="main" class="main-container">
@@ -89,14 +88,8 @@
           </main>
       </div>
     </div>
-    <% if !@shop.onboarding_completed %>
-      <div class="inner-div-overlay" style="background-color: #f4f6f8;">
-        <%= render partial: '/shared/onboarding' %>
-      </div>
-    <% end %>
-    <div>
 
-
+  
 
     <script src="https://cdn.shopify.com/s/assets/external/app.js?<%= Time.now.strftime('%Y%m%d%H') %>"></script>
 
