@@ -13,6 +13,7 @@
       </div>
     </article>
     <article class="slide__inner slide--right">
+    <%= link_to 'Skip', complete_onboarding_path, class: 'onboard_btn btn__absolute btn--highlighted-top' %>
       <h1>Challenges</h1>
       <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, aut accusantium modi incidunt, odit voluptatem tempora alias!</p>
     </article>
@@ -22,6 +23,7 @@
       <%= image_tag 'edit_template', class: 'r-img' %>
     </article>
     <article class="slide__inner slide--right">
+      <%= link_to 'Skip', complete_onboarding_path, class: 'onboard_btn btn__absolute btn--highlighted-top' %>
       <h1>Peers</h1>
       <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, aut accusantium modi incidunt, odit voluptatem tempora!</p>
     </article>
@@ -31,6 +33,7 @@
       <%= image_tag 'save_template', class: 'r-img' %>
     </article>
     <article class="slide__inner slide--right">
+      <%= link_to 'Skip', complete_onboarding_path, class: 'onboard_btn btn__absolute btn--highlighted-top' %>
       <h1>Peers</h1>
       <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, aut accusantium modi incidunt, odit voluptatem tempora!</p>
     </article>
@@ -40,6 +43,7 @@
       <%= image_tag 'turn_on_app', class: 'r-img' %>
     </article>
     <article class="slide__inner slide--right">
+      
       <h1>Peers</h1>
       <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, aut accusantium modi incidunt, odit voluptatem tempora!</p>
     </article>
@@ -71,7 +75,7 @@ $(document).ready(function(){
     currentIndex += 1 //increment the value of current slide
     cycleSlides(currentIndex);  //call slide handle function
     if(currentIndex > slidesLength-2){  //if it second to last slide show 'done' instead of 'next'
-      $('.btn__next').html('Done');
+      $('.btn__next').html('<%= link_to 'Done', complete_onboarding_path, class: 'text-white' %>')
       $('.btn__next').attr("disabled", true);
     } else{
       $('.btn__next').attr("disabled", false);
@@ -107,9 +111,9 @@ function createDots(length){  //function to create pagination dots
 
 .slides-container {
 	position: relative;
-	width: 1000px;
-	height: 550px;
-	/* margin: 50px auto; */
+	max-width: 10240px;
+  height: 590px;
+  max-height: 590px;
 	font-family: 'Open Sans', sans-serif;
 	border: 1px solid #eee;
 	box-shadow: 0px 0px 15px 1px #ebebeb;
@@ -178,25 +182,30 @@ function createDots(length){  //function to create pagination dots
 
 .btn--highlighted {
 	bottom: 40px;
-	right: 60px;
-	background-color: #10a5de;
+	right: 30px;
+	background-color: #1775EF;
 	color: #fff;
+}
+
+.btn--highlighted-top {
+	top: 40px;
+	right: 0px;
 }
 
 .btn--muted {
 	bottom: 40px;
-	right: 120px;
+	right: 100px;
 	background-color: transparent;
-	color: #ddd;
+	color: #9e9e9e;
 }
 
 .pagination {
-	height: 10px;
+	height: 20px;
 	max-width: 140px;
 	display: flex;
 	justify-content: center;
-	margin: 0 auto;
-	clear: both;
+	margin: 10px auto;
+  clear: both;
 }
 
 .paginationDot {
@@ -209,8 +218,8 @@ function createDots(length){  //function to create pagination dots
 }
 
 .paginationDot--active {
-	background: #10a5de;
-	border-color: #10a5de;
+	background: #1775EF;
+	border-color: #1775EF;
 }
 
 .slide-1 .slide--left {

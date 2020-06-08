@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get '/emails', to: 'emails#index', as: 'emails'
   get '/email/:id', to: 'emails#show', as: 'email'
 
+  get '/complete-onboarding', to: 'settings#complete_onboarding', as: 'complete_onboarding'
+
   get '/dashboard', to: 'home#index'
   mount ShopifyApp::Engine, at: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
