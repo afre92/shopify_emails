@@ -19,39 +19,9 @@
   </section>
   <section class="slide slide-2">
     <article class="slide__inner slide--left">
-      <div class="onboard_card card--profile">
-        <div class="card__logo card--profile__logo"><i class="material-icons">person</i></div>
-        <div class="card__info card--profile__info">
-          <h5 class="card__info__name card--profile__info__name">Kevin Badge</h5>
-          <div class="card__data card--profile__data">
-            <div class="card__data__stats card--profile__data__stats"> <i class="material-icons">work</i><span>413</span></div>
-            <div class="card__data__stats card--profile__data__stats"><i class="material-icons">home</i><span>221</span></div>
-            <div class="card__data__stats card--profile__data__stats"><span>Admin</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="onboard_card card--profile profile--pink">
-        <div class="card__logo card--profile__logo"><i class="material-icons">person</i></div>
-        <div class="card__info card--profile__info">
-          <h5 class="card__info__name card--profile__info__name">Billy Bob</h5>
-          <div class="card__data card--profile__data">
-            <div class="card__data__stats card--profile__data__stats"> <i class="material-icons">work</i><span>13</span></div>
-            <div class="card__data__stats card--profile__data__stats"><i class="material-icons">home</i><span>21</span></div>
-            <div class="card__data__stats card--profile__data__stats"><span>Developer</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="onboard_card card--profile profile--yellow">
-        <div class="card__logo card--profile__logo"><i class="material-icons">person</i></div>
-        <div class="card__info card--profile__info">
-          <h5 class="card__info__name card--profile__info__name">Kate Mate</h5>
-          <div class="card__data card--profile__data">
-            <div class="card__data__stats card--profile__data__stats"> <i class="material-icons">work</i><span>13</span></div>
-            <div class="card__data__stats card--profile__data__stats"><i class="material-icons">home</i><span>21</span></div>
-            <div class="card__data__stats card--profile__data__stats"><span>CTO</span></div>
-          </div>
-        </div>
-      </div>
+      
+      <%= image_tag 'edit_template', class: 'r-img' %>
+      
     </article>
     <article class="slide__inner slide--right">
       <h1>Peers</h1>
@@ -59,40 +29,7 @@
     </article>
   </section>
   <section class="slide slide-3">
-    <article class="slide__inner slide--left">
-      <div class="container container--slide-3">
-        <header class="header--slide-3">
-          <nav class="header__nav">
-            <div class="header__nav__logo"> 
-              <p>LOGO</p>
-            </div>
-            <div class="header__nav__cta">Lorem</div>
-          </nav>
-          <div class="header__hero">
-            <div class="header__hero__table"></div>
-            <div class="header__hero__chair"></div>
-          </div>
-        </header>
-        <main class="main--slide-3">
-          <section class="section--about">
-            <h5>About</h5>
-            <div class="section__stripe"></div>
-            <div class="section__stripe"></div>
-          </section>
-          <section class="section--testimonials">
-            <div class="section__logo"><i class="material-icons">person</i></div>
-            <div class="section__info">
-              <div class="section__stripe section__info__stripe"></div>
-              <div class="section__stripe section__info__stripe"></div>
-            </div>
-          </section>
-        </main>
-      </div>
-    </article>
-    <article class="slide__inner slide--right">
-      <h1>Landing page</h1>
-      <p> Lorem ipsum dolor sit amet, consectetur adipisig elit. Dicta, aut accusantium modi incidunt, voluptatem tempora alias similique!</p>
-    </article>
+  <%= image_tag 'edit_template', class: 'img-fluid' %>
   </section>
   <section class="slide slide-4">
     <article class="slide__inner slide--left">
@@ -210,9 +147,9 @@ function createDots(length){  //function to create pagination dots
 
 .slides-container {
 	position: relative;
-	width: 800px;
-	height: 450px;
-	margin: 50px auto;
+	width: 1000px;
+	height: 550px;
+	/* margin: 50px auto; */
 	font-family: 'Open Sans', sans-serif;
 	border: 1px solid #eee;
 	box-shadow: 0px 0px 15px 1px #ebebeb;
@@ -232,15 +169,17 @@ function createDots(length){  //function to create pagination dots
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	width: 50%;
+	/* width: 50%; */
 	float: left;
 }
 
 .slide--left {
-	background: #eee;
+  background: #1775EF;
+  width: 65%;
 }
 
 .slide--right {
+  width: 35%;
 	position: relative;
 	background: #fff;
 	padding: 3%;
@@ -361,7 +300,8 @@ function createDots(length){  //function to create pagination dots
 }
 
 .slide-2 .slide--left {
-	background: #83cedb;
+	background: rgb(23,117,239);
+background: linear-gradient(180deg, rgba(23,117,239,1) 0%, rgba(148,0,232,1) 77%);
 }
 
 .onboard_card {
