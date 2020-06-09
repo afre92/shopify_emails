@@ -1,9 +1,5 @@
 
-<div class="onboarding_modal">
-  <div class="carousel">
-    <div class="slide-container">
 
-      <!--  Slider  -->
 
 <div class="slides-container">
   <button class="onboard_btn btn__absolute btn__prev btn--muted">Back</button>
@@ -53,6 +49,7 @@
     </article>
   </section>
 </div>
+<section class="pagination"> </section>
 
 <script>
 $(document).ready(function(){
@@ -81,51 +78,36 @@ $(document).ready(function(){
       $('.btn__next').html('<%= link_to 'Done', complete_onboarding_path, class: 'text-white' %>')
       $('.btn__next').attr("disabled", true);
     } else{
-      controls.classList.remove('on-last-slide');
+      $('.btn__next').attr("disabled", false);
     }
+    cycleSlides(currentIndex);
+    markDots(currentIndex+1);
+  });
+ $('.btn__prev').on('click', function(){  //function for previous slide
+   $('.btn__next').attr("disabled", false);
+   currentIndex -= 1;
+   if(currentIndex <= 0){
+     $('.btn__prev').hide();
+   } 
+   else if(currentIndex >= slidesLength -2){
+     $('.btn__next').html('Next');
+   }
+   cycleSlides(currentIndex);
+   markDots(currentIndex+1);
+ })
+});
+function createDots(length){  //function to create pagination dots
+  for(i=0;i<=length-1;i++){
+    $('.pagination').append('<div class="paginationDot"></div>');
   }
-
-  function toggleDisabled(){
-    (activeSlideIndex === 0) ? previousButton.disabled = true: previousButton.disabled = false;
-    (activeSlideIndex === slides.length - 1) ? nextButton.disabled = true: nextButton.disabled = false;
-  };
-
-  function toggleSlide(slideIndex){
-    for( var i = 0; i < slides.length; ++i){
-      slides[i].classList.remove(activeClass);   
-    } 
-    slides[slideIndex].classList.add(activeClass);
-    for( var i = 0; i < slides.length; ++i){
-      toggles[i].classList.remove(activeClass);   
-    }   
-    toggles[slideIndex].classList.add(activeClass);
-    toggleDisabled();
-    toggleLastSlide()
-  };
-  // add event listeners
-
-  nextButton.addEventListener('click', function(){
-    if(activeSlideIndex < slides.length - 1){
-      activeSlideIndex = activeSlideIndex + 1;
-      toggleSlide(activeSlideIndex);  
-    };
-  });
-
-  previousButton.addEventListener('click', function(){
-    if(activeSlideIndex > 0){
-      activeSlideIndex = activeSlideIndex - 1;
-      toggleSlide(activeSlideIndex);  
-    };
-  });
-
-  // init controls on load
-  initToggles();
+}
 </script>
 
 
 
-<style>
 
+<style>
+@import 'https://fonts.googleapis.com/css?family=Open+Sans';
 
 .slides-container {
 	position: relative;
