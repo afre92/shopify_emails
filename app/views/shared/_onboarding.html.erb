@@ -1,18 +1,22 @@
 <div class="slides-container">
   <button class="onboard_btn btn__absolute btn__prev btn--muted">Back</button>
   <button class="onboard_btn btn__absolute btn__next btn--highlighted">Next</button>
-  <section class="slide slide-1">
+  <section class="slide slide-2">
     <article class="slide__inner slide--left">
-      <div class="container container--slide-1">
-        <div class="container__logo"><i class="material-icons">trending_up</i></div>
-        <div class="container__stripe container__stripe--long"></div>
-        <div class="container__stripe container__stripe--short"></div>
-      </div>
+    <%= image_tag 'lets_get_started', class: 'r-img' %>
     </article>
     <article class="slide__inner slide--right">
     <%= link_to 'Skip', complete_onboarding_path, class: 'onboard_btn btn__absolute btn--highlighted-top' %>
-      <h1>Challenges</h1>
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, aut accusantium modi incidunt, odit voluptatem tempora alias!</p>
+      <h1>Welcome to Ultimate Mailer</h1>
+      <br/>
+      <p> Lets get you ready to start sending emails. Our onboarding proccess is very short and easy, just follow the next 3 steps and you will be ready to go.</p>
+      <div style="width: 100%;">
+      <p > Thank you for your trust.
+      <br/>
+      -Supernova Labs
+       </p>
+       </div>
+      
     </article>
   </section>
   <section class="slide slide-2">
@@ -21,8 +25,10 @@
     </article>
     <article class="slide__inner slide--right">
       <%= link_to 'Skip', complete_onboarding_path, class: 'onboard_btn btn__absolute btn--highlighted-top' %>
-      <h1>Peers</h1>
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, aut accusantium modi incidunt, odit voluptatem tempora!</p>
+      <h1>Edit default templates</h1>
+      <br/>
+      <p> Before sending any emails, we need to change the default logos on the templates for your own logo.</p>
+      <p>Go to <b> Templates </b> and click on the "EDIT TEMPLATE" button located at bottom of each template preview (repeat this proces for both types of templates).</p>
     </article>
   </section>
   <section class="slide slide-2">
@@ -31,8 +37,10 @@
     </article>
     <article class="slide__inner slide--right">
       <%= link_to 'Skip', complete_onboarding_path, class: 'onboard_btn btn__absolute btn--highlighted-top' %>
-      <h1>Peers</h1>
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, aut accusantium modi incidunt, odit voluptatem tempora!</p>
+      <h1>Update Templates</h1>
+      <br/>
+      <p> With our easy to use drag and drop add or remove any information you might want to change, including your logo or any piece of text.</p>
+      <p> Once you're ready to save click on "SAVE TEMPLATE" to make your changes permanent.</p>
     </article>
   </section>
   <section class="slide slide-2">
@@ -41,8 +49,14 @@
     </article>
     <article class="slide__inner slide--right">
       
-      <h1>Peers</h1>
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, aut accusantium modi incidunt, odit voluptatem tempora!</p>
+      <h1>Turn on Emails</h1>
+      <br/>
+      <div style="width: 100%">
+      <p> Head to <b>Settings</b>.</p>
+      <p> Edit your store information if needed.</p>
+      <p> Use the sliders to change the interval between the an Order placed and the email sent.</p>
+      <p> Switch the toggles to turn on the application and click on "SAVE SETTINGS" and voilà, you are ready to start sending emails.</p>
+      </div>
     </article>
   </section>
 </div>
