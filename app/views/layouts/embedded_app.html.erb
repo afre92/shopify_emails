@@ -114,7 +114,30 @@
       $(`li div a.${view}`).parent('div').addClass('card')
     })
   </script>
-  <footer class="main-container footer"> V 1.0.0 © 2020 by <a href="#">AndyLabs</a></footer>
+  <footer class="main-container footer"> 
+    <div class="col-md-4">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+  </div>
+  <div class="col-md-4">
+  V 1.0.0 © 2020 by <a href="#">AndyLabs</a>
+  </div>
+    <div class="col-md-4">
+  <a href="mailto:afre92@gmail.com" >Contact Us</a>
+  </div>
+  </footer>
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+         <%= render partial: '/shared/onboarding' %>
+      </div>
+    </div>
+  </div>
+</div>
 
   </body>
 </html>
