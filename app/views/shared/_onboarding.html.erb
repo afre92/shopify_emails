@@ -1,3 +1,8 @@
+<script
+  src="https://code.jquery.com/jquery-3.5.1.slim.js"
+  integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
+  crossorigin="anonymous"></script>
+<div style="max-width: 1024px; margin: auto; height: 100vh; padding-top: 5%;">
 <div class="slides-container">
   <button class="onboard_btn btn__absolute btn__prev btn--muted">Back</button>
   <button class="onboard_btn btn__absolute btn__next btn--highlighted">Next</button>
@@ -54,14 +59,15 @@
       <div style="width: 100%">
       <p> Head to <b>Settings</b>.</p>
       <p> Edit your store information if needed.</p>
-      <p> Use the sliders to change the interval between the an Order placed and the email sent.</p>
-      <p> Switch the toggles to turn on the application and click on "SAVE SETTINGS" and voilà, you are ready to start sending emails.</p>
+      <p> Use the sliders to change the interval between an Order placed and the email sent.</p>
+      <p> Switch the toggles to <b>ON</b> to turn on the application, click on "SAVE SETTINGS" and voilà.</p>
+      <p>You are ready to start sending emails.</p>
       </div>
     </article>
   </section>
 </div>
 <section class="pagination"> </section>
-
+</div>
 <script>
 $(document).ready(function(){
   //basic variables for slide information
@@ -122,12 +128,17 @@ function createDots(length){  //function to create pagination dots
 
 .slides-container {
 	position: relative;
-	max-width: 10240px;
+	max-width: 1024px;
   height: 590px;
   max-height: 590px;
 	font-family: 'Open Sans', sans-serif;
 	border: 1px solid #eee;
-	box-shadow: 0px 0px 15px 1px #ebebeb;
+	box-shadow: 0px 0px 15px 15px #ebebeb;
+}
+
+.r-img {
+  max-width: 90%;
+  animation: fadeUp 1s forwards;
 }
 
 .slide {
@@ -144,7 +155,6 @@ function createDots(length){  //function to create pagination dots
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	/* width: 50%; */
 	float: left;
 }
 

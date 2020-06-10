@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/email/:id', to: 'emails#show', as: 'email'
 
   get '/complete-onboarding', to: 'settings#complete_onboarding', as: 'complete_onboarding'
+  get '/onboarding', to: 'home#onboarding', as: 'onboarding'
 
   get '/dashboard', to: 'home#index'
   mount ShopifyApp::Engine, at: '/'
