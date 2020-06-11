@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_185124) do
+ActiveRecord::Schema.define(version: 2020_05_26_154837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(version: 2020_06_04_185124) do
     t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "uuid"
-    t.integer "email_type"
     t.string "from", default: ""
     t.string "to", default: ""
     t.string "subject", default: ""
+    t.string "uuid"
+    t.integer "email_type"
     t.index ["order_id"], name: "index_emails_on_order_id"
     t.index ["shop_id"], name: "index_emails_on_shop_id"
     t.index ["template_id"], name: "index_emails_on_template_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_185124) do
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.bigint "email_id"
     t.integer "rating", default: 0
     t.string "title", default: ""
     t.text "description", default: ""
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_185124) do
     t.string "uuid", default: ""
     t.boolean "exported", default: false
     t.datetime "submitted_on"
+    t.index ["email_id"], name: "index_reviews_on_email_id"
     t.index ["order_item_id"], name: "index_reviews_on_order_item_id"
   end
 
@@ -82,7 +84,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_185124) do
     t.datetime "updated_at", null: false
     t.string "email", default: ""
     t.integer "subscription_type", default: 0
-    t.float "tokens", default: 10.0
+    t.float "tokens", default: 100.0
     t.string "address", default: ""
     t.string "owner_first_name", default: ""
     t.string "owner_last_name", default: ""
@@ -96,16 +98,16 @@ ActiveRecord::Schema.define(version: 2020_06_04_185124) do
     t.string "star_color", default: "#ffd700"
     t.string "form_button_color", default: "#1775EF"
     t.string "default_link_color", default: "#7db6ff"
-    t.string "instagram", default: ""
-    t.string "facebook", default: ""
-    t.string "twitter", default: ""
+    t.string "instagram", default: "https://www.instagram.com/"
+    t.string "facebook", default: "https://www.facebook.com/"
+    t.string "twitter", default: "https://twitter.com/"
+    t.boolean "onboarding_completed", default: false
+    t.string "timezone", default: "America/New_York"
     t.integer "payment_status", default: 0
     t.string "charge_id", default: ""
     t.integer "billing_on"
-    t.string "timezone", default: "America/New_York"
     t.integer "thank_you_status", default: 0
     t.integer "review_status", default: 0
-    t.boolean "onboarding_completed", default: false
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
   end
 

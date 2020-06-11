@@ -57,7 +57,7 @@ class Shop < ActiveRecord::Base
   end
 
   def sample_order
-    return self.orders.find_by(shopify_id: '000', order_number: '000')
+    return self.orders.find_by(shopify_id: '000', order_number: '1000')
   end
 
   def emails_sent(daterange)
