@@ -8,7 +8,7 @@
     <%= image_tag 'lets_get_started', class: 'r-img' %>
     </article>
     <article class="slide__inner slide--right">
-    <%= link_to 'Skip', complete_onboarding_path, class: 'onboard_btn btn__absolute btn--highlighted-top' %>
+    <%= link_to 'Skip', complete_onboarding_path, class: 'onboard_btn btn__absolute btn--highlighted-top',data: { turbolinks: false }  %>
       <h1>Welcome to Ultimate Mailer</h1>
       <br/>
       <p> Lets get you ready to start sending emails. Our onboarding proccess is very short and easy, just follow the next 3 steps and you will be ready to go.</p>
@@ -26,7 +26,7 @@
       <%= image_tag 'edit_template', class: 'r-img' %>
     </article>
     <article class="slide__inner slide--right">
-      <%= link_to 'Skip', complete_onboarding_path, class: 'onboard_btn btn__absolute btn--highlighted-top' %>
+      <%= link_to 'Skip', complete_onboarding_path, class: 'onboard_btn btn__absolute btn--highlighted-top',data: { turbolinks: false } %>
       <h1>Edit default templates</h1>
       <br/>
       <p> Before sending any emails, we need to change the default logos on the templates for your own logo.</p>
@@ -38,7 +38,7 @@
       <%= image_tag 'save_template', class: 'r-img' %>
     </article>
     <article class="slide__inner slide--right">
-      <%= link_to 'Skip', complete_onboarding_path, class: 'onboard_btn btn__absolute btn--highlighted-top' %>
+      <%= link_to 'Skip', complete_onboarding_path, class: 'onboard_btn btn__absolute btn--highlighted-top',data: { turbolinks: false } %>
       <h1>Update Templates</h1>
       <br/>
       <p> With our easy to use drag and drop add or remove any information you might want to change, including your logo or any piece of text.</p>
@@ -89,7 +89,7 @@ $(document).ready(function(){
     currentIndex += 1 //increment the value of current slide
     cycleSlides(currentIndex);  //call slide handle function
     if(currentIndex > slidesLength-2){  //if it second to last slide show 'done' instead of 'next'
-      $('.btn__next').html('<%= link_to 'Done', complete_onboarding_path, class: 'text-white' %>')
+      $('.btn__next').html('<%= link_to 'Done', complete_onboarding_path, class: 'text-white',data: { turbolinks: false } %>')
       $('.btn__next').attr("disabled", true);
     } else{
       $('.btn__next').attr("disabled", false);
