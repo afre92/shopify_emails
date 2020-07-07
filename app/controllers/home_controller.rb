@@ -12,6 +12,12 @@ class HomeController < AuthenticatedController
     @emails_used = @shop.emails_sent(DateTime.now.beginning_of_month...DateTime.now.end_of_month)
     @email_limit = (@emails_used + @shop.tokens).round
     email_graph_data
+
+    price_rule = ShopifyAPI::Session.temp(domain: @shop.shopify_domain, token: @shop.shopify_token, api_version: ShopifyApp.configuration.api_version) do
+      ShopifyAPI::PriceRule.new("title": 'ReviewReward', "target_type": "line_item", "target_selection": "all","allocation_method": "across","value_type": "fixed_amount","value": "-10.0","customer_selection": "all","starts_at": "2020-07-5T17:59:10Z")
+    end
+
+    byebug
   end
 
   def onboarding

@@ -35,6 +35,12 @@ class Shop < ActiveRecord::Base
       body: review_json,
       html: review_html
     )
+
+    # Create Discound code
+    shop_info = ShopifyAPI::Session.temp(domain: shopify_domain, token: shopify_token, api_version: ShopifyApp.configuration.api_version) do
+      ShopifyAPI::Shop.current
+    end
+    
   end
 
   def create_sample_dataset
@@ -72,8 +78,8 @@ class Shop < ActiveRecord::Base
     shop_info = ShopifyAPI::Session.temp(domain: shopify_domain, token: shopify_token, api_version: ShopifyApp.configuration.api_version) do
       ShopifyAPI::Shop.current
     end
-    shop_info = shop_info.attributes
 
+    shop_info = shop_info.attributes
     self.email = shop_info['email']
     self.address = shop_info['address1']
     if shop_info['shop_owner'].include?(' ')
