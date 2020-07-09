@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_26_154837) do
+ActiveRecord::Schema.define(version: 2020_07_09_155135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "discount_codes", force: :cascade do |t|
+    t.string "code"
+    t.bigint "shop_id"
+    t.bigint "price_rule_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["price_rule_id"], name: "index_discount_codes_on_price_rule_id"
+    t.index ["shop_id"], name: "index_discount_codes_on_shop_id"
+  end
 
   create_table "emails", force: :cascade do |t|
     t.datetime "scheduled_time"
@@ -58,6 +68,19 @@ ActiveRecord::Schema.define(version: 2020_05_26_154837) do
     t.string "order_number", default: ""
     t.string "order_status_url", default: ""
     t.index ["shop_id"], name: "index_orders_on_shop_id"
+  end
+
+  create_table "price_rules", force: :cascade do |t|
+    t.bigint "shop_id"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.boolean "active"
+    t.string "title"
+    t.integer "value"
+    t.integer "value_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_price_rules_on_shop_id"
   end
 
   create_table "reviews", force: :cascade do |t|

@@ -26,7 +26,6 @@ class HomeController < AuthenticatedController
       #   value: "-20.0",
       #   customer_selection: "all",
       #   starts_at: Time.now.iso8601, 
-      #   usage_limit: 1
       # )
       byebug
       # @price_rule.save
