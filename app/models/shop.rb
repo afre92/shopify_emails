@@ -7,11 +7,49 @@ class Shop < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   has_many :emails, dependent: :destroy
   has_many :reviews, through: :orders
+  has_one :price_rule
 
   before_create :create_unique_token
-  after_create :get_shop_info, :create_templates, :create_sample_dataset
+  # TODO: group all these callback into one
+  after_create :handle_after_create#:get_shop_info, :create_templates, :create_sample_dataset
 
   enum subscription_type: { free: 0, basic: 1, pro: 2 }
+
+  def handle_after_create
+       # session = ShopifyAPI::Session.temp(domain: @shop.shopify_domain, token: @shop.shopify_token, api_version: ShopifyApp.configuration.api_version) #do
+    # ShopifyAPI::Base.activate_session(session)
+    # :get_shop_info, :create_templates, :create_sample_dataset
+
+
+    ShopifyAPI::Session.temp(domain: shopify_domain, token: shopify_token, api_version: ShopifyApp.configuration.api_version) do
+      get_shop_info
+      create_price_rule
+    end
+  end
+
+  def create_price_rule
+    price_rule = ShopifyAPI::PriceRule.new(
+      title: "REVIEWCOLLECTOR",
+      target_type: "line_item",
+      target_selection: "all",
+      allocation_method: "across",
+      value_type: "fixed_amount",
+      value: "-10.0",
+      customer_selection: "all",
+      starts_at: Time.now.iso8601, # this make wonder if there should be one price rule per discount ?
+    )
+
+    if price_rule.save
+      # create price rule in local db
+      self.price_rule.create(
+        title: price_rule.title,
+        value: price_rule.value,
+        value_type: price_rule.value_type,
+        starts_at: price_rule.starts_at,
+      )
+    else
+    end
+  end
 
   def create_templates
     # Create Thank You Template
@@ -75,11 +113,11 @@ class Shop < ActiveRecord::Base
   end
 
   def get_shop_info
-    shop_info = ShopifyAPI::Session.temp(domain: shopify_domain, token: shopify_token, api_version: ShopifyApp.configuration.api_version) do
-      ShopifyAPI::Shop.current
-    end
+    # shop_info = ShopifyAPI::Session.temp(domain: shopify_domain, token: shopify_token, api_version: ShopifyApp.configuration.api_version) do
+    #   ShopifyAPI::Shop.current
+    # end
 
-    shop_info = shop_info.attributes
+    shop_info = ShopifyAPI::Shop.current.attributes
     self.email = shop_info['email']
     self.address = shop_info['address1']
     if shop_info['shop_owner'].include?(' ')

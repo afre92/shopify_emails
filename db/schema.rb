@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2020_07_09_155135) do
     t.bigint "shop_id"
     t.datetime "starts_at"
     t.datetime "ends_at"
-    t.boolean "active"
+    t.boolean "active", default: false
     t.string "title"
     t.integer "value"
     t.integer "value_type"

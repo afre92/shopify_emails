@@ -4,7 +4,7 @@ class CreatePriceRules < ActiveRecord::Migration[5.2]
       t.belongs_to :shop
       t.datetime :starts_at
       t.datetime :ends_at
-      t.boolean :active
+      t.boolean :active, default: false
       t.string :title
       t.integer :value
       t.integer :value_type
