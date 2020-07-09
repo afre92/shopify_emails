@@ -192,12 +192,12 @@
       <div class="row">
         <div class="pr-3 pl-3" style="width: 100%">
           <div class="input-row settings row ml-0 mr-0">
-            <div class="col-md-2 pl-0">
-              <div class="toggle-group">
-                <%= ff.check_box :active, class: 'd-none',id: "active_status" %>
-                  <label for="active_status">
+            <div class="col-md-4 pl-0">
+              <div class="toggle-group form-group">
+                <%= ff.check_box :active, class: 'd-none', id: "active" %>
+                  <label for="active">
                   </label>
-                  <div class="onoffswitch pull-right" aria-hidden="true">
+                  <div class="onoffswitch" aria-hidden="true">
                       <div class="onoffswitch-label">
                           <div class="onoffswitch-inner"></div>
                           <div class="onoffswitch-switch"></div>
@@ -205,13 +205,13 @@
                   </div>
               </div>
             </div>
-            <div class="col-md-5 pr-0">
+            <div class="col-md-4 pr-0">
               <div class="">
-                <%= ff.text_field :value_type, class: 'form-control'  %>
+                <%= ff.select :value_type, options_for_select([["Fixed Amount", "fixed_amount"],["Percentage", "percentage"]], ff.object.value_type), {}, class: 'form-control'  %>
               </div>
             </div>
-            <div class="col-md-5 pr-0">
-              <%= ff.text_field :value, class: 'form-control'  %>
+            <div class="col-md-4 pr-0 form-group">
+              <%= ff.text_field :value, class: 'form-control', type: 'number', value: ff.object.value.abs %>
             </div>
           </div>
         </div>

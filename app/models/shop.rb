@@ -41,7 +41,7 @@ class Shop < ActiveRecord::Base
       # create price rule in local db
       local_price_rule = self.build_price_rule(
         title: price_rule.title,
-        value: price_rule.value,
+        value: price_rule.value.abs,
         value_type: price_rule.value_type,
         starts_at: price_rule.starts_at,
       )

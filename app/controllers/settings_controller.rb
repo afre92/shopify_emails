@@ -9,7 +9,6 @@ class SettingsController < AuthenticatedController
   end
 
   def update
-    byebug
     if @shop.update(shop_params)
       flash[:success] = "Settings updated."
     else
