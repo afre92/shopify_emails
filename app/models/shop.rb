@@ -7,24 +7,21 @@ class Shop < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   has_many :emails, dependent: :destroy
   has_many :reviews, through: :orders
-  has_one :price_rule
+  has_one :price_rule, dependent: :destroy
 
   before_create :create_unique_token
-  # TODO: group all these callback into one
-  after_create :handle_after_create#:get_shop_info, :create_templates, :create_sample_dataset
+  after_create :handle_after_create
 
   enum subscription_type: { free: 0, basic: 1, pro: 2 }
 
   def handle_after_create
-       # session = ShopifyAPI::Session.temp(domain: @shop.shopify_domain, token: @shop.shopify_token, api_version: ShopifyApp.configuration.api_version) #do
-    # ShopifyAPI::Base.activate_session(session)
-    # :get_shop_info, :create_templates, :create_sample_dataset
-
-
     ShopifyAPI::Session.temp(domain: shopify_domain, token: shopify_token, api_version: ShopifyApp.configuration.api_version) do
       get_shop_info
       create_price_rule
     end
+
+    create_templates
+    create_sample_dataset
   end
 
   def create_price_rule
@@ -41,12 +38,13 @@ class Shop < ActiveRecord::Base
 
     if price_rule.save
       # create price rule in local db
-      self.price_rule.create(
+      local_price_rule = self.build_price_rule(
         title: price_rule.title,
         value: price_rule.value,
         value_type: price_rule.value_type,
         starts_at: price_rule.starts_at,
       )
+      local_price_rule.save
     else
     end
   end
@@ -73,11 +71,6 @@ class Shop < ActiveRecord::Base
       body: review_json,
       html: review_html
     )
-
-    # Create Discound code
-    shop_info = ShopifyAPI::Session.temp(domain: shopify_domain, token: shopify_token, api_version: ShopifyApp.configuration.api_version) do
-      ShopifyAPI::Shop.current
-    end
     
   end
 
@@ -96,27 +89,7 @@ class Shop < ActiveRecord::Base
     end
   end
 
-  def api_version
-    ShopifyApp.configuration.api_version
-  end
-
-  def sample_order
-    return self.orders.find_by(shopify_id: '000', order_number: '1000')
-  end
-
-  def emails_sent(daterange)
-    emails.sent.where(created_at: daterange).count
-  end
-
-  def emails_opened(daterange)
-    emails.where(created_at: daterange).sent.opened
-  end
-
   def get_shop_info
-    # shop_info = ShopifyAPI::Session.temp(domain: shopify_domain, token: shopify_token, api_version: ShopifyApp.configuration.api_version) do
-    #   ShopifyAPI::Shop.current
-    # end
-
     shop_info = ShopifyAPI::Shop.current.attributes
     self.email = shop_info['email']
     self.address = shop_info['address1']
@@ -137,6 +110,22 @@ class Shop < ActiveRecord::Base
       random_token = SecureRandom.urlsafe_base64(nil, false)
       return (self.web_token = random_token) unless Shop.exists?(web_token: random_token)
     end
+  end
+  
+  def api_version
+    ShopifyApp.configuration.api_version
+  end
+
+  def sample_order
+    return self.orders.find_by(shopify_id: '000', order_number: '1000')
+  end
+
+  def emails_sent(daterange)
+    emails.sent.where(created_at: daterange).count
+  end
+
+  def emails_opened(daterange)
+    emails.where(created_at: daterange).sent.opened
   end
 
 end
