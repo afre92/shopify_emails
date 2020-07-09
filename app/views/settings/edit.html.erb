@@ -1,13 +1,6 @@
 <%= form_for @shop, url: '/settings', data: {remote: false} do |f| %>
 <div class="row ">
   <div class="col-md-12">
-  
-
-
-
-
-
-    
     <div class="row">
       <div class="col-md-4">
         <p style="font-size: larger; font-weight: 500; color: gray;">
@@ -159,7 +152,7 @@
       </div>
     </div>
 
-      <div class="row row-bordered">
+  <div class="row row-bordered">
     <div class="col-md-4">
       <p style="font-size: larger; font-weight: 500; color: gray;">
         Time between order placed and sending of "Thank You" email.
@@ -186,6 +179,45 @@
         </div>
       </div>
     </div>
+  </div>
+
+    <div class="row row-bordered">
+    <div class="col-md-4">
+      <p style="font-size: larger; font-weight: 500; color: gray;">
+        Discount.
+      </p>
+    </div>
+    <div class="card card-user col-md-8">
+      <%= f.fields_for :price_rule, @shop.price_rule do |ff| %>
+      <div class="row">
+        <div class="pr-3 pl-3" style="width: 100%">
+          <div class="input-row settings row ml-0 mr-0">
+            <div class="col-md-2 pl-0">
+              <div class="toggle-group">
+                <%= ff.check_box :active, class: 'd-none',id: "active_status" %>
+                  <label for="active_status">
+                  </label>
+                  <div class="onoffswitch pull-right" aria-hidden="true">
+                      <div class="onoffswitch-label">
+                          <div class="onoffswitch-inner"></div>
+                          <div class="onoffswitch-switch"></div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-5 pr-0">
+              <div class="">
+                <%= ff.text_field :value_type, class: 'form-control'  %>
+              </div>
+            </div>
+            <div class="col-md-5 pr-0">
+              <%= ff.text_field :value, class: 'form-control'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
   </div>
 
     <div class="row row-bordered pt-0">

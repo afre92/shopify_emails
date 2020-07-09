@@ -8,6 +8,7 @@ class Shop < ActiveRecord::Base
   has_many :emails, dependent: :destroy
   has_many :reviews, through: :orders
   has_one :price_rule, dependent: :destroy
+  accepts_nested_attributes_for :price_rule
 
   before_create :create_unique_token
   after_create :handle_after_create
@@ -33,7 +34,7 @@ class Shop < ActiveRecord::Base
       value_type: "fixed_amount",
       value: "-10.0",
       customer_selection: "all",
-      starts_at: Time.now.iso8601, # this make wonder if there should be one price rule per discount ?
+      starts_at: Time.now.iso8601
     )
 
     if price_rule.save
@@ -111,7 +112,7 @@ class Shop < ActiveRecord::Base
       return (self.web_token = random_token) unless Shop.exists?(web_token: random_token)
     end
   end
-  
+
   def api_version
     ShopifyApp.configuration.api_version
   end
