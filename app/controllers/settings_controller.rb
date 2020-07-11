@@ -52,7 +52,7 @@ class SettingsController < AuthenticatedController
       if recurring_application_charge.save
         fullpage_redirect_to recurring_application_charge.confirmation_url
       else
-        # recurring charge could no be created
+        # recurring charge could not be created
       end
    end
   
