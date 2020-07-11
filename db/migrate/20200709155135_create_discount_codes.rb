@@ -3,8 +3,7 @@ class CreateDiscountCodes < ActiveRecord::Migration[5.2]
     create_table :discount_codes do |t|
       t.string :code
       t.belongs_to :shop
-      t.belongs_to :price_rule
-
+      t.belongs_to :review
       t.timestamps
     end
   end

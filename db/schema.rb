@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 2020_07_09_155135) do
   create_table "discount_codes", force: :cascade do |t|
     t.string "code"
     t.bigint "shop_id"
-    t.bigint "price_rule_id"
+    t.bigint "review_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["price_rule_id"], name: "index_discount_codes_on_price_rule_id"
+    t.index ["review_id"], name: "index_discount_codes_on_review_id"
     t.index ["shop_id"], name: "index_discount_codes_on_shop_id"
   end
 
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2020_07_09_155135) do
     t.string "title"
     t.integer "value"
     t.integer "value_type"
+    t.string "shopify_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["shop_id"], name: "index_price_rules_on_shop_id"

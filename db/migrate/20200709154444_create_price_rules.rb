@@ -8,6 +8,7 @@ class CreatePriceRules < ActiveRecord::Migration[5.2]
       t.string :title
       t.integer :value
       t.integer :value_type
+      t.string :shopify_id
 
       t.timestamps
     end
