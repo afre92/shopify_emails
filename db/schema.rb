@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 2020_07_09_155135) do
   create_table "discount_codes", force: :cascade do |t|
     t.string "code"
     t.bigint "shop_id"
-    t.bigint "review_id"
+    t.bigint "price_rule_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["review_id"], name: "index_discount_codes_on_review_id"
+    t.index ["price_rule_id"], name: "index_discount_codes_on_price_rule_id"
     t.index ["shop_id"], name: "index_discount_codes_on_shop_id"
   end
 
