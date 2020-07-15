@@ -33,6 +33,7 @@ class Shop < ActiveRecord::Base
       allocation_method: "across",
       value_type: "fixed_amount",
       value: "-10.0",
+      once_per_customer: true,
       customer_selection: "all",
       starts_at: Time.now.iso8601
     )
@@ -77,6 +78,7 @@ class Shop < ActiveRecord::Base
     
   end
 
+  # Creates sample dataset used to preview emails
   def create_sample_dataset
     order = self.orders.new
     order.shopify_id = '000'
