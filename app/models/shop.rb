@@ -19,10 +19,15 @@ class Shop < ActiveRecord::Base
     ShopifyAPI::Session.temp(domain: shopify_domain, token: shopify_token, api_version: ShopifyApp.configuration.api_version) do
       get_shop_info
       create_price_rule
+      create_script_tag
     end
 
     create_templates
     create_sample_dataset
+  end
+
+  def create_script_tag
+    ShopifyAPI::ScriptTag.create(event: 'onload', src: "#{ENV['APP_URL']}product.js")
   end
 
   def create_price_rule

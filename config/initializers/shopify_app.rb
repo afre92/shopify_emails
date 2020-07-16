@@ -5,7 +5,7 @@ ShopifyApp.configure do |config|
   config.api_key = ENV['SHOPIFY_API_KEY']
   config.secret = ENV['SHOPIFY_API_SECRET']
   config.old_secret = ''
-  config.scope = 'read_products, read_orders, read_draft_orders, read_discounts, write_discounts, read_price_rules, write_price_rules' # Consult this page for more scope options:
+  config.scope = 'read_products, read_orders, read_draft_orders, read_discounts, write_discounts, read_price_rules, write_price_rules, read_themes, write_themes, read_script_tags, write_script_tags' # Consult this page for more scope options:
   # https://help.shopify.com/en/api/getting-started/authentication/oauth/scopes
   config.embedded_app = true
   config.after_authenticate_job = false
