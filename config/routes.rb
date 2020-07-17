@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get '/review/:id', to: 'reviews#show', as: 'review'
   get '/review_update/:id', to: 'reviews#update', as: 'review_update'
 
+  get '/proxy-reviews', to: 'proxy#reviews'
+
   get '/emails', to: 'emails#index', as: 'emails'
   get '/email/:id', to: 'emails#show', as: 'email'
 
