@@ -2,6 +2,7 @@
 
 class OrderItem < ApplicationRecord
   belongs_to :order
+  # belongs_to :review
   has_one :review, dependent: :destroy
 
   after_create :create_review_obj

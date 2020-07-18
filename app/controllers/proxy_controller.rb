@@ -5,10 +5,15 @@ class ProxyController < ActionController::Base
   before_action :verify_signature
 
   def reviews
+    # find id of the product
+     # its going to be an id on a div
+    # get all reviews for product
     byebug
   end
 
-
+# 1. get all reviews for the product
+# 2. add html to render reviews sent 
+# 3. 
 
   private
 
