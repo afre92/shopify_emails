@@ -1,8 +1,8 @@
-<div>
-<%= reviews.each do |review| %>
+
+<% reviews.each do |review| %>
   <div class="review" style="border-bottom: 1px black solid;">
     <div>
-      <%= review.rating %>
+      <%= review.rating_stars %>
     </div>
     <div style="padding-top:10px; padding-bottom: 10px;">
       <div>
@@ -17,4 +17,3 @@
     </div>
   </div>
 <% end %>
-</div>
