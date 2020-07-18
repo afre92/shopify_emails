@@ -1,6 +1,6 @@
 
 <% reviews.each do |review| %>
-  <div class="review" style="border-bottom: 1px black solid;">
+  <div class="review" style="border-bottom: 1px black solid; padding-top: 10px;">
     <div>
       <%= review.rating_stars %>
     </div>
@@ -17,3 +17,5 @@
     </div>
   </div>
 <% end %>
+
+  <%= will_paginate @reviews , params: {daterange: @daterange} %>
