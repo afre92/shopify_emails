@@ -2,13 +2,14 @@
 
 class OrderItem < ApplicationRecord
   belongs_to :order
-  # belongs_to :review
   has_one :review, dependent: :destroy
 
   after_create :create_review_obj
 
   def create_review_obj
     review = self.build_review
+    review.shopify_product_id = self.shopify_product_id
+    review.customer_name = self.order.customer_obj.full_name
     review.uuid = SecureRandom.uuid
     review.save
   end

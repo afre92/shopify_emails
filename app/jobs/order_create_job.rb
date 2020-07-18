@@ -24,6 +24,7 @@ class OrderCreateJob < ActiveJob::Base
       # next if order.find_by(shopify_id: item['id'].to_s).present?
       order_item = order.order_items.build
       order_item.shopify_id = item['id'].to_s
+      order_item.shopify_product_id = item['product_id'].to_s
       order_item.variant_id = item['variant_id'].to_s
       order_item.title = item['title']
       order_item.quantity = item['quantity']

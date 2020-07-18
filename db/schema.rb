@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_18_180225) do
+ActiveRecord::Schema.define(version: 2020_07_18_185404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_07_18_180225) do
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "shopify_product_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
   end
 
@@ -96,7 +97,7 @@ ActiveRecord::Schema.define(version: 2020_07_18_180225) do
     t.bigint "order_item_id"
     t.string "uuid", default: ""
     t.datetime "submitted_on"
-    t.string "order_item_shopify_id"
+    t.string "shopify_product_id"
     t.string "customer_name"
     t.index ["email_id"], name: "index_reviews_on_email_id"
     t.index ["order_item_id"], name: "index_reviews_on_order_item_id"

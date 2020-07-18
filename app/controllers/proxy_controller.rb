@@ -8,6 +8,7 @@ class ProxyController < ActionController::Base
     # find id of the product
      # its going to be an id on a div
     # get all reviews for product
+    reviews = @shop.reviews.where(shopify_product_id: params[:id].to_s)
     byebug
   end
 
@@ -24,5 +25,6 @@ class ProxyController < ActionController::Base
       sorted_params = query_hash.collect{ |k, v| "#{k}=#{Array(v).join(',')}" }.sort.join
       calculated_signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), ENV['SHOPIFY_API_SECRET'], sorted_params)
       raise 'Invalid signature' unless ActiveSupport::SecurityUtils.secure_compare(signature, calculated_signature)
+      @shop = Shop.find_by(shopify_domain: query_hash['shop'])
     end
 end
