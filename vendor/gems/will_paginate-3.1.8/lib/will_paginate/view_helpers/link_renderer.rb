@@ -92,9 +92,10 @@ module WillPaginate
           attributes[:rel] = rel_value(target)
           target = url(target)
         end
-        if @options[:domain]
+        if @options[:domain].present?
           attributes[:href] = @options[:domain]+target
         else
+          target.gsub!('/proxy-reviews','/a/s')
           attributes[:href] = target
         end
        

@@ -12,10 +12,6 @@ class ProxyController < ActionController::Base
     render :partial => 'reviews' , locals: {reviews: @reviews}
   end
 
-# 1. get all reviews for the product
-# 2. add html to render reviews sent 
-# 3. 
-
   private
 
     def verify_signature

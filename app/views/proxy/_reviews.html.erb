@@ -17,6 +17,7 @@
     </div>
   </div>
 <% end %>
-
-  <%= will_paginate @reviews , domain: "https://www.#{@shop.shopify_domain}/a/s", params: {daterange: @daterange} %>
+<div id='reviews-pagination'>
+  <%= will_paginate @reviews , params: {daterange: @daterange} %>
+</div>
 <%# use js to prevent default and and make get with url %>

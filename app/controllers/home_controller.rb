@@ -6,7 +6,6 @@ class HomeController < AuthenticatedController
   before_action :set_daterange, only: :index
 
   def index
-    # byebug
     redirect_to onboarding_path unless @shop.onboarding_completed
     @emails_sent = @shop.emails_sent(@daterange)
     @emails_opened = @shop.emails_opened(@daterange)
