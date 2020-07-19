@@ -3,12 +3,12 @@ class Review < ApplicationRecord
   enum review_status: { pending: 0, completed: 1}
   has_one :order, through: :order_item
 
-  def rating_stars
+  def rating_stars(color = '#ffd700')
     total=[] 
     rating.times do |t|
       total << '★' 
     end 
-    return "<span style='color: #ffd700;'>#{total.join('')}</span>".html_safe
+    return "<span style='color:#{color};'>#{total.join('')}</span>".html_safe
   end
 
 end

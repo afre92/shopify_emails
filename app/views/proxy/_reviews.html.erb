@@ -2,7 +2,7 @@
 <% reviews.each do |review| %>
   <div class="review" style="border-bottom: 1px black solid; padding-top: 10px;">
     <div>
-      <%= review.rating_stars %>
+      <%= review.rating_stars(@shop.star_color) %>
     </div>
     <div style="padding-top:10px; padding-bottom: 10px;">
       <div>
