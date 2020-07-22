@@ -8,7 +8,7 @@ class ProxyController < ActionController::Base
     # find id of the product
      # its going to be an id on a div
     # get all reviews for product
-    @reviews = @shop.reviews.where(shopify_product_id: params[:id]).paginate(page: params[:page], per_page: 1)
+    @reviews = @shop.reviews.where(shopify_product_id: params[:id]).paginate(page: params[:page], per_page: 10)
     # @customer
     render :partial => 'reviews' , locals: {reviews: @reviews}
   end

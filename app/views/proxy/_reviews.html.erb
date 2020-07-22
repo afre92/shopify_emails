@@ -43,8 +43,13 @@
         <%= review.customer_name %>
       </div>
     </div>
-    <div style="padding-bottom: 20px;">
+    <div style="">
       <%= review.description %>
+    </div>
+    <div style="padding-bottom: 20px;">
+    <% if review.images.present? %>
+      <%= image_tag(review.images.last) %>
+    <% end %>
     </div>
   </div>
 <% end %>
