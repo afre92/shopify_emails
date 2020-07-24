@@ -47,8 +47,8 @@
       <%= review.description %>
     </div>
     <div style="padding-bottom: 20px;">
-    <% if review.images.present? %>
-      <%= image_tag(review.images.last) %>
+    <% review.images.each do |image| %>
+      <img src='<%="#{ENV["S3_URL"]}#{image.blob.key}"%>' /> 
     <% end %>
     </div>
   </div>
