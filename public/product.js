@@ -36,21 +36,21 @@ function addRatingsBellowPrice(){
   var median = $('#ue-total-review-description').data('reviews-median')
   var reviewsCount = $('#ue-total-review-description').data('reviews-count')
   var template = `<div class="ue-small-rating">
-                    <div class="ue-small-rating-upper" style="width: ${median*10*2}%;">
+                    <div class="ue-rating-upper" style="width: ${median*10*2}%;">
                         <span>★</span>
                         <span>★</span>
                         <span>★</span>
                         <span>★</span>
                         <span>★</span>
                     </div>
-                    <div class="ue-small-rating-lower">
+                    <div class="ue-rating-lower">
                         <span>★</span>
                         <span>★</span>
                         <span>★</span>
                         <span>★</span>
                         <span>★</span>
                     </div>
-                  </div><span> ${median} Based on ${reviewsCount} reviews </span>`
+                  </div><span>  ${median} Based on ${reviewsCount} reviews </span>`
   $('#ue-small-ratings-wrapper').html(template)
 }
 
