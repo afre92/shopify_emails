@@ -28,8 +28,6 @@ function paginationHandler(){
 
 function loadReviewImages(id) {
   var shopifyId = $("#shopify-product-reviews").data('id');
-
-  // getReviews({ id: shopifyId, method: 'reviews' });
 }
 
 function addRatingsBellowPrice(){
@@ -60,9 +58,9 @@ $('body').on('click', '.review-photo',function(e){
   $.get( `${window.location.origin}/a/s`, {review_id: reviewId, method: 'review_images'})
   .done(function(data){
     //TODO: change path to not
-    $('.ue-content').html(data)
-    $('.ue-modal-wrapper').addClass('open');
-    $('.ue-page-wrapper').addClass('ue-blur');
+    $('.ue-review-images-modal').addClass('visible');
+    $('.ue-modal-content').html(data)
+  
     var slideIndex = 0;
     showSlides(slideIndex);
 
