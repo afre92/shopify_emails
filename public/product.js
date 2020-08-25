@@ -2,9 +2,9 @@
 // make sure this only loads on products page
 // Modal initializer
 $('body').on('click','.ue-trigger',function() {
-    $('.ue-modal-wrapper').toggleClass('open');
-    $('.ue-page-wrapper').toggleClass('ue-blur');
-    return false;
+  $('.ue-modal-wrapper').toggleClass('open');
+  $('.ue-page-wrapper').toggleClass('ue-blur');
+  return false;
 });
 
 if ($("#shopify-product-reviews").length > 0) {
@@ -18,11 +18,11 @@ function loadReviews() {
 }
 
 function paginationHandler(){
-  $('body').on('click', 'a.page-link',function(e){
+  $('body').on('click', '.ue-pagination > a',function(e){
     e.preventDefault();
     var searchParams = new URLSearchParams($(this).attr('href'))
     var shopifyId = $("#shopify-product-reviews").data('id');
-    getReviews({ id: shopifyId, page: searchParams.get('page') })
+    getReviews({ id: shopifyId, page: searchParams.get('page'), method: 'reviews' })
   });
 }
 
@@ -74,6 +74,27 @@ $('body').on('click', '.review-photo',function(e){
   })
 })
 
+
+$('body').on('submit', 'form#review-form',function(e){
+  e.preventDefault();
+  var shopifyId = $("#shopify-product-reviews").data('id');
+  $.get( `${window.location.origin}/a/s`, {review: $('form#review-form').serializeArray(),product_id: shopifyId, method: "create_review_from_form"})
+  .done(function(data){
+
+
+    $('#ue-review-form-container').html(`
+    <div class="col-md-12" id="ue-review-submitted-container">
+      <div>
+        <span >THANK YOU FOR YOUR REVIEW !!!</span>
+      </div>
+    </div>`)
+    
+  })
+  .fail(function(){
+    console.log("something failed")
+  })
+})
+
 function getReviews(params){
   $.get( `${window.location.origin}/a/s`, params)
   .done(function(data){
@@ -112,3 +133,7 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
 }
 
+
+$('body').on('click', '#ue-open-review-form-modal',function(e){
+  $('#ue-review-form-container').toggleClass('ue-show');
+})
