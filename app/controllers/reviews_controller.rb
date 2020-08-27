@@ -4,7 +4,7 @@ class ReviewsController < AuthenticatedController
 
   def index
     @exported = params[:exported] ? params[:exported] : false
-    @reviews = @shop.reviews.where(review_status: 'completed', submitted_on: @daterange, exported: @exported).paginate(page: params[:page], per_page: 10)
+    @reviews = @shop.reviews.where(review_status: 'completed').paginate(page: params[:page], per_page: 10)
   end
 
   def show

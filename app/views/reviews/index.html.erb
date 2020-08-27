@@ -83,7 +83,7 @@
       </table>
     </div>
     <div class="paginate center-h">
-       <%= will_paginate @reviews, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, params: { daterange: @daterange, exported: @exported } %>
+       <%= will_paginate @reviews, class: 'reviews-pagination', params: { daterange: @daterange, exported: @exported } %>
     </div>
   </div>
   

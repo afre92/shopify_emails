@@ -78,7 +78,9 @@ $('body').on('click', '.review-photo',function(e){
 $('body').on('submit', 'form#review-form',function(e){
   e.preventDefault();
   var shopifyId = $("#shopify-product-reviews").data('id');
-  $.get( `${window.location.origin}/a/s`, {review: $('form#review-form').serializeArray(),product_id: shopifyId, method: "create_review_from_form"})
+  // debugger
+  
+  $.get( `${window.location.origin}/a/s`, {product_title: $("#shopify-product-reviews").data('title'), review: $('form#review-form').serializeArray(),product_id: shopifyId, method: "create_review_from_form"})
   .done(function(data){
 
 
