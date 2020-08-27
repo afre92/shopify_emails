@@ -9,6 +9,13 @@ class ReviewsController < AuthenticatedController
 
   def show
     @review = @shop.reviews.find(params['id'])
+    byebug
+    # save as customer obj as string. add more 
+    # @customer['first_name']
+    # @customer['last_name']
+    # @customer['default_address']['address1']
+    # @customer['default_address']['address2']
+    # @customer['default_address']['zip']
     @customer = JSON.parse(@review.order.customer)
   end
 
