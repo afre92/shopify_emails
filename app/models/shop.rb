@@ -27,7 +27,17 @@ class Shop < ActiveRecord::Base
   end
 
   def create_script_tag
-    ShopifyAPI::ScriptTag.create(event: 'onload', src: "#{ENV['APP_URL']}product.js")
+    ShopifyAPI::ScriptTag.create(event: 'onload', src: "#{ENV['NON_E']}product.js")
+  end
+
+  def add_reviews_images_modal
+    # get access to link
+    template = '<div class="ue-review-images-modal" style="display: none;">
+        <div>
+          <div class="close ue-trigger"></div>
+          <div class="ue-modal-content"></div>
+        </div>
+      </div>'
   end
 
   def create_price_rule
