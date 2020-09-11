@@ -32,12 +32,31 @@ class Shop < ActiveRecord::Base
 
   def add_reviews_images_modal
     # get access to link
+    themes = ShopifyAPI::Theme.all
+
+    themes.each do |theme|
+      if theme.attributes["role"] == "main"
+        self.update_attribute(:theme_id, themes.first.attributes["id"])
+      end
+    end
+
+    layout = ShopifyAPI::Asset.find('layout/theme.liquid', :params => { theme_id: self.theme_id })
+
+    parsed_layout = Nokogiri::HTML(layout.value)
+
+    body = parsed_layout.at_css "body"
+
     template = '<div class="ue-review-images-modal" style="display: none;">
-        <div>
-          <div class="close ue-trigger"></div>
-          <div class="ue-modal-content"></div>
-        </div>
-      </div>'
+    <div>
+      <div class="close ue-trigger"></div>
+      <div class="ue-modal-content"></div>
+    </div>
+  </div>'
+
+    body.add_next_sibling(template)
+
+
+
   end
 
   def create_price_rule
