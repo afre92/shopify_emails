@@ -10,10 +10,10 @@ class ApplicationController < ActionController::Base
   def format_daterange(daterange)
     if daterange.include?('...')
       from, to = daterange.split('...')
-      return (from.to_datetime.beginning_of_day...to.to_datetime.end_of_day)
+      (from.to_datetime.beginning_of_day...to.to_datetime.end_of_day)
     else
       from, to = daterange.split('-')
-      return (DateTime.strptime(from.remove(' '), '%m/%d/%Y')...DateTime.strptime(to.remove(' '), '%m/%d/%Y').end_of_day)
+      (DateTime.strptime(from.remove(' '), '%m/%d/%Y')...DateTime.strptime(to.remove(' '), '%m/%d/%Y').end_of_day)
     end
   end
 
@@ -22,5 +22,4 @@ class ApplicationController < ActionController::Base
   def allow_shopify_iframe
     response.headers['X-Frame-Options'] = 'ALLOWALL'
   end
-  
 end

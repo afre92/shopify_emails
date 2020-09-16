@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
-
 class TemplatesController < AuthenticatedController
-  before_action :find_store  
+  before_action :find_store
 
   def index
     set_token
     order = @shop.sample_order
-    @thank_you_email = order.emails.build({order: order, email_type: 'thank_you'})
-    @review_email = order.emails.build({order: order, email_type: 'review'})
+    @thank_you_email = order.emails.build(order: order, email_type: 'thank_you')
+    @review_email = order.emails.build(order: order, email_type: 'review')
   end
 
   def edit
@@ -16,7 +15,7 @@ class TemplatesController < AuthenticatedController
   end
 
   def set_token
-    shop_token = @shop.web_token+Date.current.month.to_s
+    shop_token = @shop.web_token + Date.current.month.to_s
     @token = Digest::SHA2.hexdigest shop_token
   end
 

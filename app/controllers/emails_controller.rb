@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EmailsController < AuthenticatedController
   before_action :find_store
   before_action :set_daterange, only: :index
@@ -17,5 +19,4 @@ class EmailsController < AuthenticatedController
     @shop = Shop.find_by(shopify_domain: session[:shopify_domain])
     @view = 'emails'
   end
-
 end

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class ReviewsController < AuthenticatedController
   before_action :find_store
   before_action :set_daterange, only: :index
 
   def index
-    @exported = params[:exported] ? params[:exported] : false
+    @exported = params[:exported] || false
     @reviews = @shop.reviews.where(review_status: 'completed').paginate(page: params[:page], per_page: 10)
   end
 
@@ -15,17 +17,15 @@ class ReviewsController < AuthenticatedController
   def update
     review = @shop.reviews.find(params['id'])
     if review.update(exported: !review.exported)
-      flash[:success] = "Review updated"
+      flash[:success] = 'Review updated'
     else
-      flash[:danger] = "Something is wrong"
+      flash[:danger] = 'Something is wrong'
     end
     redirect_to reviews_path
   end
-
 
   def find_store
     @shop = Shop.find_by(shopify_domain: session[:shopify_domain])
     @view = 'reviews'
   end
-
 end

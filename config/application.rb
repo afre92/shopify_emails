@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 
 module Shopifyv5
   class Application < Rails::Application
-    config.eager_load_paths += %W(#{config.root}/lib)
+    config.eager_load_paths += %W[#{config.root}/lib]
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')

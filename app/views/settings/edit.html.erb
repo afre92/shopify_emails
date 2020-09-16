@@ -124,7 +124,7 @@
 
     </div>
 
-        <div class="row row-bordered">
+    <div class="row row-bordered">
       <div class="col-md-4">
         <p style="font-size: larger; font-weight: 500; color: gray;">
           Time between order placed and sending of "Review" email.
@@ -152,47 +152,49 @@
       </div>
     </div>
 
-  <div class="row row-bordered">
-    <div class="col-md-4">
-      <p style="font-size: larger; font-weight: 500; color: gray;">
-        Time between order placed and sending of "Thank You" email.
-      </p>
-    </div>
-    <div class="card card-user col-md-8">
-      <div class="row">
-        <div class="pr-3 pl-3" style="width: 100%">
-          <div class="input-row settings row ml-0 mr-0">
-            <div class="col-md-7 pl-0">
-              <span class="form-label" > 
-                <label class="pr-1">
-                Time to send "Thank You" Email 
-                </label>
-                ( <span id="thank-you-range-value" class="pr-1"></span>Minutes )
-              </span>
-            </div>
-            <div class="col-md-5 pr-0">
-              <div class="slidecontainer float-right">
-                <%= f.text_field :thank_you_interval, min: '1', max: '60', class: 'bar-slider', type: 'range'  %>
+    <div class="row row-bordered">
+      <div class="col-md-4">
+        <p style="font-size: larger; font-weight: 500; color: gray;">
+          Time between order placed and sending of "Thank You" email.
+        </p>
+      </div>
+      <div class="card card-user col-md-8">
+        <div class="row">
+          <div class="pr-3 pl-3" style="width: 100%">
+            <div class="input-row settings row ml-0 mr-0">
+              <div class="col-md-7 pl-0">
+                <span class="form-label" > 
+                  <label class="pr-1">
+                  Time to send "Thank You" Email 
+                  </label>
+                  ( <span id="thank-you-range-value" class="pr-1"></span>Minutes )
+                </span>
+              </div>
+              <div class="col-md-5 pr-0">
+                <div class="slidecontainer float-right">
+                  <%= f.text_field :thank_you_interval, min: '1', max: '60', class: 'bar-slider', type: 'range'  %>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
     <div class="row row-bordered">
     <div class="col-md-4">
       <p style="font-size: larger; font-weight: 500; color: gray;">
-        Discount.
+        Discount code given to customer after it has submitted images.
       </p>
     </div>
     <div class="card card-user col-md-8">
       <%= f.fields_for :price_rule do |ff| %>
       <div class="row">
-        <div class="pr-3 pl-3" style="width: 100%">
+        <div class="" style="width: 100%">
           <div class="input-row settings row ml-0 mr-0">
-            <div class="col-md-4 pl-0">
+            <div class="col-md-5 pr-3 pl-3">
+              <span class="form-label" > <label>Discounts Status</label> </span>
+            
               <div class="toggle-group form-group">
                 <%= ff.check_box :active, class: 'd-none', id: "active" %>
                   <label for="active">
@@ -210,7 +212,7 @@
                 <%= ff.select :value_type, options_for_select([["Fixed Amount", "fixed_amount"],["Percentage", "percentage"]], ff.object.value_type), {}, class: 'form-control'  %>
               </div>
             </div>
-            <div class="col-md-4 pr-0 form-group">
+            <div class="col-md-3 pr-0 form-group">
               <%= ff.text_field :value, class: 'form-control', type: 'number', value: ff.object.value.abs %>
             </div>
           </div>
@@ -272,20 +274,13 @@
   </div>
   
 </div> <%# end of main row %>
-
-
-
-
   <div class="row col-md-12">
     <div class="col-md-4"></div>
-  <div class=" col-md-8 text-center">
-    <div class="update ml-auto mr-auto">
-      <button type="submit" class="btn btn-primary btn-round mb-4">Save Settings</button>
-    </div>
+    <div class=" col-md-8 text-center">
+      <div class="update ml-auto mr-auto">
+        <button type="submit" class="btn btn-primary btn-round mb-4">Save Settings</button>
+      </div>
   </div>
-
-
-
 <% end %>
 
 

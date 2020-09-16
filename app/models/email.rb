@@ -6,10 +6,10 @@ class Email < ApplicationRecord
   has_one :tracking_pixel, dependent: :destroy
 
   before_create :check_limit_for_order
-  after_create :add_tracking_pixel  
+  after_create :add_tracking_pixel
 
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
-  enum email_type: { thank_you: 0, review: 1}
+  enum email_type: { thank_you: 0, review: 1 }
 
   attr_reader :shop, :order, :template
 
@@ -20,7 +20,7 @@ class Email < ApplicationRecord
         each do |email|
           opened += 1 if email.tracking_pixel.views > 0
         end
-        return opened
+        opened
       else
         0
       end
@@ -51,7 +51,7 @@ class Email < ApplicationRecord
     product_name = order.order_items.order('id ASC').first.title if @email_type == 'review'
     customer = order.customer_obj
     parsed_html = ERB.new(html)
-    return parsed_html.result(binding)
+    parsed_html.result(binding)
   end
 
   def populate_html
@@ -60,8 +60,8 @@ class Email < ApplicationRecord
       parsed_html = parse_html
     else
       parsed_template = parse_html
-      parsed_review_form = parse_html(File.read(Rails.root + "app/views/reviews/_review_form.html.erb"))
-  
+      parsed_review_form = parse_html(File.read(Rails.root + 'app/views/reviews/_review_form.html.erb'))
+
       # inject review partial into template with nokogiri
       parsed_template = Nokogiri::HTML(parsed_template)
       div = parsed_template.css('div.email-row-container').last
@@ -70,12 +70,12 @@ class Email < ApplicationRecord
       parsed_html = parsed_template.to_html
     end
 
-    return parsed_html
+    parsed_html
   end
 
   def template_type
-    template = Template.find(self.template_id)
-    return template.template_type
+    template = Template.find(template_id)
+    template.template_type
   end
 
   def check_limit_for_order
@@ -84,12 +84,8 @@ class Email < ApplicationRecord
 
   def add_tracking_pixel
     tracking_pixel = TrackingPixel.create(template_id: template_id, shop_id: shop_id, email_id: id)
-    body_index = self.html.index('</body>')
-    self.html = self.html.insert(body_index, tracking_pixel.conversion_tag)
+    body_index = html.index('</body>')
+    self.html = html.insert(body_index, tracking_pixel.conversion_tag)
     save
   end
-
 end
-
-
-

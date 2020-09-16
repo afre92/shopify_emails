@@ -1,9 +1,9 @@
 # frozen_string_literal: true
-require "securerandom"
+
+require 'securerandom'
 require 'nokogiri'
 
 class OrderCreateJob < ActiveJob::Base
-
   def perform(shop_domain:, webhook:)
     shop = Shop.find_by(shopify_domain: shop_domain)
 
@@ -33,7 +33,7 @@ class OrderCreateJob < ActiveJob::Base
 
     # Create Thank You Email
     if shop.thank_you_status == 1
-      thank_you_email = order.emails.build({order: order, email_type: 'thank_you'})
+      thank_you_email = order.emails.build(order: order, email_type: 'thank_you')
       if thank_you_email.save
         puts "Thank you email for Order:#{order.id} SUCCESSFULLY created"
       else
@@ -43,7 +43,7 @@ class OrderCreateJob < ActiveJob::Base
 
     # Create Review Email
     if shop.review_status == 1
-      review_email = order.emails.build({order: order, email_type: 'review'})
+      review_email = order.emails.build(order: order, email_type: 'review')
       if review_email.save
         puts "Review email for Order:#{order.id} SUCCESSFULLY created."
       else

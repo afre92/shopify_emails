@@ -11,11 +11,10 @@ class Order < ApplicationRecord
   def customer_obj
     c = JSON.parse(customer, object_class: OpenStruct)
     c['full_name'] = c['default_address']['name']
-    return c
+    c
   end
 
   def first_item
-    return order_items.order('id ASC').first
+    order_items.order('id ASC').first
   end
-
 end
