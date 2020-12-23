@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ShopDefaults
+module StoreDefaults
   def customer_json
     json = '{"id":2871225188422,"email":"info@example.com","accepts_marketing":false,"created_at":"2020-04-02T18:01:37-04:00","updated_at":"2020-05-13T19:25:28-04:00","first_name":"John","last_name":"Smith","orders_count":0,"state":"disabled","total_spent":"0.00","last_order_id":null,"note":null,"verified_email":true,"multipass_identifier":null,"tax_exempt":false,"phone":null,"tags":"","last_order_name":null,"currency":"USD","accepts_marketing_updated_at":"2020-04-02T18:01:38-04:00","marketing_opt_in_level":null,"admin_graphql_api_id":"gid://shopify/Customer/2871225188422","default_address":{"id":3077169905734,"customer_id":2871225188422,"first_name":"John","last_name":"Smith","company":null,"address1":"123 Main St ","address2":"","city":"Miami","province":"Florida","country":"United States","zip":"33137","phone":null,"name":"John Smith","province_code":"FL","country_code":"US","country_name":"United States","default":true}}'
     json
