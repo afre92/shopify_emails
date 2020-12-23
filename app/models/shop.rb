@@ -2,7 +2,9 @@
 
 class Shop < ActiveRecord::Base
   include ShopifyApp::SessionStorage
+  # ShopifyApp::ShopSessionStorage
   include ShopDefaults
+
   has_many :templates, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :emails, dependent: :destroy
@@ -10,7 +12,7 @@ class Shop < ActiveRecord::Base
   has_one :price_rule, dependent: :destroy
   accepts_nested_attributes_for :price_rule
 
-  before_create :create_unique_token
+  # before_create :create_unique_token
   after_create :handle_after_create
 
   enum subscription_type: { free: 0, basic: 1, pro: 2 }
@@ -139,12 +141,10 @@ class Shop < ActiveRecord::Base
     save
   end
 
-  def create_unique_token
-    loop do
-      random_token = SecureRandom.urlsafe_base64(nil, false)
-      return (self.web_token = random_token) unless Shop.exists?(web_token: random_token)
-    end
-  end
+  # def create_unique_token
+  #   random_token = SecureRandom.urlsafe_base64(nil, false)
+  #   self.web_token = random_token
+  # end
 
   def api_version
     ShopifyApp.configuration.api_version
