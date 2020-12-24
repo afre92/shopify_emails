@@ -19,6 +19,8 @@ class OrderCreateJob < ActiveJob::Base
     order.customer = webhook['customer'].to_json
     order.save
 
+    puts "PACA! #{order.id}"
+
     # Create Order Items
     webhook['line_items'].each do |item|
       # next if order.find_by(shopify_id: item['id'].to_s).present?
