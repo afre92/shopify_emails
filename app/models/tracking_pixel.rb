@@ -3,7 +3,7 @@
 class TrackingPixel < ApplicationRecord
   belongs_to :email
 
-  # before_create :create_unique_token
+  before_create :create_unique_token
 
   def increment_views
     update_attribute(:views, views + 1)
