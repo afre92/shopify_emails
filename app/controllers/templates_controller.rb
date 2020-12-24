@@ -5,10 +5,10 @@ class TemplatesController < AuthenticatedController
   before_action :find_template, only: :update
 
   def index
-    set_token
-    order = @shop.sample_order
-    @thank_you_email = order.emails.build(order: order, email_type: 'thank_you')
-    @review_email = order.emails.build(order: order, email_type: 'review')
+    # set_token
+    # order = @shop.sample_order
+    @thank_you_template = @shop.templates.find_by(template_type: 'thank_you')
+    @review_template = @shop.templates.find_by(template_type: 'review')
   end
 
   def edit
