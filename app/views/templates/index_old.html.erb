@@ -1,0 +1,151 @@
+
+  <div class="row">
+    <div class="col-md-4">
+      <h5>Review Template</h5>
+      <p class="side-info">
+        This is how your Review email will look like.
+      </p>
+      <p style="margin-top: 20px;padding-top: 10px;" class="side-info">
+        Your store info (like store name, address, phone number, etc ) can be modified at any time. Please click on <%= link_to 'Settings', settings_path, class: 'primary' %> to change them.
+      </p>
+    </div>
+    <div class="col-md-8">
+      <div class="col-md-12 row px-0 mx-0">
+        <div class="col-md-6 pl-0">
+          <div class="card ">
+            <div class="input-row">
+                <span class="form-label" >From: </span><%= @review_email.from %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 pr-0"> 
+          <div class="card">
+            <span class="input-row"> 
+              <span class="form-label">Reply to: </span> <%= @review_email.template.reply_to %>
+            </span>
+          </div>
+      </div>
+    </div>
+
+    <div class="card card-user">
+      <div class="row">
+        <div class="pr-3 pl-3" style="width: 100%">
+          <div class="input-row settings row ml-0 mr-0">
+            <div><span class="form-label" >Subject: </span><%= @review_email.subject %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-user">
+      <div class="">
+        <div class="input-row" style="border-top: none;" id='review-template-content'>
+          <div style="position: relative;">
+              <%= @review_email.html.html_safe %>
+              <div class="inner-div-overlay">
+              </div>
+          </div>
+        </div>
+      </div>
+        <div class="input-row" style="border-top: 1px solid #e4e4e4; padding: 10px 20px;">
+          <div class="card-footer">
+              <div class="row">
+                <div class="update edit-template col-6">
+                  <%= link_to 'Edit Shop Info', settings_path, class: "btn btn-primary btn-round"%>
+                </div>
+                <div class="update edit-template col-6 text-right row">
+                  <div class="col-md-6">
+                  <%= link_to 'Help', '#', class: "btn btn-default btn-round" %>
+                  </div>
+                  <div class="col-md-6">
+                  <%= link_to 'Edit Template', "#{ENV['NON_E']}templates/edit?shop=#{@shop.shopify_domain}&token=#{@token}&type=1", class: "btn btn-primary btn-round" ,target: "_blank" %>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>  
+      </div>
+    </div>
+</div>
+  <div class="row pt-5">
+    <div class="col-md-4">
+      <h5>Thank You Template</h5>
+      <p class="side-info">
+        This is how your Thank You email will look like.
+      </p>
+      <p style="margin-top: 20px;padding-top: 10px;" class="side-info">
+        Your store info (like store name, address, phone number, etc ) can be modified at any time. Please click on <%= link_to 'Settings', settings_path, class: 'primary' %> to change them.
+      </p>
+    </div>
+    <div class="col-md-8">
+      <div class="col-md-12 row px-0 mx-0">
+        <div class="col-md-6 pl-0">
+          <div class="card ">
+            <div class="input-row">
+                <span class="form-label" >From: </span><%= @thank_you_email.from %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 pr-0"> 
+          <div class="card">
+            <span class="input-row"> 
+              <span class="form-label">Reply to: </span> <%= @thank_you_email.template.reply_to%>
+            </span>
+          </div>
+      </div>
+    </div>
+
+    <div class="card card-user">
+      <div class="row">
+        <div class="pr-3 pl-3" style="width: 100%">
+          <div class="input-row settings row ml-0 mr-0">
+            <div><span class="form-label" >Subject: </span><%= @thank_you_email.subject %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-user">
+      <div class="row">
+        <div class="input-row" style="border-top: none; position: relative;" id='thank-you-template-content'>
+          <%= @thank_you_email.html.html_safe %>
+          <div class="inner-div-overlay">
+          </div>
+        </div>
+      </div>
+        <div class="input-row" style="border-top: 1px solid #e4e4e4; padding: 10px 20px;">
+          <div class="card-footer">
+              <div class="row">
+                <div class="update edit-template col-6">
+                  <%= link_to 'Edit Shop Info', settings_path, class: "btn btn-primary btn-round"%>
+                </div>
+                <div class="update edit-template col-6 text-right row">
+                  <div class="col-md-6">
+                  <%= link_to 'Help', '#', class: "btn btn-default btn-round" %>
+                  </div>
+                  <div class="col-md-6">
+                  <%= link_to 'Edit Template', "#{ENV['NON_E']}templates/edit?shop=#{@shop.shopify_domain}&token=#{@token}&type=0", class: "btn btn-primary btn-round" ,target: "_blank" %>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>    
+      </div>
+    </div>
+  </div>
+
+  
+
+
+<script>
+  $('#review-template-content, #thank-you-template-content').on('click', 'a, button', function(e) {
+    e.preventDefault();
+  })
+</script>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    ShopifyApp.ready(function(){
+      ShopifyApp.Bar.initialize({ title: "Templates" });
+    });
+  </script>
+<% end %>

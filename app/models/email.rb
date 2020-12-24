@@ -64,6 +64,7 @@ class Email < ApplicationRecord
 
       # inject review partial into template with nokogiri
       parsed_template = Nokogiri::HTML(parsed_template)
+      #replacing the default for the custom
       div = parsed_template.css('div.email-row-container').last
       div.add_next_sibling(parsed_review_form)
 
