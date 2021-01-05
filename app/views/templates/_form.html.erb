@@ -10,14 +10,14 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :title %>
+    <%= f.label :email_title %>
     <%= f.text_field :title, style: {width: '100%'}, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :body %>
+    <%= f.label :email_body %>
     <%= f.text_area :body, style: {width: '100%'}, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.submit "Save", data: {confirm: 'Are you sure you want to save this template' }, class: 'btn btn-primary btn-round' %>
+    <%= f.submit "Save Template", data: {confirm: 'Are you sure you want to save this template' }, class: 'btn btn-primary btn-round' %>
   </div>
 <% end %>
