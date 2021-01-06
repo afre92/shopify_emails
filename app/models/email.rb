@@ -50,20 +50,24 @@ class Email < ApplicationRecord
   def parse_html(html = template.html)
     product_name = order.order_items.order('id ASC').first.title if @email_type == 'review'
     customer = order.customer_obj
+    # get template 
     parsed_html = ERB.new(html)
+    # binding does parse variables into real values
     parsed_html.result(binding)
   end
 
+  # I might be able to remove this method
   def populate_html
     parsed_html = ''
-    if @email_type == 'thank_you'
-      parsed_html = parse_html
+    if @email_type == 'thank_you' # there is no form injected needed
+      parsed_html = parse_html # this gives me the parsed and rendered form
     else
-      parsed_template = parse_html
+      parsed_template = parse_html # this gives me the parsed and rendered form
       parsed_review_form = parse_html(File.read(Rails.root + 'app/views/reviews/_review_form.html.erb'))
 
       # inject review partial into template with nokogiri
       parsed_template = Nokogiri::HTML(parsed_template)
+
       #replacing the default for the custom
       div = parsed_template.css('div.email-row-container').last
       div.add_next_sibling(parsed_review_form)
