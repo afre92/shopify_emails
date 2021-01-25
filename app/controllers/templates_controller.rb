@@ -32,7 +32,7 @@ class TemplatesController < AuthenticatedController
   private
 
   def template_params
-    params.require(:template).permit(:from, :subject, :reply_to, :body, :html)
+    params.require(:template).permit(:from, :subject, :reply_to, :body, :html, :title)
   end
 
   def find_store
