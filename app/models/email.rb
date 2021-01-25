@@ -44,39 +44,47 @@ class Email < ApplicationRecord
     self.scheduled_time = order.shopify_created_at + (@email_type == 'review' ?
        shop.review_interval.days :
         shop.thank_you_interval.minutes)
-    self.html = populate_html
+    self.html = paca_test
+    # the plan is to render the template object on the email defaults html
+      #get email data and bind it with template data
   end
 
-  def parse_html(html = template.html)
-    product_name = order.order_items.order('id ASC').first.title if @email_type == 'review'
-    customer = order.customer_obj
-    # get template 
-    parsed_html = ERB.new(html)
-    # binding does parse variables into real values
-    parsed_html.result(binding)
+
+  def paca_test
+    # get default template and order info to craft email
+    return File.read(Rails.root + 'app/views/reviews/_review_form.html.erb')
   end
 
-  # I might be able to remove this method
-  def populate_html
-    parsed_html = ''
-    if @email_type == 'thank_you' # there is no form injected needed
-      parsed_html = parse_html # this gives me the parsed and rendered form
-    else
-      parsed_template = parse_html # this gives me the parsed and rendered form
-      parsed_review_form = parse_html(File.read(Rails.root + 'app/views/reviews/_review_form.html.erb'))
+  # def parse_html(html = template.html)
+  #   product_name = order.order_items.order('id ASC').first.title if @email_type == 'review'
+  #   customer = order.customer_obj
+  #   # get template 
+  #   parsed_html = ERB.new(html)
+  #   # binding does parse variables into real values
+  #   parsed_html.result(binding)
+  # end
 
-      # inject review partial into template with nokogiri
-      parsed_template = Nokogiri::HTML(parsed_template)
+  # # I might be able to remove this method
+  # def populate_html
+  #   parsed_html = ''
+  #   if @email_type == 'thank_you' # there is no form injected needed
+  #     parsed_html = parse_html # this gives me the parsed and rendered form
+  #   else
+  #     parsed_template = parse_html # this gives me the parsed and rendered form
+  #     parsed_review_form = parse_html(File.read(Rails.root + 'app/views/reviews/_review_form.html.erb'))
 
-      #replacing the default for the custom
-      div = parsed_template.css('div.email-row-container').last
-      div.add_next_sibling(parsed_review_form)
+  #     # inject review partial into template with nokogiri
+  #     parsed_template = Nokogiri::HTML(parsed_template)
 
-      parsed_html = parsed_template.to_html
-    end
+  #     #replacing the default for the custom
+  #     div = parsed_template.css('div.email-row-container').last
+  #     div.add_next_sibling(parsed_review_form)
 
-    parsed_html
-  end
+  #     parsed_html = parsed_template.to_html
+  #   end
+
+  #   parsed_html
+  # end
 
   def template_type
     template = Template.find(template_id)
