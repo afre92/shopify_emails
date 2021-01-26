@@ -29,6 +29,23 @@ class TemplatesController < AuthenticatedController
     @token = Digest::SHA2.hexdigest shop_token
   end
 
+  def preview
+
+  #   product_name = order.order_items.order('id ASC').first.title if @email_type == 'review'
+  #   customer = order.customer_obj
+  #   # get template 
+  #   parsed_html = ERB.new(html)
+  #   # binding does parse variables into real values
+  #   parsed_html.result(binding)
+
+
+    puts "PACA was here"
+    @order = @shop.orders.first
+    # html = File.read(Rails.root + 'app/views/reviews/_review_form.html.erb')
+    # @parsed_html = ERB.new(html)
+    # @parsed_html.result(binding)
+  end
+
   private
 
   def template_params

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   patch '/settings', to: 'settings#update'
   get '/pricing', to: 'settings#pricing'
   resources :templates
+  get '/preview-template', to: 'templates#preview', as: 'preview_template'
   get '/convert/:token', to: 'analytics#convert'
   root to: 'home#index'
   get '/activatecharge', to: 'settings#activate_charge'

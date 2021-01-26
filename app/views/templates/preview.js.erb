@@ -1,0 +1,5 @@
+
+// paste irb on it 
+$('div#exampleModal div div.modal-body').html("<%= escape_javascript(render :partial =>'reviews/review_form', :locals => { order: @order, shop: @shop } ) %>");
+$("#exampleModal").modal('show');
+// render all data and posted in the modal
