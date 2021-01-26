@@ -1,7 +1,9 @@
-<% styles = {} 
+<% 
+  styles = {} 
  styles['button'] = "line-height: 1.35em;font-size: 0.8571em;font-family: 'montserrat', 'Helvetica Neue', Arial, sans-serif;border:0;padding: 10px!important;border-radius: 5px !important;color: white !important;font-weight: 600 !important; text-decoration: none;background-color: #{shop.form_button_color};"
  styles['stars'] = "font-size:17px;line-height:23px; color:#{shop.star_color};padding-right: .25rem;"
- styles['links'] = "color: #{shop.default_link_color}" %>
+ styles['links'] = "color: #{shop.default_link_color}" 
+ %>
 
 
 <!doctype html>
@@ -117,25 +119,96 @@
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
                     <tr>
                       <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi there,</p>
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"><%= order.email %></p>
-                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
-                          <tbody>
-                            <tr>
-                              <td align="left" style="font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;">
-                                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
-                                  <tbody>
-                                    <tr>
-                                      <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; border-radius: 5px; text-align: center;"> <a href="http://htmlemail.io" target="_blank" style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; border-color: #3498db;">Call To Action</a> </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">This is where the form will go</p>
-                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Good luck! Hope it works.</p>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"><%= template.title %></p>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"><%= template.html %></p>
+                        <form action='<%="#{ENV['NON_E']}review-submission/dfasdfsd"%>'>
+                          <div style="text-align: center;" class="rating-stars-container">
+                            <input type="radio" id="five" name="review[rating]" value="5">
+                            <label for="five"><span style="<%=styles['stars']%>">★★★★★</span></label>
+
+                            <input type="radio" id="four" name="review[rating]" value="4">
+                            <label for="four"><span style="<%=styles['stars']%>">★★★★</span></label>
+
+                            <input type="radio" id="three" name="review[rating]" value="3">
+                            <label for="three"><span style="<%=styles['stars']%>">★★★</span></label>
+
+                            <input type="radio" id="two" name="review[rating]" value="2">
+                            <label for="tow"><span style="<%=styles['stars']%>">★★</span></label>
+
+                            <input type="radio" id="one" name="review[rating]" value="1">
+                            <label for="one"><span style="<%=styles['stars']%>">★</span></label>
+                          </div>
+                            <br/>
+                            <label >Title of Review</label><br>
+                            <input type="text" id="title" name="review[title]" style="width: 100%; height: 25px; margin-bottom: 10px; font-size: 16px !important" required maxlength="70"><br>
+                            <label >How was your overall experience using the item?</label><br>
+                            <textarea id="description" name="review[description]" style="width: 100%; min-height:100px; font-size: 16px !important;" required maxlength="200"></textarea>
+                            <input type="hidden" id="review_status" name="review[review_status]" value="in_progress" style="width: 100%; height: 25px; margin-bottom: 10px"><br>
+                            <br><br>
+                            <div style="text-align: center">
+                              <button type="submit" class="btn button submit-review-btn" style="<%=styles['button']%>" >SUBMIT YOUR REVIEW</button>
+                            </div>
+                        </form>
+
+                        <%# Option to review other items in the order: I might have leave this for later %>
+                        <% if order.order_items.length > 1 %>
+                          <div style="width: 100%; text-align:center;">
+                            <strong style="color:#444444!important">Write a review for other products</strong>
+                            <% order.order_items.order('id ASC').each_with_index do |item, index| %>
+                            <%# <% next if item.id == first_item.id %>
+                              <div>
+                                <br>
+                                <p style="margin-bottom: 1.5em;"><%= item.title %></p>
+                                <a href='<%="#{ENV['NON_E']}review/#{item.review.uuid}/edit"%>' class="submit-review-btn button" style="<%=styles['button']%>">WRITE A REVIEW</a>
+                              <div>
+                              
+                            <% end %>
+                            <br>
+                          </div>
+                        <% end %>
+
+                        <div class="form-links" style="width: 100%;text-align:center;">
+                          <br>
+                          <strong style="color:#444444!important">Having trouble with this form?</strong>
+                          <br>
+                          <a href='<%="#{ENV['NON_E']}review/asdfasdfasd/edit"%>' class="link-color" target="_blank" style="<%= styles['links'] %>" >Submit your review online</a>
+                          <br>
+                        </div>
+
+                        <div class="form-links" style="width: 100%;text-align:center;">
+                          <br>
+                          <strong style="color:#444444!important">How do I get details about this order?</strong>
+                          <br>
+                          <a href='<%= order.order_status_url %>' target="_blank" class="link-color" style="<%= styles['links'] %>" >Get up-to-date information about order <%= order.order_number %></a>
+                          <br>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-links" style="width: 100%;text-align: center">
+                          <br>
+                          <% if shop.facebook.present? || shop.instagram.present? || shop.twitter.present?  %>
+                            <strong style="color:#444444!important">Lets keep in touch!</strong>
+                            <br>
+                          <% end %>
+                          <br>
+                          <% if shop.facebook.present? %>
+                            <a href="https://www.facebook.com/<%= shop.facebook %>" style="text-decoration: none;">
+                              <img src="https://ci6.googleusercontent.com/proxy/yKrS8mYn3LmKMibnhZLzjIzGYwNdbYtpaoy1OCV2ajjRi6GVVuqvEg_s3LIoeq9YzMYEa-wkP_RlNhWpVseABMTUkDeJX_cf=s0-d-e1-ft" style="width: 40px;">
+                            </a>
+                          <% end %>
+                          <% if shop.instagram.present? %>
+                            <a href="https://www.instagram.com/<%= shop.instagram %>" style="text-decoration: none;">
+                              <img src="https://ci5.googleusercontent.com/proxy/Z3-F3FDmOOsihszuxiPP44syKwWfzuqpwbXewjPSFQHheRdZkc610wOynfbXbr9S4FP76ybONMD7Lmr5NBDK9oKyJ4VRSyu_3g=s0-d-e1-ft" style="width: 40px;">
+                            </a>
+                          <% end %>
+                          <% if shop.twitter.present? %>
+                            <a href="https://www.twitter.com/<%= shop.twitter %>" style="text-decoration: none;">
+                              <img src="https://ci3.googleusercontent.com/proxy/h2Lsa9Cp6aov1E8FPU0mmhC7mwEkKSX8ywelRXeq93ugnCCWwN8NH3vi6kXNMP3OKgzpJ88ZggzQRIA9bI3Svx_yoW8E1BI=s0-d-e1-ft" style="width: 40px;">
+                            </a>
+                          <% end %>
+                          <br>
+                        </div>
+                      </div>
                       </td>
                     </tr>
                   </table>

@@ -41,6 +41,7 @@ class TemplatesController < AuthenticatedController
 
     puts "PACA was here"
     @order = @shop.orders.first
+    @template = @shop.templates.last
     # html = File.read(Rails.root + 'app/views/reviews/_review_form.html.erb')
     # @parsed_html = ERB.new(html)
     # @parsed_html.result(binding)
