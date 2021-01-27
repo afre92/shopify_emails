@@ -30,21 +30,8 @@ class TemplatesController < AuthenticatedController
   end
 
   def preview
-
-  #   product_name = order.order_items.order('id ASC').first.title if @email_type == 'review'
-  #   customer = order.customer_obj
-  #   # get template 
-  #   parsed_html = ERB.new(html)
-  #   # binding does parse variables into real values
-  #   parsed_html.result(binding)
-
-
-    puts "PACA was here"
     @order = @shop.orders.first
     @template = @shop.templates.last
-    # html = File.read(Rails.root + 'app/views/reviews/_review_form.html.erb')
-    # @parsed_html = ERB.new(html)
-    # @parsed_html.result(binding)
   end
 
   private

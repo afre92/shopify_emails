@@ -6,7 +6,7 @@ class Email < ApplicationRecord
   has_one :tracking_pixel, dependent: :destroy
 
   before_create :check_limit_for_order
-  after_create :add_tracking_pixel
+  # after_create :add_tracking_pixel
 
   enum was_sent: { not_sent: 0, sent: 1, error: 2 }
   enum email_type: { thank_you: 0, review: 1 }
@@ -52,7 +52,13 @@ class Email < ApplicationRecord
 
   def paca_test
     # get default template and order info to craft email
-    return File.read(Rails.root + 'app/views/reviews/_review_form.html.erb')
+    html = File.read(Rails.root + 'app/views/reviews/_review_form.html.erb')
+    shop= @shop
+    order = @order
+    template = @template
+    parsed_html = ERB.new(html)
+    yay = parsed_html.result(binding)
+    return yay
   end
 
   # def parse_html(html = template.html)
