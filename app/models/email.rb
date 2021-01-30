@@ -52,13 +52,18 @@ class Email < ApplicationRecord
 
   def paca_test
     # get default template and order info to craft email
-    html = File.read(Rails.root + 'app/views/reviews/_review_form.html.erb')
-    shop= @shop
-    order = @order
-    template = @template
+    html      = nil
+    shop      = @shop
+    order     = @order
+    template  = @template
+
+    if @email_type == 'review'
+      html = File.read(Rails.root + 'app/views/reviews/_review_form.html.erb')
+    else
+      html = File.read(Rails.root + 'app/views/reviews/_thank_you_form.html.erb')
+    end
     parsed_html = ERB.new(html)
-    yay = parsed_html.result(binding)
-    return yay
+    return parsed_html.result(binding)
   end
 
   # def parse_html(html = template.html)
