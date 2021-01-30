@@ -30,8 +30,8 @@ class TemplatesController < AuthenticatedController
   end
 
   def preview
-    @order = @shop.orders.first
-    @template = @shop.templates.last
+    @order = @shop.sample_order
+    @template = @shop.templates.find_by(template_type: params[:template_type])
   end
 
   private

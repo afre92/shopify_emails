@@ -44,13 +44,13 @@ class Email < ApplicationRecord
     self.scheduled_time = order.shopify_created_at + (@email_type == 'review' ?
        shop.review_interval.days :
         shop.thank_you_interval.minutes)
-    self.html = paca_test
+    self.html = generate_email_html
     # the plan is to render the template object on the email defaults html
       #get email data and bind it with template data
   end
 
 
-  def paca_test
+  def generate_email_html
     # get default template and order info to craft email
     html      = nil
     shop      = @shop
@@ -65,37 +65,6 @@ class Email < ApplicationRecord
     parsed_html = ERB.new(html)
     return parsed_html.result(binding)
   end
-
-  # def parse_html(html = template.html)
-  #   product_name = order.order_items.order('id ASC').first.title if @email_type == 'review'
-  #   customer = order.customer_obj
-  #   # get template 
-  #   parsed_html = ERB.new(html)
-  #   # binding does parse variables into real values
-  #   parsed_html.result(binding)
-  # end
-
-  # # I might be able to remove this method
-  # def populate_html
-  #   parsed_html = ''
-  #   if @email_type == 'thank_you' # there is no form injected needed
-  #     parsed_html = parse_html # this gives me the parsed and rendered form
-  #   else
-  #     parsed_template = parse_html # this gives me the parsed and rendered form
-  #     parsed_review_form = parse_html(File.read(Rails.root + 'app/views/reviews/_review_form.html.erb'))
-
-  #     # inject review partial into template with nokogiri
-  #     parsed_template = Nokogiri::HTML(parsed_template)
-
-  #     #replacing the default for the custom
-  #     div = parsed_template.css('div.email-row-container').last
-  #     div.add_next_sibling(parsed_review_form)
-
-  #     parsed_html = parsed_template.to_html
-  #   end
-
-  #   parsed_html
-  # end
 
   def template_type
     template = Template.find(template_id)
