@@ -1,16 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'charges/create'
-  get 'charges/cancel'
-  get 'charges/activate'
   # get '/settings', to: 'settings#edit', as: 'settings'
   # patch '/settings', to: 'settings#update'
   # get '/pricing', to: 'settings#pricing'
   # resources :templates
   # get '/preview-template/:template_type', to: 'templates#preview', as: 'preview_template'
   # get '/convert/:token', to: 'analytics#convert'
-  # root to: 'home#index'
+  root to: 'home#index'
   # get '/activatecharge', to: 'settings#activate_charge'
   # get 'create-charge/:id', to: 'settings#create_recurring_application_charge', as: 'create_charge'
   # get 'cancel-charge', to: 'settings#cancel_charge', as: 'cancel_charge'
@@ -24,13 +21,13 @@ Rails.application.routes.draw do
   # get '/complete-onboarding', to: 'settings#complete_onboarding', as: 'complete_onboarding'
   # get '/onboarding', to: 'home#onboarding', as: 'onboarding'
   # get '/dashboard', to: 'home#index'
-
+# root '/embedded'
   
   scope '/embedded' do
     # get '/settings', to: 'settings#edit', as: 'settings'
     # patch '/settings', to: 'settings#update'
 
-    resource :settings, only: [:edit, :update]
+    resource :settings, only: [:edit, :update] # pricing needs to be added
     resources :emails, only: [:index, :show]
     resources :reviews, only: [:index, :show]
 
@@ -38,11 +35,18 @@ Rails.application.routes.draw do
       get 'preview', to: 'templates#preview'
     end
 
-    resources :charges do
+    resources :charges, only: :create do
       get 'activate', to: 'charges#activate'
-      get 'create', to: 'charges#create'
       get 'cancel', to: 'charges#cancel'
     end
+
+
+    # resources :home, only: :index do 
+    get 'onboarding', to: 'home#onboarding'
+    get 'complete-onboarding', to: 'home#complete_onboarding'
+    # end
+
+    # get ''
 
     
 
@@ -63,8 +67,8 @@ Rails.application.routes.draw do
     # get '/email/:id', to: 'emails#show', as: 'email' -d
   
     # get '/complete-onboarding', to: 'settings#complete_onboarding', as: 'complete_onboarding'
-    get '/onboarding', to: 'home#onboarding', as: 'onboarding'
-    get '/dashboard', to: 'home#index'
+    # get '/onboarding', to: 'home#onboarding', as: 'onboarding'
+    # get '/dashboard', to: 'home#index'
   end
 
   scope '/non-embedded' do
