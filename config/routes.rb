@@ -1,27 +1,80 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get '/settings', to: 'settings#edit', as: 'settings'
-  patch '/settings', to: 'settings#update'
-  get '/pricing', to: 'settings#pricing'
-  resources :templates
-  get '/preview-template/:template_type', to: 'templates#preview', as: 'preview_template'
-  get '/convert/:token', to: 'analytics#convert'
-  root to: 'home#index'
-  get '/activatecharge', to: 'settings#activate_charge'
-  get 'create-charge/:id', to: 'settings#create_recurring_application_charge', as: 'create_charge'
-  get 'cancel-charge', to: 'settings#cancel_charge', as: 'cancel_charge'
-  get '/reviews', to: 'reviews#index', as: 'reviews'
-  get '/review/:id', to: 'reviews#show', as: 'review'
-  get '/review_update/:id', to: 'reviews#update', as: 'review_update'
+  get 'charges/create'
+  get 'charges/cancel'
+  get 'charges/activate'
+  # get '/settings', to: 'settings#edit', as: 'settings'
+  # patch '/settings', to: 'settings#update'
+  # get '/pricing', to: 'settings#pricing'
+  # resources :templates
+  # get '/preview-template/:template_type', to: 'templates#preview', as: 'preview_template'
+  # get '/convert/:token', to: 'analytics#convert'
+  # root to: 'home#index'
+  # get '/activatecharge', to: 'settings#activate_charge'
+  # get 'create-charge/:id', to: 'settings#create_recurring_application_charge', as: 'create_charge'
+  # get 'cancel-charge', to: 'settings#cancel_charge', as: 'cancel_charge'
+  # get '/reviews', to: 'reviews#index', as: 'reviews'
+  # get '/review/:id', to: 'reviews#show', as: 'review'
+  # get '/review_update/:id', to: 'reviews#update', as: 'review_update'
 
-  get '/emails', to: 'emails#index', as: 'emails'
-  get '/email/:id', to: 'emails#show', as: 'email'
+  # get '/emails', to: 'emails#index', as: 'emails'
+  # get '/email/:id', to: 'emails#show', as: 'email'
 
-  get '/complete-onboarding', to: 'settings#complete_onboarding', as: 'complete_onboarding'
-  get '/onboarding', to: 'home#onboarding', as: 'onboarding'
+  # get '/complete-onboarding', to: 'settings#complete_onboarding', as: 'complete_onboarding'
+  # get '/onboarding', to: 'home#onboarding', as: 'onboarding'
+  # get '/dashboard', to: 'home#index'
 
-  get '/dashboard', to: 'home#index'
-  mount ShopifyApp::Engine, at: '/'
+  
+  scope '/embedded' do
+    # get '/settings', to: 'settings#edit', as: 'settings'
+    # patch '/settings', to: 'settings#update'
+
+    resource :settings, only: [:edit, :update]
+    resources :emails, only: [:index, :show]
+    resources :reviews, only: [:index, :show]
+
+    resources :templates do 
+      get 'preview', to: 'templates#preview'
+    end
+
+    resources :charges do
+      get 'activate', to: 'charges#activate'
+      get 'create', to: 'charges#create'
+      get 'cancel', to: 'charges#cancel'
+    end
+
+    
+
+
+    # get '/pricing', to: 'settings#pricing'
+    
+    # get '/preview-template/:template_type', to: 'templates#preview', as: 'preview_template'
+    # get '/convert/:token', to: 'analytics#convert' -d
+    # root to: 'home#index'
+    # get '/activatecharge', to: 'settings#activate_charge'
+    # get 'create-charge/:id', to: 'settings#create_recurring_application_charge', as: 'create_charge'
+    # get 'cancel-charge', to: 'settings#cancel_charge', as: 'cancel_charge'
+    # get '/reviews', to: 'reviews#index', as: 'reviews' -d
+    # get '/review/:id', to: 'reviews#show', as: 'review' -d
+    # get '/review_update/:id', to: 'reviews#update', as: 'review_update'
+  
+    # get '/emails', to: 'emails#index', as: 'emails' -d
+    # get '/email/:id', to: 'emails#show', as: 'email' -d
+  
+    # get '/complete-onboarding', to: 'settings#complete_onboarding', as: 'complete_onboarding'
+    get '/onboarding', to: 'home#onboarding', as: 'onboarding'
+    get '/dashboard', to: 'home#index'
+  end
+
+  scope '/non-embedded' do
+    get '/convert/:token', to: 'analytics#convert'
+  end
+
+
+
+  # OLD
+
+  mount ShopifyApp::Engine, at: '/embedded'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
