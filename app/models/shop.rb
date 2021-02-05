@@ -2,7 +2,7 @@
 
 class Shop < ActiveRecord::Base
   include ShopifyApp::SessionStorage
-  include StoreDefaults
+  # include StoreDefaults
   
   has_many :templates, dependent: :destroy
   has_many :orders, dependent: :destroy
@@ -92,8 +92,8 @@ class Shop < ActiveRecord::Base
       reply_to: email,
       subject: 'I really want to send you a special thanks for visiting our store',
       template_type: 'thank_you',
-      body: thank_you_json,
-      html: thank_you_html
+      body: 'test',
+      html: 'test'
     )
 
     # Create Review Template
@@ -103,8 +103,8 @@ class Shop < ActiveRecord::Base
       reply_to: email,
       subject: "We'd love feedback on your recent #{shop_name} purchase",
       template_type: 'review',
-      body: review_json,
-      html: review_html
+      body: 'test',
+      html: 'test'
     )
   end
 
@@ -114,7 +114,7 @@ class Shop < ActiveRecord::Base
     order.shopify_id = '000'
     order.email = 'info@example.com'
     order.shopify_created_at = DateTime.now
-    order.customer = customer_json
+    order.customer = '{"id":2871225188422,"email":"info@example.com","accepts_marketing":false,"created_at":"2020-04-02T18:01:37-04:00","updated_at":"2020-05-13T19:25:28-04:00","first_name":"John","last_name":"Smith","orders_count":0,"state":"disabled","total_spent":"0.00","last_order_id":null,"note":null,"verified_email":true,"multipass_identifier":null,"tax_exempt":false,"phone":null,"tags":"","last_order_name":null,"currency":"USD","accepts_marketing_updated_at":"2020-04-02T18:01:38-04:00","marketing_opt_in_level":null,"admin_graphql_api_id":"gid://shopify/Customer/2871225188422","default_address":{"id":3077169905734,"customer_id":2871225188422,"first_name":"John","last_name":"Smith","company":null,"address1":"123 Main St ","address2":"","city":"Miami","province":"Florida","country":"United States","zip":"33137","phone":null,"name":"John Smith","province_code":"FL","country_code":"US","country_name":"United States","default":true}}'
     order.order_number = '1000'
     order.save
 
@@ -141,10 +141,8 @@ class Shop < ActiveRecord::Base
   end
 
   def create_unique_token
-    loop do
-      random_token = SecureRandom.urlsafe_base64(nil, false)
-      return (self.web_token = random_token) unless Shop.exists?(web_token: random_token)
-    end
+    random_token = SecureRandom.urlsafe_base64(nil, false)
+    self.web_token = random_token
   end
 
   def api_version

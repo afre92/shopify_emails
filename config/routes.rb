@@ -1,31 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # get '/settings', to: 'settings#edit', as: 'settings'
-  # patch '/settings', to: 'settings#update'
-  # get '/pricing', to: 'settings#pricing'
-  # resources :templates
-  # get '/preview-template/:template_type', to: 'templates#preview', as: 'preview_template'
-  # get '/convert/:token', to: 'analytics#convert'
   root to: 'home#index'
-  # get '/activatecharge', to: 'settings#activate_charge'
-  # get 'create-charge/:id', to: 'settings#create_recurring_application_charge', as: 'create_charge'
-  # get 'cancel-charge', to: 'settings#cancel_charge', as: 'cancel_charge'
-  # get '/reviews', to: 'reviews#index', as: 'reviews'
-  # get '/review/:id', to: 'reviews#show', as: 'review'
-  # get '/review_update/:id', to: 'reviews#update', as: 'review_update'
-
-  # get '/emails', to: 'emails#index', as: 'emails'
-  # get '/email/:id', to: 'emails#show', as: 'email'
-
-  # get '/complete-onboarding', to: 'settings#complete_onboarding', as: 'complete_onboarding'
-  # get '/onboarding', to: 'home#onboarding', as: 'onboarding'
-  # get '/dashboard', to: 'home#index'
-# root '/embedded'
   
   scope '/embedded' do
-    # get '/settings', to: 'settings#edit', as: 'settings'
-    # patch '/settings', to: 'settings#update'
 
     resource :settings, only: [:edit, :update] # pricing needs to be added
     resources :emails, only: [:index, :show]
@@ -40,16 +18,9 @@ Rails.application.routes.draw do
       get 'cancel', to: 'charges#cancel'
     end
 
-
     # resources :home, only: :index do 
     get 'onboarding', to: 'home#onboarding'
     get 'complete-onboarding', to: 'home#complete_onboarding'
-    # end
-
-    # get ''
-
-    
-
 
     # get '/pricing', to: 'settings#pricing'
     
@@ -68,7 +39,7 @@ Rails.application.routes.draw do
   
     # get '/complete-onboarding', to: 'settings#complete_onboarding', as: 'complete_onboarding'
     # get '/onboarding', to: 'home#onboarding', as: 'onboarding'
-    # get '/dashboard', to: 'home#index'
+    get 'dashboard', to: 'home#index'
   end
 
   scope '/non-embedded' do
