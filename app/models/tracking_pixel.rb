@@ -10,6 +10,7 @@ class TrackingPixel < ApplicationRecord
   end
 
   def conversion_tag
+    # change this to non  embedded url
     url = "#{ENV['APP_URL']}convert/#{token}"
     "<img src='#{url}' width='0' height='0' class='tp'>"
   end

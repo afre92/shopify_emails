@@ -8,6 +8,7 @@ class Shop < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   has_many :emails, dependent: :destroy
   has_many :reviews, through: :orders
+  has_many :charges
   has_one :price_rule, dependent: :destroy
   accepts_nested_attributes_for :price_rule
 

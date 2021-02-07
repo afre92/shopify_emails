@@ -17,62 +17,13 @@ class SettingsController < AuthenticatedController
 
   def pricing
     @view = 'pricing'
+    # TODO: get last 
+    @charge_id = @shop.charges.find_by(active: true)
   end
 
   def complete_onboarding
     @shop.update_attribute(:onboarding_completed, true)
     redirect_to templates_path
-  end
-
-  # Move shopify related code to module helper
-
-  def cancel_charge
-    # make sure this works with the new billing system
-    ShopifyAPI::RecurringApplicationCharge.current.cancel
-    @shop.update(subscription_type: 0)
-    flash[:success] = 'Your plan has been changed to Free.'
-    fullpage_redirect_to "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/pricing"
-  end
-
-  def create_recurring_application_charge
-    # Each shop can have only one recurring charge per app. When a new recurring application charge is activated for a shop
-    # that already has one, the existing recurring charge is canceled and replaced by the new charge.
-    # The new recurring charge is then activated.
-    plan_info = get_plan(params[:id])
-    recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.new(
-      name: plan_info[:name],
-      price: plan_info[:price],
-      return_url: "#{ENV['APP_URL']}activatecharge",
-      test: plan_info[:test],
-      capped_amount: plan_info[:capped_amount],
-      terms: plan_info[:terms]
-    )
-    if recurring_application_charge.save
-      fullpage_redirect_to recurring_application_charge.confirmation_url
-    else
-      # recurring charge could not be created
-    end
-   end
-
-  def activate_charge
-    # might need to save the charge id to check on its status
-    redirect_link = "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/pricing"
-    recurring_application_charge = ShopifyAPI::RecurringApplicationCharge.find(request.params['charge_id'])
-    if recurring_application_charge.status == 'accepted'
-      plan_info = get_plan(recurring_application_charge.name.downcase)
-      recurring_application_charge.activate
-      @shop.update(payment_status: 1,
-                   charge_id: request.params['charge_id'],
-                   billing_on: recurring_application_charge.billing_on.to_date.day,
-                   subscription_type: recurring_application_charge.name.downcase,
-                   tokens: plan_info[:number_of_emails])
-
-    else
-      flash[:danger] = 'Something is not quite right! plase contact the support team.'
-      redirect_to redirect_link
-    end
-    flash[:success] = "Your plan has been changed to #{recurring_application_charge.name}."
-    redirect_to redirect_link
   end
 
   private

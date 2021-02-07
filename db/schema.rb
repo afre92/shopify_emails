@@ -16,6 +16,10 @@ ActiveRecord::Schema.define(version: 2021_02_07_155903) do
   enable_extension "plpgsql"
 
   create_table "charges", force: :cascade do |t|
+    t.integer "billing_on"
+    t.string "subscription_type", default: "free"
+    t.integer "tokens"
+    t.boolean "active", default: false
     t.string "shopify_charge_id"
     t.bigint "shop_id"
     t.datetime "created_at", null: false

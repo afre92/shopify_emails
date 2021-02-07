@@ -21,7 +21,6 @@
     <%= f.submit "Save Template", data: {confirm: "Are you sure you want to save the #{template.template_type} template" }, class: 'btn btn-primary btn-round' %>
   </div>
   <div class="form-group">
-    <%= puts "PACA #{template.template_type}" %>
     <%= link_to "Click Here", template_preview_path(template.template_type), remote: true %>
   </div>
 <% end %>

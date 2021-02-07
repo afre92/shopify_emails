@@ -13,10 +13,14 @@ Rails.application.routes.draw do
       get 'preview', to: 'templates#preview'
     end
 
-    resources :charges, only: :create do
-      get 'activate', to: 'charges#activate'
-      get 'cancel', to: 'charges#cancel'
-    end
+    # resources :charges do
+    #   get 'activate', to: 'charges#activate'
+    #   get 'cancel', to: 'charges#cancel'
+    # end
+
+    get 'charges/:subscription_type/create', to: 'charges#create', as: 'charge_create'
+    get 'charges/:local_charge_id/activate', to: 'charges#activate', as: 'charge_activate'
+    get 'charges/:local_charge_id/cancel', to: 'charges#cancel', as: 'charge_cancel'
 
     get 'onboarding', to: 'home#onboarding'
     get 'complete-onboarding', to: 'home#complete_onboarding'
