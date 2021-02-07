@@ -6,6 +6,7 @@ class ChargesController < AuthenticatedController
     # make sure this works with the new billing system
     ShopifyAPI::RecurringApplicationCharge.current.cancel
     @shop.update(subscription_type: 0)
+  
     flash[:success] = 'Your plan has been changed to Free.'
     fullpage_redirect_to "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/pricing"
   end
@@ -22,7 +23,7 @@ class ChargesController < AuthenticatedController
     shopify_charge = ShopifyAPI::RecurringApplicationCharge.new(
       name:           plan_info[:name],
       price:          plan_info[:price],
-      return_url:     "#{ENV['APP_URL']}/charges/#{charge.id}/activate",
+      return_url:     "#{ENV['APP_URL']}/charges/#{local_charge.id}/activate",
       test:           plan_info[:test],
       capped_amount:  plan_info[:capped_amount],
       terms:          plan_info[:terms]
@@ -50,13 +51,9 @@ class ChargesController < AuthenticatedController
                           shopify_charge_id:  request.params["charge_id"], 
                           billing_on:         shopify_charge.billing_on.to_date.day,
                           subscription_type:  shopify_charge.name.downcase,
-                          tokens:             plan_info[:number_of_emails]
+                          tokens:             plan_info[:number_of_emails],
+                          active:             true
                           )
-      # @shop.update(payment_status: 1,
-      #              charge_id: request.params['charge_id'],
-      #              billing_on: shopify_charge.billing_on.to_date.day,
-      #              subscription_type: shopify_charge.name.downcase,
-      #              tokens: plan_info[:number_of_emails])
 
     else
       flash[:danger] = 'Something is not quite right! plase contact the support team.'
