@@ -12,7 +12,7 @@ class SettingsController < AuthenticatedController
     else
       flash[:danger] = 'Ooops, something is wrong '
     end
-    redirect_to settings_path
+    redirect_to edit_settings_path
   end
 
   def pricing

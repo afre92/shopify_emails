@@ -5,8 +5,8 @@ class TemplatesController < AuthenticatedController
   before_action :find_template, only: :update
 
   def index
-    # set_token
-    # order = @shop.sample_order
+    set_token
+    order = @shop.sample_order
     @thank_you_template = @shop.templates.find_by(template_type: 'thank_you')
     @review_template = @shop.templates.find_by(template_type: 'review')
   end
@@ -31,7 +31,7 @@ class TemplatesController < AuthenticatedController
 
   def preview
     @order = @shop.sample_order
-    @template = @shop.templates.find_by(template_type: params[:template_type])
+    @template = @shop.templates.find_by(template_type: params[:template_id])
   end
 
   private

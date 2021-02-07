@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   
   scope '/embedded' do
 
-    resource :settings, only: [:edit, :update] # pricing needs to be added
+    resource :settings, only: [:edit, :update, :index] # pricing needs to be added
     resources :emails, only: [:index, :show]
     resources :reviews, only: [:index, :show]
 
@@ -18,11 +18,10 @@ Rails.application.routes.draw do
       get 'cancel', to: 'charges#cancel'
     end
 
-    # resources :home, only: :index do 
     get 'onboarding', to: 'home#onboarding'
     get 'complete-onboarding', to: 'home#complete_onboarding'
 
-    # get '/pricing', to: 'settings#pricing'
+    get 'pricing', to: 'settings#pricing'
     
     # get '/preview-template/:template_type', to: 'templates#preview', as: 'preview_template'
     # get '/convert/:token', to: 'analytics#convert' -d
