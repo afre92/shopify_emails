@@ -32,6 +32,10 @@ class Shop < ActiveRecord::Base
     ShopifyAPI::ScriptTag.create(event: 'onload', src: "#{ENV['NON_E']}product.js")
   end
 
+  def current_charge
+    self.charges.find_by(active: true)
+  end
+
   def add_reviews_images_modal
     # get access to link
     themes = ShopifyAPI::Theme.all

@@ -25,7 +25,7 @@
       <div class="card-footer">
         <hr>
         <div class="button-container py-2">
-          <% if @shop.subscription_type == "free"%>  
+          <% if @shop.current_charge.subscription_type == "free"%>  
             <a class="btn btn-primary btn-round" href="#" disabled>Selected</a>
           <% else %>
             <%= link_to 'Select Plan', charge_cancel_url(@charge_id), class: 'btn btn-primary create-charge-url btn-round' %>
@@ -60,7 +60,7 @@
       <div class="card-footer">
         <hr>
         <div class="button-container py-2">  
-          <% if @shop.subscription_type == "basic"%>  
+          <% if @shop.current_charge.subscription_type == "basic" %>  
             <a class="btn btn-primary btn-round" href="#" disabled>Selected</a>
           <% else %>
             <%= link_to 'Select Plan', charge_create_path('basic') ,class: 'btn btn-primary create-charge-url btn-round' %>
@@ -96,7 +96,7 @@
         <hr>
         <div class="button-container py-2 d-flex">
           <div>
-            <% if @shop.subscription_type == "pro"%>  
+            <% if @shop.current_charge.subscription_type == "pro"%>  
               <a class="btn btn-primary btn-round" href="#" disabled>Selected</a>
             <% else %>
               <%= link_to 'Select Plan', charge_create_path('pro') ,class: 'btn btn-primary btn-round create-charge-url' %>
