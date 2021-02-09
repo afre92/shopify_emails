@@ -1,6 +1,5 @@
 class ChargesController < AuthenticatedController
-  include UserPlans 
-  before_action :find_store
+  before_action :find_store, :init_subscriptions_info
 
   def cancel
     # make sure this works with the new billing system
@@ -17,16 +16,16 @@ class ChargesController < AuthenticatedController
     # The new recurring charge is then activated.
 
     # TODO : change status of current charge if exisist before creating a new one?
-    plan_info      = get_plan(params[:subscription_type])
+    plan_info      = @subscriptions_info[params[:subscription_type]]
     local_charge   = @shop.charges.create
 
     shopify_charge = ShopifyAPI::RecurringApplicationCharge.new(
-      name:           plan_info[:name],
-      price:          plan_info[:price],
+      name:           plan_info["name"],
+      price:          plan_info["price"],
       return_url:     "#{ENV['APP_URL']}/charges/#{local_charge.id}/activate",
-      test:           plan_info[:test],
-      capped_amount:  plan_info[:capped_amount],
-      terms:          plan_info[:terms]
+      test:           plan_info["test"],
+      capped_amount:  plan_info["capped_amount"],
+      terms:          plan_info["terms"]
     )
     if shopify_charge.save
       fullpage_redirect_to shopify_charge.confirmation_url
@@ -44,14 +43,14 @@ class ChargesController < AuthenticatedController
     shopify_charge  = ShopifyAPI::RecurringApplicationCharge.find(request.params['charge_id'])
 
     if shopify_charge.status == "accepted"
-      plan_info = get_plan(shopify_charge.name.downcase)
+      plan_info = @subscriptions_info[shopify_charge.name.downcase]
       shopify_charge.activate
 
       local_charge.update(payment_status:     1, 
                           shopify_charge_id:  request.params["charge_id"], 
                           billing_on:         shopify_charge.billing_on.to_date.day,
                           subscription_type:  shopify_charge.name.downcase,
-                          tokens:             plan_info[:number_of_emails],
+                          tokens:             plan_info["number_of_emails"],
                           active:             true
                           )
 
@@ -75,4 +74,17 @@ class ChargesController < AuthenticatedController
       params.require(:charge).permit(:shopify_charge_id, :shop_id)
     end
 
+    def init_subscriptions_info
+      @subscriptions_info = Charge.get_subscriptions_info
+    end
+
 end
+
+# Local charges must be created every time a change of plan is mades
+  # When the store is created then a charge must be created even for the the free plan
+
+  # ---------------------   HOW THE CHARGES CONTROLLER WORKS -------------------------
+
+  # THIS CONTROLLER HAS THREE MAIN ACTION; CREATE, CANCEL AND ACTIVATE
+  #   CREATE:
+  #     CREATES A LOCAL AND SHOPIFY CHARGE, SINCE SHOPIFY STORE CAN ONLY HAVE ONE A

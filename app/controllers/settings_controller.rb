@@ -17,12 +17,7 @@ class SettingsController < AuthenticatedController
 
   def pricing
     @view = 'pricing'
-    # TODO: get last
-    if @shop.charges.find_by(active: true)
-      @charge_id = @shop.charges.find_by(active: true)
-    else
-      @charge_id = 123
-    end
+    @charge_id = @shop.current_charge.id
   end
 
   def complete_onboarding
