@@ -1,13 +1,19 @@
 class ChargesController < AuthenticatedController
   before_action :find_store, :init_subscriptions_info
 
-  def cancel
-    # make sure this works with the new billing system
+  def create_local_charge_only
     ShopifyAPI::RecurringApplicationCharge.current.cancel
-    @shop.update(subscription_type: 0)
+    @shop.charges.create(
+                          payment_status:     1, 
+                          shopify_charge_id:  "000000", 
+                          billing_on:         Date.today.day,
+                          subscription_type:  "free",
+                          tokens:             100,
+                          active:             true
+                          )
   
     flash[:success] = 'Your plan has been changed to Free.'
-    fullpage_redirect_to "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/pricing"
+    fullpage_redirect_to "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/embedded/pricing"
   end
 
   def create
@@ -15,7 +21,6 @@ class ChargesController < AuthenticatedController
     # that already has one, the existing recurring charge is canceled and replaced by the new charge.
     # The new recurring charge is then activated.
 
-    # TODO : change status of current charge if exisist before creating a new one?
     plan_info      = @subscriptions_info[params[:subscription_type]]
     local_charge   = @shop.charges.create
 
@@ -50,17 +55,19 @@ class ChargesController < AuthenticatedController
                           shopify_charge_id:  request.params["charge_id"], 
                           billing_on:         shopify_charge.billing_on.to_date.day,
                           subscription_type:  shopify_charge.name.downcase,
-                          tokens:             plan_info["number_of_emails"],
+                          tokens:             plan_info["number_of_tokens"],
                           active:             true
                           )
+
+      @shop.update(tokens: @shop.tokens + plan_info["number_of_tokens"])
+      flash[:success] = "Your plan has been changed to #{shopify_charge.name}."
+      redirect_to redirect_link
 
     else
       flash[:danger] = 'Something is not quite right! plase contact the support team.'
       redirect_to redirect_link
     end
-    # activate the the local charge and save the shopify charge id
-    flash[:success] = "Your plan has been changed to #{shopify_charge.name}."
-    redirect_to redirect_link
+
   end
 
   private
@@ -79,12 +86,3 @@ class ChargesController < AuthenticatedController
     end
 
 end
-
-# Local charges must be created every time a change of plan is mades
-  # When the store is created then a charge must be created even for the the free plan
-
-  # ---------------------   HOW THE CHARGES CONTROLLER WORKS -------------------------
-
-  # THIS CONTROLLER HAS THREE MAIN ACTION; CREATE, CANCEL AND ACTIVATE
-  #   CREATE:
-  #     CREATES A LOCAL AND SHOPIFY CHARGE, SINCE SHOPIFY STORE CAN ONLY HAVE ONE A

@@ -28,7 +28,7 @@
           <% if @shop.current_charge.subscription_type == "free" %>  
             <a class="btn btn-primary btn-round" href="#" disabled>Selected</a>
           <% else %>
-            <%= link_to 'Select Plan', charge_cancel_url(@charge_id), class: 'btn btn-primary create-charge-url btn-round' %>
+            <%= link_to 'Select Plan', charge_create_local_only_path(@charge_id), class: 'btn btn-primary create-charge-url btn-round' %>
           <% end %>
         </div>
       </div>

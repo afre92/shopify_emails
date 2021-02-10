@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   
   scope '/embedded' do
 
-    resource :settings, only: [:edit, :update, :index] # pricing needs to be added
+    resource :settings, only: [:edit, :update, :index]
     resources :emails, only: [:index, :show]
     resources :reviews, only: [:index, :show]
 
@@ -13,14 +13,9 @@ Rails.application.routes.draw do
       get 'preview', to: 'templates#preview'
     end
 
-    # resources :charges do
-    #   get 'activate', to: 'charges#activate'
-    #   get 'cancel', to: 'charges#cancel'
-    # end
-
     get 'charges/:subscription_type/create', to: 'charges#create', as: 'charge_create'
     get 'charges/:local_charge_id/activate', to: 'charges#activate', as: 'charge_activate'
-    get 'charges/:local_charge_id/cancel', to: 'charges#cancel', as: 'charge_cancel'
+    get 'charges/:local_charge_id/create_local_charge_only', to: 'charges#create_local_charge_only', as: 'charge_create_local_only'
 
     get 'onboarding', to: 'home#onboarding'
     get 'complete-onboarding', to: 'home#complete_onboarding'

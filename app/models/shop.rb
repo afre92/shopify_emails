@@ -172,7 +172,7 @@ class Shop < ActiveRecord::Base
                         shopify_charge_id:  '000000', 
                         billing_on:         Date.today.day,
                         subscription_type:  'free',
-                        tokens:             plan_info["number_of_emails"],
+                        tokens:             plan_info["number_of_tokens"],
                         active:             true
                         )
   end
