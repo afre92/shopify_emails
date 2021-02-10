@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TemplatesController < AuthenticatedController
+class TemplatesController < ShopifyAuthenticatedController
   before_action :find_store
   before_action :find_template, only: :update
 

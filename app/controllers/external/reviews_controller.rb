@@ -1,0 +1,2 @@
+class External::ReviewsController < ShopifyAuthenticatedController
+end

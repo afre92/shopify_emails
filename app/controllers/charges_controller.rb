@@ -1,4 +1,4 @@
-class ChargesController < AuthenticatedController
+class ChargesController < ShopifyAuthenticatedController
   before_action :find_store, :init_subscriptions_info
 
   def create_local_charge_only
@@ -16,6 +16,7 @@ class ChargesController < AuthenticatedController
     fullpage_redirect_to "https://#{@shop.shopify_domain}/admin/apps/#{ENV['APP_NAME']}/embedded/pricing"
   end
 
+  # TODO: maybe change it so the free plan creates a new Shopify charge but charging $0.00 instead of using create_local_charge_only method
   def create
     # Each shop can have only one recurring charge per app. When a new recurring application charge is activated for a shop
     # that already has one, the existing recurring charge is canceled and replaced by the new charge.
@@ -61,13 +62,10 @@ class ChargesController < AuthenticatedController
 
       @shop.update(tokens: @shop.tokens + plan_info["number_of_tokens"])
       flash[:success] = "Your plan has been changed to #{shopify_charge.name}."
-      redirect_to redirect_link
-
     else
-      flash[:danger] = 'Something is not quite right! plase contact the support team.'
-      redirect_to redirect_link
+      flash[:danger]  = 'Something is not quite right! plase contact the support team.'
     end
-
+    redirect_to redirect_link
   end
 
   private

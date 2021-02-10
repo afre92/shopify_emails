@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EmailsController < AuthenticatedController
+class EmailsController < ShopifyAuthenticatedController
   before_action :find_store
   before_action :set_daterange, only: :index
 
