@@ -2,18 +2,17 @@
 
 class Shop < ActiveRecord::Base
   include ShopifyApp::SessionStorage
-  # include StoreDefaults
   
   has_many :templates, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :emails, dependent: :destroy
   has_many :reviews, through: :orders
   has_many :charges
-  has_one :price_rule, dependent: :destroy
+  has_one  :price_rule, dependent: :destroy
   accepts_nested_attributes_for :price_rule
 
   before_create :create_unique_token
-  after_create :handle_after_create
+  after_create  :handle_after_create
 
   enum subscription_type: { free: 0, basic: 1, pro: 2 }
 
@@ -176,4 +175,17 @@ class Shop < ActiveRecord::Base
                         active:             true
                         )
   end
+
+
+
+  ###################### METHODS FROM NON-EMBEDDED ######################
+
+  def temp_session(*args)
+    ShopifyAPI::Session.temp(domain: self.shopify_domain, token: self.shopify_token, api_version: '2019-10') do
+      args.each do |arg|
+        return method(arg).call
+      end
+    end
+  end
+
 end
