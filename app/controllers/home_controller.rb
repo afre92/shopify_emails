@@ -6,7 +6,7 @@ class HomeController < ShopifyAuthenticatedController
   before_action :set_daterange, only: :index
 
   def index
-    redirect_to onboarding_path unless @shop.onboarding_completed
+    # redirect_to onboarding_path unless @shop.onboarding_completed
     @emails_sent = @shop.emails_sent(@daterange)
     @emails_opened = @shop.emails_opened(@daterange)
     @emails_used = @shop.emails_sent(DateTime.now.beginning_of_month...DateTime.now.end_of_month)

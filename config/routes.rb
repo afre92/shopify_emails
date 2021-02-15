@@ -42,6 +42,9 @@ Rails.application.routes.draw do
 
   scope '/external' do
     get '/convert/:token', to: 'analytics#convert'
+    
+    resource :reviews, only: [:update]
+
 
   end
 

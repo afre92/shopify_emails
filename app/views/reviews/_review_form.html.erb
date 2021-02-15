@@ -120,7 +120,7 @@
                       <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                         <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"><%= template.title %></p>
                         <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"><%= template.html %></p>
-                        <form action='<%="#{ENV['NON_E']}review-submission/dfasdfsd"%>'>
+                        <form action='<%="#{ENV['EXTERNAL_URL']}reviews/#{order.order_items.first.review.uuid}"%>'>
                           <div style="text-align: center;" class="rating-stars-container">
                             <input type="radio" id="five" name="review[rating]" value="5">
                             <label for="five"><span style="<%=styles['stars']%>">★★★★★</span></label>

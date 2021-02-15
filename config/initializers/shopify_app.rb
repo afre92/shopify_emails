@@ -13,7 +13,7 @@ ShopifyApp.configure do |config|
   config.api_version = '2019-10'
   config.session_repository = Shop
   config.webhooks = [
-    { topic: 'orders/create', address: "#{ENV['APP_URL']}webhooks/order_create", format: 'json' }
+    { topic: 'orders/create', address: "#{ENV['EMBEDDED_URL']}webhooks/order_create", format: 'json' }
   ]
 end
 

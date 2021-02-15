@@ -1,9 +1,9 @@
 class External::ReviewsController < ApplicationController
-  before_action :validate_uuid
+  # before_action :validate_uuid
 
   def update
+    puts "paca we made it "
     if @review.update(review_params)
-
       if @review.review_status == 'completed'
         if @shop.price_rule.active
           discount_code = @shop.temp_session(:create_discount_code)
@@ -31,9 +31,8 @@ class External::ReviewsController < ApplicationController
       return redirect_to not_found_path
     elsif @review.review_status == "completed"
       render json: 'Your review has already been submitted, thank you!'
-      # redirect_to thank you for submitting you review page
     end
-    @shop = Shop.find(@review.order.shop_id)
+    # @shop = Shop.find(@review.order.shop_id)
     # find email and find the status of review
   end
 
@@ -46,6 +45,5 @@ class External::ReviewsController < ApplicationController
     raise 'Invalid signature' unless ActiveSupport::SecurityUtils.secure_compare(signature, calculated_signature)
     @shop = Shop.find_by(shopify_domain: query_hash['shop'])
   end
-
 
 end
