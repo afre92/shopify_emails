@@ -12,6 +12,7 @@ ShopifyApp.configure do |config|
   config.after_authenticate_job = false
   config.api_version = '2019-10'
   config.session_repository = Shop
+  config.webhook_jobs_namespace = 'embedded'
   config.webhooks = [
     { topic: 'orders/create', address: "#{ENV['EMBEDDED_URL']}webhooks/order_create", format: 'json' }
   ]

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SettingsController < ShopifyAuthenticatedController
-  include UserPlans
+  # include UserPlans
   before_action :find_store
 
   def edit; end

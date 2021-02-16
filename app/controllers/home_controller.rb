@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HomeController < ShopifyAuthenticatedController
-  include UserPlans
+  # include UserPlans
   before_action :find_shop
   before_action :set_daterange, only: :index
 
